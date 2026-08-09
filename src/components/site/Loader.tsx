@@ -10,10 +10,20 @@ export function Loader({ ready }: { ready: boolean }) {
   const bar = useRef<HTMLSpanElement>(null);
   const [hidden, setHidden] = useState(false);
 
+  const [expired, setExpired] = useState(false);
+  const done = ready || expired;
+
+  // Safety valve: never trap the page behind the curtain if WebGL never reports.
+  useEffect(() => {
+    const t = window.setTimeout(() => setExpired(true), 4000);
+    return () => window.clearTimeout(t);
+  }, []);
+
   useEffect(() => {
     if (!bar.current) return;
-    gsap.to(bar.current, { scaleX: ready ? 1 : 0.72, duration: ready ? 0.5 : 2.4, ease: "power2.out" });
-  }, [ready]);
+    gsap.to(bar.current, { scaleX: done ? 1 : 0.72, duration: done ? 0.5 : 2.4, ease: "power2.out" });
+  }, [done]);
+
 
   useEffect(() => {
     if (!ready || !root.current) return;
