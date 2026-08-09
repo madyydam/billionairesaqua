@@ -161,9 +161,10 @@ export function BottleMesh({
       </mesh>
 
       {/* neck ring */}
-      <mesh position={[0, 0.995, 0]} material={capMaterial}>
-        <torusGeometry args={[0.185, 0.016, 12, 48]} rotation={[Math.PI / 2, 0, 0]} />
+      <mesh position={[0, 0.995, 0]} rotation={[Math.PI / 2, 0, 0]} material={capMaterial}>
+        <torusGeometry args={[0.185, 0.016, 12, 48]} />
       </mesh>
+
 
       {/* ribbed cap */}
       <group position={[0, 1.155, 0]}>
