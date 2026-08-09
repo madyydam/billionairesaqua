@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ElementType, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
@@ -6,19 +6,17 @@ import { cn } from "@/lib/utils";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Section entrance / text mask reveal. Children are revealed line-by-line as
- * the block enters the viewport. Fully bypassed under prefers-reduced-motion.
+ * Section entrance / text reveal. Direct children are revealed with a stagger
+ * as the block enters the viewport. Fully bypassed under prefers-reduced-motion.
  */
 export function Reveal({
   children,
-  as: Tag = "div",
   className,
   delay = 0,
   stagger = 0.09,
   y = 26,
 }: {
   children: ReactNode;
-  as?: ElementType;
   className?: string;
   delay?: number;
   stagger?: number;
@@ -34,7 +32,7 @@ export function Reveal({
       return;
     }
 
-    const items = el.children.length ? Array.from(el.children) : [el];
+    const items: Element[] = el.children.length ? Array.from(el.children) : [el];
     const ctx = gsap.context(() => {
       gsap.fromTo(
         items,
@@ -52,19 +50,14 @@ export function Reveal({
       );
     }, el);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, [delay, stagger, y]);
 
-  const Component = Tag as ElementType<{
-    ref: typeof ref;
-    className?: string;
-    children?: ReactNode;
-  }>;
-
   return (
-    <Component ref={ref} className={cn(className)}>
+    <div ref={ref} className={cn(className)}>
       {children}
-    </Component>
+    </div>
   );
 }
-
