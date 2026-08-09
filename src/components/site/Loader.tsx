@@ -26,13 +26,14 @@ export function Loader({ ready }: { ready: boolean }) {
 
 
   useEffect(() => {
-    if (!ready || !root.current) return;
+    if (!done || !root.current) return;
     const tl = gsap.timeline({ delay: 0.35, onComplete: () => setHidden(true) });
     tl.to(root.current, { opacity: 0, duration: 0.9, ease: "power2.inOut" });
     return () => {
       tl.kill();
     };
-  }, [ready]);
+  }, [done]);
+
 
   useEffect(() => {
     document.documentElement.classList.toggle("is-loading", !hidden);
