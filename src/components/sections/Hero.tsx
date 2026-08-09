@@ -44,7 +44,7 @@ export function Hero({ ready }: { ready: boolean }) {
             <Eyebrow>500ml · Packaged drinking water</Eyebrow>
           </div>
 
-          <Display as="h1" id="hero-title" className="mt-7 opacity-0" >
+          <Display as="h1" id="hero-title" className="mt-7">
             <span data-hero-item className="block opacity-0">
               Designed
             </span>
