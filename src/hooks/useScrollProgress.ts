@@ -53,14 +53,18 @@ export function useScrollProgress(steps = 100) {
 
   useEffect(() => {
     let last = -1;
-    return subscribeScroll((p) => {
+    const unsubscribe = subscribeScroll((p) => {
       const q = Math.round(p * steps) / steps;
       if (q !== last) {
         last = q;
         setValue(q);
       }
     });
+    return () => {
+      unsubscribe();
+    };
   }, [steps]);
+
 
   return value;
 }
