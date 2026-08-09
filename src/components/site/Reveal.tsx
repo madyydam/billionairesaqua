@@ -55,9 +55,16 @@ export function Reveal({
     return () => ctx.revert();
   }, [delay, stagger, y]);
 
+  const Component = Tag as ElementType<{
+    ref: typeof ref;
+    className?: string;
+    children?: ReactNode;
+  }>;
+
   return (
-    <Tag ref={ref} className={cn(className)}>
+    <Component ref={ref} className={cn(className)}>
       {children}
-    </Tag>
+    </Component>
   );
 }
+
