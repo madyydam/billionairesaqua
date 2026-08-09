@@ -10,7 +10,8 @@ export function Hero({ ready }: { ready: boolean }) {
   const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ready || !root.current) return;
+    if (!root.current) return;
+
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const items = root.current.querySelectorAll("[data-hero-item]");
     if (reduce) {
