@@ -14,9 +14,7 @@ const LINKS = [
 ];
 
 export function Nav() {
-  const progress = useScrollProgress(60);
   const [open, setOpen] = useState(false);
-  const solid = progress > 0.03;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -30,26 +28,9 @@ export function Nav() {
     scrollToSection(id);
   };
 
-  const textThemeClass = solid
-    ? "text-muted-foreground hover:text-foreground focus-visible:text-foreground"
-    : "text-[#2D3738]/70 hover:text-[#2D3738] focus-visible:text-[#2D3738]";
-
-  const textForegroundThemeClass = solid ? "text-foreground" : "text-[#2D3738]";
-
-  const buttonThemeClass = solid
-    ? "border-hairline text-foreground hover:border-accent-gold hover:text-accent-gold"
-    : "border-[#2D3738]/20 text-[#2D3738] hover:border-brand-green hover:text-brand-green";
-
-  const brandTheClass = solid ? "text-muted-foreground" : "text-[#2D3738]/50";
-
   return (
     <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-700",
-        solid
-          ? "border-b border-hairline bg-background/70 backdrop-blur-xl"
-          : "border-b border-transparent",
-      )}
+      className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-xl transition-all duration-700"
     >
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
         <button
@@ -57,17 +38,10 @@ export function Nav() {
           className="flex items-baseline gap-2 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           aria-label="The Billionaire's Aqua — back to top"
         >
-          <span
-            className={cn("font-display text-[0.6rem] tracking-[0.4em] uppercase", brandTheClass)}
-          >
+          <span className="font-display text-[0.6rem] tracking-[0.4em] text-white/50 uppercase">
             The
           </span>
-          <span
-            className={cn(
-              "font-display text-sm tracking-[0.3em] uppercase",
-              textForegroundThemeClass,
-            )}
-          >
+          <span className="font-display text-sm tracking-[0.3em] text-white uppercase">
             Billionaire&apos;s Aqua
           </span>
         </button>
@@ -77,26 +51,15 @@ export function Nav() {
             <button
               key={link.id}
               onClick={() => go(link.id)}
-              className={cn(
-                "group relative font-body text-[0.72rem] tracking-[0.2em] uppercase transition-colors focus-visible:outline-none",
-                textThemeClass,
-              )}
+              className="group relative font-body text-[0.72rem] tracking-[0.2em] text-white/70 uppercase transition-colors hover:text-white focus-visible:outline-none"
             >
               {link.label}
-              <span
-                className={cn(
-                  "absolute -bottom-1 left-0 h-px w-0 transition-all duration-500 group-hover:w-full",
-                  solid ? "bg-accent-gold" : "bg-brand-green",
-                )}
-              />
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-[#00B3C6] transition-all duration-500 group-hover:w-full" />
             </button>
           ))}
           <button
             onClick={() => go("contact")}
-            className={cn(
-              "rounded-full px-6 py-2.5 font-body text-[0.7rem] tracking-[0.2em] uppercase transition-colors duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-              buttonThemeClass,
-            )}
+            className="rounded-full border border-white/25 px-6 py-2.5 font-body text-[0.7rem] tracking-[0.2em] text-white uppercase transition-colors duration-500 hover:border-[#00B3C6] hover:text-[#00B3C6] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           >
             Enquire now
           </button>
@@ -106,10 +69,7 @@ export function Nav() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className={cn(
-            "flex min-h-11 min-w-11 items-center justify-center transition-colors duration-350 md:hidden",
-            textForegroundThemeClass,
-          )}
+          className="flex min-h-11 min-w-11 items-center justify-center text-white transition-colors duration-350 md:hidden"
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>

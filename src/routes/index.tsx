@@ -91,8 +91,8 @@ function Index() {
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        {/* 40% dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* 60% dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* persistent WebGL stage — fixed z-0, comes AFTER video so it renders on top */}
