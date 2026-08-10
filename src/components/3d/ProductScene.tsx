@@ -7,7 +7,7 @@ import { CameraController } from "./CameraController";
 import { ProductRig } from "./ProductRig";
 import { useProductInteraction } from "@/hooks/useProductInteraction";
 import type { DeviceProfile } from "@/hooks/useDevicePerformance";
-import bottleAsset from "@/assets/bottle.png.asset.json";
+import bottleAsset from "@/assets/bottle-real.png.asset.json";
 
 function SceneContents({ device }: { device: DeviceProfile }) {
   return (

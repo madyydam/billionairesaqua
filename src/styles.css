@@ -82,10 +82,10 @@
   --popover-foreground: oklch(0.928 0.017 85.5);
   --primary: oklch(0.928 0.017 85.5);
   --primary-foreground: oklch(0.163 0.003 145);
-  --secondary: oklch(0.238 0.006 145);
+  --secondary: oklch(0.44 0 0);
   --secondary-foreground: oklch(0.928 0.017 85.5);
-  --muted: oklch(0.238 0.006 145);
-  --muted-foreground: oklch(0.652 0.012 85);
+  --muted: oklch(0.44 0 0);
+  --muted-foreground: oklch(0.78 0.008 85);
   --accent: oklch(0.72 0.098 82.5);
   --accent-foreground: oklch(0.163 0.003 145);
   --destructive: oklch(0.6 0.21 24);
@@ -153,7 +153,8 @@
   z-index: 5;
   pointer-events: none;
   background:
-    radial-gradient(120% 90% at 50% 45%, transparent 38%, oklch(0.09 0.002 145 / 0.72) 100%);
+    radial-gradient(115% 85% at 50% 42%, oklch(0.44 0 0 / 0.55) 0%, transparent 45%),
+    radial-gradient(130% 110% at 50% 50%, transparent 30%, oklch(0.18 0 0 / 0.78) 100%);
 
   &::after {
     content: "";
