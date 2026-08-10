@@ -46,11 +46,15 @@ export function Hero({ ready }: { ready: boolean }) {
             </Eyebrow>
           </div>
 
-          <Display as="h1" id="hero-title" className="mt-7 text-[#2D3738]">
+          <Display
+            as="h1"
+            id="hero-title"
+            className="mt-7 text-[#2D3738] font-editorial normal-case text-[clamp(2.8rem,7vw,6rem)] leading-[1.05] tracking-[-0.02em]"
+          >
             <span data-hero-item className="block opacity-0">
               More Than Water.
             </span>
-            <span data-hero-item className="block text-brand-green opacity-0">
+            <span data-hero-item className="block text-brand-green italic opacity-0">
               A Standard.
             </span>
           </Display>
