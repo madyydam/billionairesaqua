@@ -1,7 +1,7 @@
 import { Section, Display, Eyebrow, Body } from "@/components/site/Primitives";
 import { Reveal } from "@/components/site/Reveal";
 
-/** Scene 6 — 360° view; drag-to-rotate coexists with the scroll rotation. */
+/** Scene 6 — close inspection; the product stays locked facing forward. */
 export function ProductAngles() {
   return (
     <Section id="angles" scene="angles" labelledBy="angles-title" className="items-end">
@@ -11,12 +11,12 @@ export function ProductAngles() {
         </Reveal>
         <Reveal className="w-full" delay={0.1}>
           <Display id="angles-title" className="text-[clamp(1.9rem,4vw,3.4rem)]">
-            360° of the same standard.
+            Held to one standard.
           </Display>
         </Reveal>
         <Reveal className="w-full" delay={0.18}>
           <Body className="mx-auto text-center text-[0.85rem]">
-            Drag to spin the bottle. Every seam, ring and print edge holds up under inspection.
+            Every seam, ring and print edge holds up under inspection.
           </Body>
         </Reveal>
       </div>
