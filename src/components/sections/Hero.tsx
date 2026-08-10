@@ -39,23 +39,6 @@ export function Hero({ ready }: { ready: boolean }) {
   return (
     <Section id="hero" scene="hero" labelledBy="hero-title" className="items-center">
 
-      {/* ── Video background ── */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          disablePictureInPicture
-          preload="auto"
-          className="h-full w-full object-cover"
-          aria-hidden="true"
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
-        {/* 10% dark overlay so content stays readable */}
-        <div className="absolute inset-0 bg-black/10" />
-      </div>
 
       {/* ── Content ── */}
       <div ref={root} className="relative z-10 grid gap-10 md:grid-cols-12 md:items-center">

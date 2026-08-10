@@ -7,7 +7,8 @@ import { CameraController } from "./CameraController";
 import { ProductRig } from "./ProductRig";
 import { useProductInteraction } from "@/hooks/useProductInteraction";
 import type { DeviceProfile } from "@/hooks/useDevicePerformance";
-import bottleAsset from "@/assets/bottle-real.png.asset.json";
+// Bottle image served from /public — no CDN dependency, works on Vercel
+const BOTTLE_URL = "/bottle-real.png";
 
 function SceneContents({ device }: { device: DeviceProfile }) {
   return (
@@ -65,7 +66,7 @@ function StaticFallback() {
   return (
     <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
       <img
-        src={bottleAsset.url}
+        src={BOTTLE_URL}
         alt="The Billionaire's Aqua 500ml packaged drinking water bottle, deep green label with gold trim"
         className="h-[68vh] w-auto max-w-[70vw] object-contain opacity-95 md:h-[78vh]"
       />

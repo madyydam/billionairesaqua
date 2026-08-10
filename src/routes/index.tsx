@@ -69,7 +69,33 @@ function Index() {
 
 
 
-      {/* persistent WebGL stage, fixed behind the document */}
+      {/*
+        Hero video background — fixed z-0, rendered BEFORE the WebGL canvas.
+        Same z-index but earlier in DOM order means the WebGL Canvas paints
+        ON TOP of the video, so the bottle is always in front of the video.
+        The 40% black overlay keeps content readable. Fades out on scroll.
+      */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-700 ease-out"
+        style={{ opacity: Math.max(0, 1 - scrollProgress * 9) }}
+        aria-hidden="true"
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          disablePictureInPicture
+          preload="auto"
+          className="h-full w-full object-cover"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* 40% dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      {/* persistent WebGL stage — fixed z-0, comes AFTER video so it renders on top */}
       <ProductSceneLazy device={device} onReady={onReady} />
       <div className="stage-atmosphere" aria-hidden="true" />
 
