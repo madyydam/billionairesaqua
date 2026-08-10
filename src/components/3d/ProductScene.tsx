@@ -99,7 +99,7 @@ export function ProductScene({ device, onReady }: { device: DeviceProfile; onRea
       {device.webgl ? (
         <Canvas
           dpr={device.dpr}
-          shadows={device.shadows}
+          shadows={device.shadows ? { type: THREE.PCFShadowMap } : false}
           gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
           camera={{ position: [0, 0, 6.4], fov: 32, near: 0.1, far: 40 }}
           onCreated={({ gl }) => {
