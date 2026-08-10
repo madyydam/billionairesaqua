@@ -38,15 +38,11 @@ export function Hero({ ready }: { ready: boolean }) {
 
   return (
     <Section id="hero" scene="hero" labelledBy="hero-title" className="items-center">
-
-
       {/* ── Content ── */}
       <div ref={root} className="relative z-10 grid gap-10 md:grid-cols-12 md:items-center">
         <div className="md:col-span-6 lg:col-span-5">
           <div data-hero-item className="opacity-0">
-            <Eyebrow className="border-white/30 text-white/80">
-              THE BILLIONAIRE&apos;S AQUA
-            </Eyebrow>
+            <Eyebrow className="border-white/30 text-white/80">THE BILLIONAIRE&apos;S AQUA</Eyebrow>
           </div>
 
           <Display
@@ -57,7 +53,10 @@ export function Hero({ ready }: { ready: boolean }) {
             <span data-hero-item className="block opacity-0">
               More Than Water.
             </span>
-            <span data-hero-item className="block italic opacity-0 text-[#00B3C6] drop-shadow-[0_2px_18px_rgba(0,179,198,0.6)]">
+            <span
+              data-hero-item
+              className="block italic opacity-0 text-[#00B3C6] drop-shadow-[0_2px_18px_rgba(0,179,198,0.6)]"
+            >
               A Standard.
             </span>
           </Display>

@@ -66,9 +66,6 @@ function Index() {
       <Loader ready={ready && device.ready} />
       <SmoothScrollProvider reducedMotion={device.reducedMotion} />
 
-
-
-
       {/*
         Hero video background — fixed z-0, rendered BEFORE the WebGL canvas.
         Same z-index but earlier in DOM order means the WebGL Canvas paints
