@@ -77,39 +77,39 @@ export function CallToAction() {
               onClick={() => setActiveTab("enquiry")}
               className={`pb-3 font-display text-[0.68rem] tracking-[0.2em] uppercase transition-all duration-500 relative focus-visible:outline-none ${
                 activeTab === "enquiry"
-                  ? "text-accent-gold"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-accent-gold-light font-semibold"
+                  : "text-muted-foreground hover:text-accent-gold-light"
               }`}
             >
               Enquiries
               {activeTab === "enquiry" && (
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-gold" />
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-gold-light shadow-[0_0_8px_rgba(0,179,198,0.5)]" />
               )}
             </button>
             <button
               onClick={() => setActiveTab("partner")}
               className={`pb-3 font-display text-[0.68rem] tracking-[0.2em] uppercase transition-all duration-500 relative focus-visible:outline-none ${
                 activeTab === "partner"
-                  ? "text-accent-gold"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-accent-gold-light font-semibold"
+                  : "text-muted-foreground hover:text-accent-gold-light"
               }`}
             >
               Partner With Us
               {activeTab === "partner" && (
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-gold" />
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-gold-light shadow-[0_0_8px_rgba(0,179,198,0.5)]" />
               )}
             </button>
             <button
               onClick={() => setActiveTab("faq")}
               className={`pb-3 font-display text-[0.68rem] tracking-[0.2em] uppercase transition-all duration-500 relative focus-visible:outline-none ${
                 activeTab === "faq"
-                  ? "text-accent-gold"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-accent-gold-light font-semibold"
+                  : "text-muted-foreground hover:text-accent-gold-light"
               }`}
             >
               FAQs
               {activeTab === "faq" && (
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-gold" />
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-gold-light shadow-[0_0_8px_rgba(0,179,198,0.5)]" />
               )}
             </button>
           </div>

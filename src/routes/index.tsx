@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useDevicePerformance } from "@/hooks/useDevicePerformance";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { ProductSceneLazy } from "@/components/3d/ProductSceneLazy";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { Loader } from "@/components/site/Loader";
 import { Nav } from "@/components/site/Nav";
 import { ProgressRail } from "@/components/site/ProgressRail";
@@ -58,11 +59,22 @@ function Index() {
   const device = useDevicePerformance();
   const [ready, setReady] = useState(false);
   const onReady = useCallback(() => setReady(true), []);
+  const scrollProgress = useScrollProgress(100);
 
   return (
     <>
       <Loader ready={ready && device.ready} />
       <SmoothScrollProvider reducedMotion={device.reducedMotion} />
+
+      {/* Dynamic light blue-and-white background gradient for Hero section */}
+      <div
+        className="fixed inset-0 transition-opacity duration-500 ease-out pointer-events-none"
+        style={{
+          zIndex: -10,
+          background: "linear-gradient(135deg, #FFFFFF 0%, #E6F7F5 100%)",
+          opacity: Math.max(0, 1 - scrollProgress * 6.5), // Fades out completely by scrollProgress = 0.15 (intro transition point)
+        }}
+      />
 
       {/* persistent WebGL stage, fixed behind the document */}
       <ProductSceneLazy device={device} onReady={onReady} />

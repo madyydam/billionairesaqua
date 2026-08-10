@@ -33,9 +33,14 @@ export function Section({
   );
 }
 
-export function Eyebrow({ children }: { children: ReactNode }) {
+export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <span className="inline-flex items-center gap-3 rounded-full border border-hairline px-4 py-1.5 font-body text-[0.62rem] tracking-[0.32em] text-muted-foreground uppercase">
+    <span
+      className={cn(
+        "inline-flex items-center gap-3 rounded-full border border-hairline px-4 py-1.5 font-body text-[0.62rem] tracking-[0.32em] text-muted-foreground uppercase",
+        className,
+      )}
+    >
       <span className="size-1 rounded-full bg-accent-gold" aria-hidden="true" />
       {children}
     </span>

@@ -216,13 +216,13 @@ export function ProductDetails() {
             </div>
             <div className="flex justify-between py-3.5 gap-4">
               <span>BIS Standard</span>
-              <span className="text-foreground text-right text-accent-gold">
+              <span className="text-foreground text-right text-accent-gold-light">
                 {activeProduct.specs.bis}
               </span>
             </div>
             <div className="flex justify-between py-3.5 gap-4">
               <span>FSSAI License</span>
-              <span className="text-foreground text-right text-accent-gold">
+              <span className="text-foreground text-right text-accent-gold-light">
                 {activeProduct.specs.fssai}
               </span>
             </div>
