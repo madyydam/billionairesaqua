@@ -57,9 +57,23 @@ export function Display({
     "font-display text-[clamp(2.35rem,6.4vw,6.4rem)] leading-[0.95] tracking-[-0.03em] text-foreground uppercase",
     className,
   );
-  if (Tag === "h1") return <h1 id={id} className={classes}>{children}</h1>;
-  if (Tag === "h3") return <h3 id={id} className={classes}>{children}</h3>;
-  return <h2 id={id} className={classes}>{children}</h2>;
+  if (Tag === "h1")
+    return (
+      <h1 id={id} className={classes}>
+        {children}
+      </h1>
+    );
+  if (Tag === "h3")
+    return (
+      <h3 id={id} className={classes}>
+        {children}
+      </h3>
+    );
+  return (
+    <h2 id={id} className={classes}>
+      {children}
+    </h2>
+  );
 }
 
 export function Body({ children, className }: { children: ReactNode; className?: string }) {

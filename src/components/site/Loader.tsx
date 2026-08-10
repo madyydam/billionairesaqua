@@ -21,9 +21,12 @@ export function Loader({ ready }: { ready: boolean }) {
 
   useEffect(() => {
     if (!bar.current) return;
-    gsap.to(bar.current, { scaleX: done ? 1 : 0.72, duration: done ? 0.5 : 2.4, ease: "power2.out" });
+    gsap.to(bar.current, {
+      scaleX: done ? 1 : 0.72,
+      duration: done ? 0.5 : 2.4,
+      ease: "power2.out",
+    });
   }, [done]);
-
 
   useEffect(() => {
     if (!done || !root.current) return;
@@ -33,7 +36,6 @@ export function Loader({ ready }: { ready: boolean }) {
       tl.kill();
     };
   }, [done]);
-
 
   useEffect(() => {
     document.documentElement.classList.toggle("is-loading", !hidden);

@@ -6,10 +6,7 @@ import { scrollState } from "@/hooks/useScrollProgress";
  * Attached to the canvas wrapper so it coexists with scrolling: only pointer
  * (mouse/touch) drag is captured, wheel/touch scroll still reaches Lenis.
  */
-export function useProductInteraction(
-  element: HTMLElement | null,
-  enabled: boolean,
-) {
+export function useProductInteraction(element: HTMLElement | null, enabled: boolean) {
   useEffect(() => {
     if (!element) return;
 

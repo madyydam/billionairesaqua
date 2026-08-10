@@ -1,12 +1,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import {
-  sampleTimeline,
-  SCROLL_DAMPING,
-  IDLE,
-  MOBILE_ADAPT,
-} from "@/config/productAnimation";
+import { sampleTimeline, SCROLL_DAMPING, IDLE, MOBILE_ADAPT } from "@/config/productAnimation";
 import { scrollState } from "@/hooks/useScrollProgress";
 import { ProductModel } from "./ProductModel";
 import { Packaging } from "./Packaging";

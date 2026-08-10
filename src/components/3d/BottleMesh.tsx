@@ -9,13 +9,7 @@ import { createLabelTexture } from "@/lib/label-texture";
  * Replace by dropping `product.glb` into /public/models — see
  * src/components/3d/ProductModel.tsx, no other file needs to change.
  */
-export function BottleMesh({
-  rich = true,
-  shadows = true,
-}: {
-  rich?: boolean;
-  shadows?: boolean;
-}) {
+export function BottleMesh({ rich = true, shadows = true }: { rich?: boolean; shadows?: boolean }) {
   const label = useMemo(() => createLabelTexture(), []);
 
   const bodyGeometry = useMemo(() => {
@@ -164,7 +158,6 @@ export function BottleMesh({
       <mesh position={[0, 0.995, 0]} rotation={[Math.PI / 2, 0, 0]} material={capMaterial}>
         <torusGeometry args={[0.185, 0.016, 12, 48]} />
       </mesh>
-
 
       {/* ribbed cap */}
       <group position={[0, 1.155, 0]}>

@@ -29,9 +29,7 @@ export function SmoothScrollProvider({ reducedMotion }: { reducedMotion: boolean
     let anchors: { at: number; top: number }[] = [];
 
     const measure = () => {
-      const nodes = Array.from(
-        document.querySelectorAll<HTMLElement>("[data-scene]"),
-      );
+      const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-scene]"));
       anchors = nodes
         .map((node) => {
           const id = node.dataset["scene"]!;

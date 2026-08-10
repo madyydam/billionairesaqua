@@ -41,36 +41,33 @@ export function Hero({ ready }: { ready: boolean }) {
       <div ref={root} className="grid gap-10 md:grid-cols-12 md:items-center">
         <div className="md:col-span-6 lg:col-span-5">
           <div data-hero-item className="opacity-0">
-            <Eyebrow>500ml · Packaged drinking water</Eyebrow>
+            <Eyebrow>THE BILLIONAIRE&apos;S AQUA</Eyebrow>
           </div>
 
           <Display as="h1" id="hero-title" className="mt-7">
             <span data-hero-item className="block opacity-0">
-              Designed
-            </span>
-            <span data-hero-item className="block opacity-0">
-              to be
+              More Than Water.
             </span>
             <span data-hero-item className="block text-accent-gold opacity-0">
-              Experienced.
+              A Standard.
             </span>
           </Display>
 
           <div data-hero-item className="mt-8 opacity-0">
             <Body>
-              Meet the next generation of premium drinking water — sourced, mineral-balanced and
-              bottled for those who notice the details.
+              Premium packaged drinking water created for those who believe that quality is not an
+              option — it is a standard.
             </Body>
           </div>
 
           <div data-hero-item className="mt-10 flex flex-wrap items-center gap-6 opacity-0">
-            <MagneticButton onClick={() => scrollToSection("intro")}>
-              Explore the product
+            <MagneticButton onClick={() => scrollToSection("details")}>
+              Explore our products
               <ArrowRight className="size-3.5 transition-transform duration-500 group-hover:translate-x-1" />
             </MagneticButton>
             <MagneticButton variant="quiet" onClick={() => scrollToSection("cta")}>
               <span className="relative">
-                Buy a case
+                Partner with us
                 <span className="line absolute -bottom-1 left-0 h-px w-0 bg-current transition-all duration-500" />
               </span>
             </MagneticButton>
@@ -89,10 +86,13 @@ export function Hero({ ready }: { ready: boolean }) {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2">
-        <span className="flex flex-col items-center gap-3 font-body text-[0.6rem] tracking-[0.32em] text-muted-foreground uppercase">
+      <div className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+        <p className="font-body text-[0.55rem] tracking-[0.4em] text-muted-foreground uppercase">
+          PUNE • MAHARASHTRA • INDIA
+        </p>
+        <span className="flex flex-col items-center gap-1 font-body text-[0.5rem] tracking-[0.32em] text-muted-foreground uppercase">
           Scroll
-          <ArrowDown className="size-3.5 animate-bounce" aria-hidden="true" />
+          <ArrowDown className="size-3 animate-bounce" aria-hidden="true" />
         </span>
       </div>
     </Section>

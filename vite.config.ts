@@ -12,4 +12,15 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    server: {
+      proxy: {
+        "/__l5e": {
+          target: "https://99cef998-cdf7-48fb-9e22-e969931c59e8.lovableproject.com",
+          changeOrigin: true,
+          secure: false,
+        },
+      },
+    },
+  },
 });

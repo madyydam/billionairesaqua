@@ -65,6 +65,5 @@ export function useScrollProgress(steps = 100) {
     };
   }, [steps]);
 
-
   return value;
 }

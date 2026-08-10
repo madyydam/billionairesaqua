@@ -5,10 +5,12 @@ import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { label: "Product", id: "intro" },
-  { label: "Technology", id: "technology" },
-  { label: "Details", id: "details" },
-  { label: "About", id: "benefits" },
+  { label: "Home", id: "hero" },
+  { label: "Our Story", id: "intro" },
+  { label: "Our Water", id: "reveal" },
+  { label: "Products", id: "details" },
+  { label: "Quality", id: "technology" },
+  { label: "Partner With Us", id: "cta" },
 ];
 
 export function Nav() {
@@ -63,10 +65,10 @@ export function Nav() {
             </button>
           ))}
           <button
-            onClick={() => go("cta")}
+            onClick={() => go("contact")}
             className="rounded-full border border-hairline px-6 py-2.5 font-body text-[0.7rem] tracking-[0.2em] text-foreground uppercase transition-colors duration-500 hover:border-accent-gold hover:text-accent-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           >
-            Shop now
+            Enquire now
           </button>
         </nav>
 
@@ -93,10 +95,10 @@ export function Nav() {
               </button>
             ))}
             <button
-              onClick={() => go("cta")}
+              onClick={() => go("contact")}
               className="mt-6 rounded-full bg-foreground py-4 font-body text-[0.72rem] tracking-[0.22em] text-background uppercase"
             >
-              Shop now
+              Enquire now
             </button>
           </nav>
         </div>

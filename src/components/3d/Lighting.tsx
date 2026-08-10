@@ -68,7 +68,12 @@ export function Lighting({ shadows = true }: { shadows?: boolean }) {
         color="#eaf6ff"
       />
 
-      <pointLight position={[0.9, -1.8, 1.6]} intensity={2.4} color={theme.goldLight} distance={7} />
+      <pointLight
+        position={[0.9, -1.8, 1.6]}
+        intensity={2.4}
+        color={theme.goldLight}
+        distance={7}
+      />
     </>
   );
 }

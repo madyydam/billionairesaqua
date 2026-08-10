@@ -30,9 +30,24 @@ export function CameraController({
     );
 
     const d = Math.min(1, delta);
-    camera.position.x = THREE.MathUtils.damp(camera.position.x, target.current.x, SCROLL_DAMPING, d);
-    camera.position.y = THREE.MathUtils.damp(camera.position.y, target.current.y, SCROLL_DAMPING, d);
-    camera.position.z = THREE.MathUtils.damp(camera.position.z, target.current.z, SCROLL_DAMPING, d);
+    camera.position.x = THREE.MathUtils.damp(
+      camera.position.x,
+      target.current.x,
+      SCROLL_DAMPING,
+      d,
+    );
+    camera.position.y = THREE.MathUtils.damp(
+      camera.position.y,
+      target.current.y,
+      SCROLL_DAMPING,
+      d,
+    );
+    camera.position.z = THREE.MathUtils.damp(
+      camera.position.z,
+      target.current.z,
+      SCROLL_DAMPING,
+      d,
+    );
 
     const fov = s.cameraFov + (mobile ? MOBILE_ADAPT.fovOffset : 0);
     if (Math.abs(camera.fov - fov) > 0.01) {

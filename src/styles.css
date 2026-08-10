@@ -115,7 +115,6 @@
   --sidebar-ring: oklch(0.72 0.098 82.5);
 }
 
-
 @layer base {
   * {
     border-color: var(--color-border);
@@ -183,4 +182,3 @@
     animation: none;
   }
 }
-

@@ -18,9 +18,9 @@ import { FullscreenMoment } from "@/components/sections/FullscreenMoment";
 import { Benefits } from "@/components/sections/Benefits";
 import { CallToAction } from "@/components/sections/CallToAction";
 
-const TITLE = "The Billionaire's Aqua — Premium 500ml Drinking Water";
+const TITLE = "Billionaire's Aqua | Premium Packaged Drinking Water";
 const DESCRIPTION =
-  "A cinematic 3D product experience for The Billionaire's Aqua: mineral-balanced 500ml packaged drinking water, engineered down to the last detail.";
+  "Discover THE BILLIONAIRE'S AQUA — a premium packaged drinking water brand built around quality, consistency and a bigger vision. Starting from Pune, Maharashtra.";
 
 export const Route = createFileRoute("/")({
   component: Index,

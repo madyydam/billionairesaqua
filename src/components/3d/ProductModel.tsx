@@ -14,7 +14,13 @@ function GlbProduct({ url }: { url: string }) {
  * The product. Uses the real GLB when one is configured, otherwise renders the
  * real photographic packshot billboard (exact product match).
  */
-export function ProductModel({ rich = true, shadows = true }: { rich?: boolean; shadows?: boolean }) {
+export function ProductModel({
+  rich = true,
+  shadows = true,
+}: {
+  rich?: boolean;
+  shadows?: boolean;
+}) {
   const url = MODELS.product;
 
   if (url) {
