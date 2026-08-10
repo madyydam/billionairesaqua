@@ -30,6 +30,18 @@ export function Nav() {
     scrollToSection(id);
   };
 
+  const textThemeClass = solid
+    ? "text-muted-foreground hover:text-foreground focus-visible:text-foreground"
+    : "text-[#2D3738]/70 hover:text-[#2D3738] focus-visible:text-[#2D3738]";
+
+  const textForegroundThemeClass = solid ? "text-foreground" : "text-[#2D3738]";
+
+  const buttonThemeClass = solid
+    ? "border-hairline text-foreground hover:border-accent-gold hover:text-accent-gold"
+    : "border-[#2D3738]/20 text-[#2D3738] hover:border-brand-green hover:text-brand-green";
+
+  const brandTheClass = solid ? "text-muted-foreground" : "text-[#2D3738]/50";
+
   return (
     <header
       className={cn(
@@ -45,10 +57,17 @@ export function Nav() {
           className="flex items-baseline gap-2 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           aria-label="The Billionaire's Aqua — back to top"
         >
-          <span className="font-display text-[0.6rem] tracking-[0.4em] text-muted-foreground uppercase">
+          <span
+            className={cn("font-display text-[0.6rem] tracking-[0.4em] uppercase", brandTheClass)}
+          >
             The
           </span>
-          <span className="font-display text-sm tracking-[0.3em] text-foreground uppercase">
+          <span
+            className={cn(
+              "font-display text-sm tracking-[0.3em] uppercase",
+              textForegroundThemeClass,
+            )}
+          >
             Billionaire&apos;s Aqua
           </span>
         </button>
@@ -58,15 +77,26 @@ export function Nav() {
             <button
               key={link.id}
               onClick={() => go(link.id)}
-              className="group relative font-body text-[0.72rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground focus-visible:outline-none focus-visible:text-foreground"
+              className={cn(
+                "group relative font-body text-[0.72rem] tracking-[0.2em] uppercase transition-colors focus-visible:outline-none",
+                textThemeClass,
+              )}
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent-gold transition-all duration-500 group-hover:w-full" />
+              <span
+                className={cn(
+                  "absolute -bottom-1 left-0 h-px w-0 transition-all duration-500 group-hover:w-full",
+                  solid ? "bg-accent-gold" : "bg-brand-green",
+                )}
+              />
             </button>
           ))}
           <button
             onClick={() => go("contact")}
-            className="rounded-full border border-hairline px-6 py-2.5 font-body text-[0.7rem] tracking-[0.2em] text-foreground uppercase transition-colors duration-500 hover:border-accent-gold hover:text-accent-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            className={cn(
+              "rounded-full px-6 py-2.5 font-body text-[0.7rem] tracking-[0.2em] uppercase transition-colors duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+              buttonThemeClass,
+            )}
           >
             Enquire now
           </button>
@@ -76,7 +106,10 @@ export function Nav() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="flex min-h-11 min-w-11 items-center justify-center text-foreground md:hidden"
+          className={cn(
+            "flex min-h-11 min-w-11 items-center justify-center transition-colors duration-350 md:hidden",
+            textForegroundThemeClass,
+          )}
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>

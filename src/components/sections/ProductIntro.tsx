@@ -1,5 +1,6 @@
 import { Section, Eyebrow, Display, Body } from "@/components/site/Primitives";
 import { Reveal } from "@/components/site/Reveal";
+import { scrollToSection } from "@/components/SmoothScrollProvider";
 
 /** Scene 2 — product travels to the opposite side while the story changes. */
 export function ProductIntro() {
@@ -9,7 +10,7 @@ export function ProductIntro() {
         <div className="md:col-span-5 md:col-start-7">
           <Reveal>
             <Eyebrow>Brand Introduction</Eyebrow>
-            <Display id="intro-title" className="mt-7">
+            <Display id="intro-title" className="mt-7 font-editorial normal-case text-5xl">
               More than
               <br />
               just water.

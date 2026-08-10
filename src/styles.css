@@ -21,6 +21,7 @@
 @theme inline {
   --font-display: "Antonio", "Arial Narrow", sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
+  --font-editorial: "Playfair Display", Georgia, serif;
   --color-accent-gold: var(--accent-gold);
   --color-accent-gold-light: var(--accent-gold-light);
   --color-brand-green: var(--brand-green);

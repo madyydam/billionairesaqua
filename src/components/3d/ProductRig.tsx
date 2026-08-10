@@ -49,10 +49,6 @@ export function ProductRig({
     st.rz = THREE.MathUtils.damp(st.rz, s.rotation[2], k, delta);
     st.s = THREE.MathUtils.damp(st.s, scale, k, delta);
 
-    // rotation is intentionally locked: the product always faces forward
-    scrollState.dragRotation = 0;
-    scrollState.dragVelocity = 0;
-
     const t = performance.now() / 1000;
     const float = reducedMotion ? 0 : Math.sin(t * IDLE.floatSpeed) * IDLE.floatAmplitude;
 

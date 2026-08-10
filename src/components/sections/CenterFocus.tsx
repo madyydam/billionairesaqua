@@ -17,7 +17,7 @@ export function CenterFocus() {
         <Reveal className="mt-8 w-full" delay={0.1}>
           <Display
             id="focus-title"
-            className="mx-auto max-w-[20ch] text-[clamp(2.2rem,5vw,4.4rem)] lowercase first-letter:uppercase"
+            className="mx-auto max-w-[20ch] text-[clamp(2.2rem,5vw,4.4rem)] font-editorial normal-case"
           >
             Billionaires aren&apos;t born — they&apos;re built.
           </Display>
