@@ -118,6 +118,7 @@ export function BottleImage() {
           ref={matRef}
           args={[shaderArgs]}
           transparent
+          toneMapped={false}
           depthWrite={false}
           side={THREE.DoubleSide}
         />
