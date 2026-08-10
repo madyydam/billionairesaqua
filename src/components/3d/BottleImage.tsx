@@ -1,10 +1,13 @@
 import { useMemo } from "react";
 import * as THREE from "three";
 import { Billboard, useTexture } from "@react-three/drei";
-import bottleReal from "@/assets/bottle-real.png.asset.json";
 
 const HEIGHT = 2.55;
 const ASPECT = 402 / 1298;
+
+// Direct public-folder URL — bypasses the Lovable vite plugin that rewrites
+// asset.json imports back to /__l5e/... CDN paths (which 404 on Vercel).
+const BOTTLE_URL = "/bottle-real.png";
 
 /**
  * The real product shot, rendered as a camera-facing billboard so the bottle
@@ -12,7 +15,7 @@ const ASPECT = 402 / 1298;
  * scroll timeline (position / scale / float / parallax).
  */
 export function BottleImage() {
-  const map = useTexture(bottleReal.url);
+  const map = useTexture(BOTTLE_URL);
 
   const material = useMemo(() => {
     map.colorSpace = THREE.SRGBColorSpace;
