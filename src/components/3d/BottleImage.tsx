@@ -10,23 +10,27 @@ const ASPECT = 402 / 1298;
 
 /**
  * The real product shot rendered as a camera-facing billboard.
- * Features:
- *  - Stable local texture (no 404 risk)
- *  - Magnetic pointer tracking: the bottle softly follows mouse position
- *  - Water-splash bottom shader: an animated sine wave ripple at the bottom 15% of the image
- *  - Fully memoised — zero allocations per frame
+ *
+ * STRETCH EFFECT: The bottle texture elastically stretches/warps toward the
+ * cursor position — like a rubber sheet being pulled. The distortion is a
+ * radial UV warp centered on the cursor, with gaussian falloff so it looks
+ * natural and doesn't affect the edges.
+ *
+ * WATER SPLASH: Bottom 15% of texture gets a sine-wave slosh during the
+ * Hero → Intro scroll transition.
+ *
+ * MAGNETIC POSITION: The entire mesh drifts gently toward the pointer.
  */
 export function BottleImage() {
   const map = useTexture(bottleReal.url);
 
-  // Current rendered magnetic offset (damped toward pointer)
-  const magnetic = useRef({ x: 0, y: 0 });
-  // Raw pointer target offset
-  const pointerTarget = useRef({ x: 0, y: 0 });
   const meshRef = useRef<THREE.Mesh>(null);
   const matRef = useRef<THREE.ShaderMaterial>(null);
 
-  // Build the splash shader once — never recreated
+  // Damped values — updated in useFrame, no React state
+  const magPos = useRef({ x: 0, y: 0 });
+  const dampedCursor = useRef({ x: 0, y: 0 });
+
   const shaderArgs = useMemo(() => {
     map.colorSpace = THREE.SRGBColorSpace;
     map.anisotropy = 8;
@@ -38,7 +42,11 @@ export function BottleImage() {
       uniforms: {
         uMap: { value: map },
         uTime: { value: 0 },
-        /** 0 = no splash, 1 = full splash — driven by scroll progress 0→0.2 */
+        /** Cursor UV position — maps pointer -1..1 NDC → 0..1 UV space */
+        uCursor: { value: new THREE.Vector2(0.5, 0.5) },
+        /** Strength of the elastic stretch pull. 0 = none, 1 = full. */
+        uStretch: { value: 0 },
+        /** Bottom water splash amount */
         uSplash: { value: 0 },
       },
       vertexShader: /* glsl */ `
@@ -50,22 +58,35 @@ export function BottleImage() {
       `,
       fragmentShader: /* glsl */ `
         uniform sampler2D uMap;
-        uniform float uTime;
-        uniform float uSplash;
+        uniform float     uTime;
+        uniform vec2      uCursor;   // 0..1 UV of mouse
+        uniform float     uStretch;  // elastic stretch toward cursor
+        uniform float     uSplash;   // water slosh at bottom
+
         varying vec2 vUv;
 
         void main() {
           vec2 uv = vUv;
 
-          // Only distort the bottom 15% of the bottle texture (the water line area)
-          float splashZone = clamp(1.0 - vUv.y / 0.15, 0.0, 1.0);
-          float strength = uSplash * splashZone;
+          // ── ELASTIC STRETCH TOWARD CURSOR ─────────────────────────────────
+          // Each UV point is pulled toward the cursor proportionally to how
+          // close it is. The gaussian envelope keeps edges from distorting.
+          if (uStretch > 0.001) {
+            vec2  dir     = uCursor - uv;          // vector from UV → cursor
+            float dist    = length(dir);
+            // Gaussian falloff: strong near cursor, zero far away
+            float falloff = exp(-dist * dist * 4.0);
+            float pull    = uStretch * falloff * 0.35;
+            // Shift UV toward cursor → texture "stretches" toward that point
+            uv += dir * pull;
+          }
 
-          if (strength > 0.001) {
-            float wave = sin(uv.x * 22.0 + uTime * 8.0) * 0.018 * strength;
+          // ── WATER SPLASH at bottle bottom ─────────────────────────────────
+          if (uSplash > 0.001) {
+            float zone   = clamp(1.0 - vUv.y / 0.15, 0.0, 1.0);
+            float wave   = sin(uv.x * 22.0 + uTime * 8.0) * 0.018 * uSplash * zone;
+            float slosh  = cos(uv.y * 10.0 + uTime * 5.0) * 0.01  * uSplash * zone;
             uv.y += wave;
-            // Subtle horizontal sloshing for the water meniscus
-            float slosh = cos(uv.y * 10.0 + uTime * 5.0) * 0.01 * strength;
             uv.x += slosh;
           }
 
@@ -78,35 +99,49 @@ export function BottleImage() {
     };
   }, [map]);
 
-  useFrame((_, delta) => {
-    const dt = Math.min(delta, 0.05); // cap to avoid spiral on tab restore
+  useFrame((_, rawDelta) => {
+    const dt = Math.min(rawDelta, 0.05);
+    const mat = matRef.current;
 
-    // --- Magnetic tracking ---
-    const px = scrollState.pointerX; // already -1..1
-    const py = scrollState.pointerY;
-    const MAG = 0.18; // max magnetic offset in world units
-    const targetX = px * MAG;
-    const targetY = py * MAG * 0.5;
+    // ── DAMPED CURSOR (smooth lag for natural feel) ─────────────────────────
+    const dc = dampedCursor.current;
+    const px = scrollState.pointerX; // -1..1
+    const py = scrollState.pointerY; // -1..1
+    dc.x += (px - dc.x) * Math.min(1, dt * 9);
+    dc.y += (py - dc.y) * Math.min(1, dt * 9);
 
-    const mag = magnetic.current;
-    mag.x += (targetX - mag.x) * Math.min(1, dt * 7);
-    mag.y += (targetY - mag.y) * Math.min(1, dt * 7);
+    // ── MAGNETIC MESH POSITION (whole mesh drifts toward cursor) ───────────
+    const mag = magPos.current;
+    mag.x += (dc.x * 0.14 - mag.x) * Math.min(1, dt * 6);
+    mag.y += (dc.y * 0.07 - mag.y) * Math.min(1, dt * 6);
 
     if (meshRef.current) {
       meshRef.current.position.x = mag.x;
       meshRef.current.position.y = mag.y;
     }
 
-    // --- Splash shader ---
-    if (matRef.current) {
-      matRef.current.uniforms.uTime.value += dt;
+    if (mat) {
+      mat.uniforms.uTime.value += dt;
 
+      // Convert damped cursor -1..1 → UV 0..1 (Y is flipped in UV space)
+      mat.uniforms.uCursor.value.set(
+        dc.x * 0.5 + 0.5,
+        1.0 - (dc.y * 0.5 + 0.5),
+      );
+
+      // Stretch strength: max when cursor is active, fades on mobile/no pointer
+      // We boost it when the user moves fast
+      const velBoost = Math.min(0.6, Math.abs(scrollState.velocity) * 2.5);
+      const cursorPresent = Math.sqrt(px * px + py * py); // 0 at center, ~1 at edge
+      mat.uniforms.uStretch.value =
+        Math.min(1, cursorPresent * 1.4) * (0.7 + velBoost);
+
+      // Water splash during Hero→Intro scroll
       const p = scrollState.progress;
-      // Bell curve: ramps up 0→0.17, peaks at scroll=0.17 (Hero→Intro transition), fades 0.17→0.34
-      const rawSplash = p < 0.17 ? p / 0.17 : Math.max(0, 1 - (p - 0.17) / 0.17);
-      // Amplify by scroll velocity so fast scrolling = bigger splash
-      const velBoost = Math.min(1, Math.abs(scrollState.velocity) * 4);
-      matRef.current.uniforms.uSplash.value = rawSplash * (0.6 + velBoost * 0.4);
+      const rawSplash =
+        p < 0.17 ? p / 0.17 : Math.max(0, 1 - (p - 0.17) / 0.17);
+      const splashVel = Math.min(1, Math.abs(scrollState.velocity) * 4);
+      mat.uniforms.uSplash.value = rawSplash * (0.6 + splashVel * 0.4);
     }
   });
 
