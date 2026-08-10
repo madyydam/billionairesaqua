@@ -38,10 +38,30 @@ export function Hero({ ready }: { ready: boolean }) {
 
   return (
     <Section id="hero" scene="hero" labelledBy="hero-title" className="items-center">
-      <div ref={root} className="grid gap-10 md:grid-cols-12 md:items-center">
+
+      {/* ── Video background ── */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          disablePictureInPicture
+          preload="auto"
+          className="h-full w-full object-cover"
+          aria-hidden="true"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* 10% dark overlay so content stays readable */}
+        <div className="absolute inset-0 bg-black/10" />
+      </div>
+
+      {/* ── Content ── */}
+      <div ref={root} className="relative z-10 grid gap-10 md:grid-cols-12 md:items-center">
         <div className="md:col-span-6 lg:col-span-5">
           <div data-hero-item className="opacity-0">
-            <Eyebrow className="text-[#2D3738] border-[#2D3738]/25">
+            <Eyebrow className="border-white/30 text-white/80">
               THE BILLIONAIRE&apos;S AQUA
             </Eyebrow>
           </div>
@@ -49,18 +69,18 @@ export function Hero({ ready }: { ready: boolean }) {
           <Display
             as="h1"
             id="hero-title"
-            className="mt-7 text-[#2D3738] font-editorial normal-case text-[clamp(2.8rem,7vw,6rem)] leading-[1.05] tracking-[-0.02em]"
+            className="mt-7 font-editorial normal-case text-[clamp(2.8rem,7vw,6rem)] leading-[1.05] tracking-[-0.02em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]"
           >
             <span data-hero-item className="block opacity-0">
               More Than Water.
             </span>
-            <span data-hero-item className="block text-brand-green italic opacity-0">
+            <span data-hero-item className="block italic opacity-0 text-[#00B3C6] drop-shadow-[0_2px_18px_rgba(0,179,198,0.6)]">
               A Standard.
             </span>
           </Display>
 
           <div data-hero-item className="mt-8 opacity-0">
-            <Body className="text-[#2D3738]/85">
+            <Body className="text-white/85 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
               Premium packaged drinking water created for those who believe that quality is not an
               option — it is a standard.
             </Body>
@@ -68,7 +88,7 @@ export function Hero({ ready }: { ready: boolean }) {
 
           <div data-hero-item className="mt-10 flex flex-wrap items-center gap-6 opacity-0">
             <MagneticButton
-              className="bg-[#2D3738] text-white hover:bg-brand-green hover:text-white"
+              className="bg-white text-[#2D3738] hover:bg-[#00B3C6] hover:text-white"
               onClick={() => scrollToSection("details")}
             >
               Explore our products
@@ -76,7 +96,7 @@ export function Hero({ ready }: { ready: boolean }) {
             </MagneticButton>
             <MagneticButton
               variant="quiet"
-              className="text-[#2D3738]/70 hover:text-[#2D3738] [&>span.line]:bg-[#2D3738]"
+              className="text-white/75 hover:text-white [&>span.line]:bg-white"
               onClick={() => scrollToSection("cta")}
             >
               <span className="relative">
@@ -90,20 +110,20 @@ export function Hero({ ready }: { ready: boolean }) {
         <div className="md:col-span-6 lg:col-start-9 lg:col-span-4">
           <div
             data-hero-item
-            className="ml-auto hidden max-w-[26ch] border-l border-[#2D3738]/20 pl-6 opacity-0 lg:block"
+            className="ml-auto hidden max-w-[26ch] border-l border-white/25 pl-6 opacity-0 lg:block"
           >
-            <p className="font-body text-[0.7rem] leading-loose tracking-[0.2em] text-[#2D3738]/80 uppercase">
+            <p className="font-body text-[0.7rem] leading-loose tracking-[0.2em] text-white/70 uppercase">
               Scroll to travel through the product story.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <p className="font-body text-[0.55rem] tracking-[0.4em] text-accent-gold-light uppercase">
+      <div className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
+        <p className="font-body text-[0.55rem] tracking-[0.4em] text-[#00B3C6] uppercase drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
           PUNE • MAHARASHTRA • INDIA
         </p>
-        <span className="flex flex-col items-center gap-1 font-body text-[0.5rem] tracking-[0.32em] text-muted-foreground uppercase">
+        <span className="flex flex-col items-center gap-1 font-body text-[0.5rem] tracking-[0.32em] text-white/60 uppercase">
           Scroll
           <ArrowDown className="size-3 animate-bounce" aria-hidden="true" />
         </span>
