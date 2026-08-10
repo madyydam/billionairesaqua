@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
 import { MODELS, MODEL_TRANSFORM } from "@/config/models";
+import { BottleImage } from "./BottleImage";
 import { BottleMesh } from "./BottleMesh";
 
 function GlbProduct({ url }: { url: string }) {
@@ -11,7 +12,7 @@ function GlbProduct({ url }: { url: string }) {
 
 /**
  * The product. Uses the real GLB when one is configured, otherwise renders the
- * procedural placeholder so the entire animation system stays testable.
+ * real photographic packshot billboard (exact product match).
  */
 export function ProductModel({ rich = true, shadows = true }: { rich?: boolean; shadows?: boolean }) {
   const url = MODELS.product;
@@ -24,5 +25,9 @@ export function ProductModel({ rich = true, shadows = true }: { rich?: boolean; 
     );
   }
 
-  return <BottleMesh rich={rich} shadows={shadows} />;
+  return (
+    <Suspense fallback={null}>
+      <BottleImage />
+    </Suspense>
+  );
 }
