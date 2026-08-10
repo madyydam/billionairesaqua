@@ -54,23 +54,19 @@ export function ProductRig({
     st.rz = THREE.MathUtils.damp(st.rz, s.rotation[2], k, delta);
     st.s = THREE.MathUtils.damp(st.s, scale, k, delta);
 
-    // drag inertia
-    if (!scrollState.dragging) {
-      scrollState.dragRotation += scrollState.dragVelocity * delta;
-      scrollState.dragVelocity *= 1 - Math.min(1, delta * 3.2);
-    }
+    // rotation is intentionally locked: the product always faces forward
+    scrollState.dragRotation = 0;
+    scrollState.dragVelocity = 0;
 
     const t = performance.now() / 1000;
     const float = reducedMotion ? 0 : Math.sin(t * IDLE.floatSpeed) * IDLE.floatAmplitude;
-    const drift = reducedMotion ? 0 : Math.sin(t * 0.32) * IDLE.rotationDrift;
-    const tilt = reducedMotion ? 0 : scrollState.velocity * 0.00035;
 
     g.position.set(st.x, st.y + float, st.z);
-    g.rotation.set(st.rx + tilt, st.ry + drift + scrollState.dragRotation, st.rz);
+    g.rotation.set(0, 0, 0);
     g.scale.setScalar(st.s);
 
     if (inner.current) {
-      inner.current.rotation.z = reducedMotion ? 0 : Math.sin(t * 0.4) * 0.012;
+      inner.current.rotation.set(0, 0, 0);
     }
   });
 

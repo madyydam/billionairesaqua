@@ -83,7 +83,7 @@ export function Hero({ ready }: { ready: boolean }) {
             className="ml-auto hidden max-w-[26ch] border-l border-hairline pl-6 opacity-0 lg:block"
           >
             <p className="font-body text-[0.7rem] leading-loose tracking-[0.2em] text-muted-foreground uppercase">
-              Drag the bottle to inspect it. Scroll to travel through the product story.
+              Scroll to travel through the product story.
             </p>
           </div>
         </div>
