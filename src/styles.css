@@ -74,11 +74,11 @@
  */
 :root {
   --radius: 0.25rem;
-  --background: oklch(0.163 0.003 145);
+  --background: oklch(0.362 0 0);
   --foreground: oklch(0.928 0.017 85.5);
-  --card: oklch(0.203 0.004 145);
+  --card: oklch(0.41 0 0);
   --card-foreground: oklch(0.928 0.017 85.5);
-  --popover: oklch(0.203 0.004 145);
+  --popover: oklch(0.41 0 0);
   --popover-foreground: oklch(0.928 0.017 85.5);
   --primary: oklch(0.928 0.017 85.5);
   --primary-foreground: oklch(0.163 0.003 145);
