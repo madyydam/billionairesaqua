@@ -3,9 +3,9 @@
  * src/styles.css) and the WebGL scene originate here.
  */
 export const theme = {
-  /** deep charcoal studio background */
-  background: "#0b0c0c",
-  backgroundDeep: "#050606",
+  /** mid-grey studio background (matches the reference shot) */
+  background: "#333333",
+  backgroundDeep: "#1c1c1c",
   /** warm off-white typography */
   foreground: "#efe9dc",
   muted: "#8f8d86",
