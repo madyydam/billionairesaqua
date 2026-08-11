@@ -7,11 +7,11 @@ export function Footer() {
         {/* Main Grid */}
         <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-16">
           {/* Left Column: Official Brand Emblem Logo */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="md:col-span-2 flex items-start">
             <img
               src="/logos/billionaires-aqua-emblem.webp"
               alt="The Billionaire's Aqua Official Brand Emblem"
-              className="h-44 md:h-56 w-auto object-contain rounded-2xl border border-accent-gold/40 bg-emerald-950/40 p-4 shadow-[0_0_35px_rgba(212,175,55,0.2)]"
+              className="h-44 md:h-56 w-auto object-contain"
             />
           </div>
 
