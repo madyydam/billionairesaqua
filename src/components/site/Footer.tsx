@@ -6,17 +6,17 @@ export function Footer() {
       <div className="mx-auto max-w-[1600px]">
         {/* Main Grid */}
         <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-16">
-          {/* Left Column: Stacked Brand Logos (Emblem on top, Tagline logo underneath) */}
-          <div className="md:col-span-2 flex flex-col items-start gap-5">
+          {/* Left Column: Stacked Centered Brand Logos */}
+          <div className="md:col-span-2 flex flex-col items-center justify-center gap-6 text-center">
             <img
               src="/logos/billionaires-aqua-emblem.webp"
               alt="The Billionaire's Aqua Official Brand Emblem"
-              className="h-28 md:h-36 w-auto object-contain"
+              className="h-32 md:h-44 w-auto object-contain"
             />
             <img
               src="/logos/the-b-aqua-tagline.webp"
               alt="The Billionaire's Aqua Logo with Tagline"
-              className="h-20 md:h-28 w-auto object-contain rounded-xl shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+              className="h-28 md:h-36 w-auto object-contain rounded-xl shadow-[0_0_25px_rgba(212,175,55,0.2)]"
             />
           </div>
 
