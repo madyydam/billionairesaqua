@@ -50,12 +50,10 @@ export function ProductRig({
     st.s = THREE.MathUtils.damp(st.s, scale, k, delta);
 
     const t = performance.now() / 1000;
-    const floatY = reducedMotion ? 0 : Math.sin(t * 1.2) * 0.07;
-    const floatRotZ = reducedMotion ? 0 : Math.sin(t * 0.85) * 0.03;
-    const floatRotY = reducedMotion ? 0 : Math.cos(t * 0.65) * 0.045;
+    const float = reducedMotion ? 0 : Math.sin(t * IDLE.floatSpeed) * IDLE.floatAmplitude;
 
-    g.position.set(st.x, st.y + floatY, st.z);
-    g.rotation.set(st.rx, st.ry + floatRotY, st.rz + floatRotZ);
+    g.position.set(st.x, st.y + float, st.z);
+    g.rotation.set(0, 0, 0);
     g.scale.setScalar(st.s);
 
     if (inner.current) {
