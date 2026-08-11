@@ -42,11 +42,17 @@ export function Nav() {
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
         <button
           onClick={() => go("hero")}
-          className="flex items-center text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
+          className="flex items-center gap-2 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
           aria-label="The Billionaire's Aqua back to top"
         >
-          <span className="font-body font-bold text-base md:text-lg text-accent-gold tracking-wide uppercase drop-shadow-[0_0_12px_rgba(212,175,55,0.4)]">
-            The Billionaire&apos;s Aqua
+          <span className="font-display font-bold text-xs tracking-[0.32em] text-accent-gold uppercase">
+            THE
+          </span>
+          <span className="font-editorial font-bold text-lg md:text-xl tracking-[0.1em] text-white uppercase drop-shadow-[0_2px_10px_rgba(255,255,255,0.25)]">
+            BILLIONAIRE&apos;S
+          </span>
+          <span className="font-display font-bold text-xs tracking-[0.32em] text-accent-gold uppercase">
+            AQUA
           </span>
         </button>
 

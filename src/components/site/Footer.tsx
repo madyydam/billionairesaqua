@@ -3,47 +3,38 @@ import { scrollToSection } from "@/components/SmoothScrollProvider";
 export function Footer() {
   return (
     <footer className="relative z-10 border-t border-hairline bg-black/60 px-6 py-20 md:px-10">
-      <div className="mx-auto max-w-[1600px] space-y-16">
-        {/* Big Brand Logos Showcase */}
-        <div className="grid md:grid-cols-2 gap-8 items-center border-b border-hairline/80 pb-16">
-          {/* Logo Card 1: The Billionaire's Aqua Emblem */}
-          <div className="flex flex-col items-center justify-center p-8 md:p-10 rounded-2xl bg-gradient-to-br from-emerald-950/80 via-black to-neutral-950 border border-accent-gold/40 shadow-[0_0_40px_rgba(212,175,55,0.15)] group hover:border-accent-gold transition-all duration-700">
-            <img
-              src="/logos/billionaires-aqua-emblem.webp"
-              alt="The Billionaire's Aqua Official Brand Emblem"
-              className="h-44 md:h-56 w-auto object-contain drop-shadow-[0_0_25px_rgba(212,175,55,0.3)] transition-transform duration-500 group-hover:scale-105"
-            />
-            <p className="mt-4 font-display text-xs tracking-[0.3em] text-accent-gold uppercase font-semibold">
-              Official Brand Trademark
-            </p>
-          </div>
-
-          {/* Logo Card 2: The Suraj Ishwar Group */}
-          <div className="flex flex-col items-center justify-center p-8 md:p-10 rounded-2xl bg-gradient-to-br from-black via-neutral-950 to-black border border-accent-gold/40 shadow-[0_0_40px_rgba(212,175,55,0.15)] group hover:border-accent-gold transition-all duration-700">
-            <img
-              src="/logos/suraj-ishwar-group.webp"
-              alt="The Suraj Ishwar Group — Always Help Others"
-              className="h-44 md:h-56 w-auto object-contain drop-shadow-[0_0_25px_rgba(255,255,255,0.2)] transition-transform duration-500 group-hover:scale-105"
-            />
-            <p className="mt-4 font-display text-xs tracking-[0.3em] text-accent-gold uppercase font-semibold">
-              Parent Enterprise
-            </p>
-          </div>
-        </div>
-
+      <div className="mx-auto max-w-[1600px]">
         {/* Main Grid */}
         <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-16">
-          {/* Logo Column */}
-          <div className="md:col-span-2 space-y-4">
-            <p className="font-body font-bold text-base tracking-wide text-accent-gold uppercase">
-              THE BILLIONAIRE&apos;S AQUA
-            </p>
-            <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase">
-              More Than Water. A Standard.
-            </p>
-            <p className="font-body text-[0.65rem] leading-relaxed text-muted-foreground uppercase max-w-xs">
-              Premium packaged drinking water crafted for quality, consistency, and a bigger vision.
-            </p>
+          {/* Left Column: Stacked Logos (Up & Down) + Brand Text */}
+          <div className="md:col-span-2 space-y-6">
+            {/* Logos Stacked Up and Down */}
+            <div className="space-y-4">
+              <img
+                src="/logos/billionaires-aqua-emblem.webp"
+                alt="The Billionaire's Aqua Official Brand Emblem"
+                className="h-32 md:h-40 w-auto object-contain rounded-2xl border border-accent-gold/40 bg-emerald-950/40 p-3 shadow-[0_0_30px_rgba(212,175,55,0.15)]"
+              />
+              <img
+                src="/logos/suraj-ishwar-group.webp"
+                alt="The Suraj Ishwar Group"
+                className="h-20 md:h-24 w-auto object-contain rounded-xl border border-accent-gold/25 bg-black/50 p-3 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              />
+            </div>
+
+            {/* Brand Text */}
+            <div className="space-y-3 pt-2">
+              <p className="font-editorial font-bold text-lg md:text-xl tracking-wide text-white uppercase">
+                <span className="font-display text-xs tracking-[0.32em] text-accent-gold block mb-0.5">THE</span>
+                BILLIONAIRE&apos;S <span className="font-display text-xs tracking-[0.32em] text-accent-gold inline-block ml-1">AQUA</span>
+              </p>
+              <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase font-medium">
+                More Than Water. A Standard.
+              </p>
+              <p className="font-body text-[0.68rem] leading-relaxed text-muted-foreground uppercase max-w-xs">
+                Premium packaged drinking water crafted for quality, consistency, and a bigger vision.
+              </p>
+            </div>
           </div>
 
           {/* Company Column */}
