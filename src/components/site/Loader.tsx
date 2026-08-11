@@ -51,14 +51,22 @@ export function Loader({ ready }: { ready: boolean }) {
       aria-live="polite"
       className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-background"
     >
-      <p className="font-display text-[0.7rem] tracking-[0.5em] text-muted-foreground uppercase">
-        The Billionaire&apos;s
-      </p>
-      <p className="mt-3 font-display text-3xl tracking-[0.28em] text-foreground uppercase">Aqua</p>
-      <div className="mt-10 h-px w-40 overflow-hidden bg-hairline">
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-6 text-center">
+        <span className="font-editorial font-bold text-base sm:text-2xl tracking-[0.22em] text-accent-gold uppercase">
+          THE
+        </span>
+        <span className="font-editorial font-bold text-xl sm:text-3xl tracking-[0.14em] text-white uppercase drop-shadow-[0_2px_12px_rgba(255,255,255,0.35)]">
+          BILLIONAIRE&apos;S
+        </span>
+        <span className="font-editorial font-bold text-base sm:text-2xl tracking-[0.22em] text-accent-gold uppercase">
+          AQUA
+        </span>
+      </div>
+
+      <div className="mt-10 h-px w-48 sm:w-64 overflow-hidden bg-hairline">
         <span
           ref={bar}
-          className="block h-px w-full origin-left scale-x-0 bg-accent-gold"
+          className="block h-px w-full origin-left scale-x-0 bg-accent-gold shadow-[0_0_12px_rgba(212,175,55,0.85)]"
           aria-hidden="true"
         />
       </div>
