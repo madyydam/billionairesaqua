@@ -19,7 +19,7 @@ export function Footer() {
               <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase font-semibold">
                 MORE THAN WATER. A STANDARD.
               </p>
-              <p className="font-body text-[0.66rem] leading-relaxed text-muted-foreground uppercase max-w-xs">
+              <p className="font-body text-[0.68rem] leading-[1.95] tracking-[0.06em] text-muted-foreground uppercase max-w-xs">
                 PREMIUM PACKAGED DRINKING WATER CRAFTED FOR QUALITY, CONSISTENCY, AND A BIGGER VISION.
               </p>
             </div>

@@ -149,7 +149,12 @@ export function CallToAction() {
                 <Phone className="size-5 text-accent-gold shrink-0 mt-0.5" />
                 <div className="font-body text-xs tracking-wider space-y-1">
                   <p className="text-foreground font-semibold">Phone Support</p>
-                  <p>[Verification Pending]</p>
+                  <a
+                    href="tel:+917822059936"
+                    className="hover:text-accent-gold transition-colors"
+                  >
+                    +91 78220 59936
+                  </a>
                 </div>
               </div>
             </Reveal>
