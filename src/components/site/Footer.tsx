@@ -6,17 +6,12 @@ export function Footer() {
       <div className="mx-auto max-w-[1600px]">
         {/* Main Grid */}
         <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-16">
-          {/* Left Column: Stacked Centered Brand Logos */}
-          <div className="md:col-span-2 flex flex-col items-center justify-center gap-6 text-center">
-            <img
-              src="/logos/billionaires-aqua-emblem.webp"
-              alt="The Billionaire's Aqua Official Brand Emblem"
-              className="h-32 md:h-44 w-auto object-contain"
-            />
+          {/* Left Column: Brand Tagline Logo taking full space */}
+          <div className="md:col-span-2 flex items-center justify-start">
             <img
               src="/logos/the-b-aqua-tagline.webp"
               alt="The Billionaire's Aqua Logo with Tagline"
-              className="w-full max-w-[280px] md:max-w-xs h-auto object-contain rounded-xl shadow-[0_0_25px_rgba(212,175,55,0.2)]"
+              className="h-36 md:h-48 w-auto object-contain rounded-2xl shadow-[0_0_30px_rgba(212,175,55,0.2)]"
             />
           </div>
 
@@ -111,31 +106,32 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar: Suraj Ishwar Group Logo + Copyright */}
-        <div className="flex flex-col md:flex-row items-center justify-between border-t border-hairline pt-10 gap-6">
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <img
-              src="/logos/suraj-ishwar-group.webp"
-              alt="The Suraj Ishwar Group Logo"
-              className="h-12 md:h-14 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-            />
+        {/* Bottom Bar with Centered Emblem Logo */}
+        <div className="border-t border-hairline pt-10 flex flex-col items-center gap-8">
+          <img
+            src="/logos/billionaires-aqua-emblem.webp"
+            alt="The Billionaire's Aqua Official Brand Emblem"
+            className="h-32 md:h-44 w-auto object-contain"
+          />
+
+          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-6 pt-4 border-t border-hairline/40">
             <p className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase">
               © 2026 THE BILLIONAIRE&apos;S AQUA. All Rights Reserved.
             </p>
-          </div>
-          <div className="flex gap-6">
-            <a
-              href="#"
-              className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground transition-colors"
-            >
-              Instagram
-            </a>
-            <a
-              href="#"
-              className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground transition-colors"
-            >
-              LinkedIn
-            </a>
+            <div className="flex gap-6">
+              <a
+                href="#"
+                className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground transition-colors"
+              >
+                Instagram
+              </a>
+              <a
+                href="#"
+                className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground transition-colors"
+              >
+                LinkedIn
+              </a>
+            </div>
           </div>
         </div>
       </div>
