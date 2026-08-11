@@ -39,9 +39,23 @@ export function BottleImage() {
 
   return (
     <Billboard follow lockZ>
-      <mesh material={material}>
-        <planeGeometry args={[HEIGHT * aspect, HEIGHT]} />
-      </mesh>
+      <group>
+        {/* Soft luxury golden glow halo backdrop behind bottle */}
+        <mesh position={[0, 0, -0.05]}>
+          <planeGeometry args={[HEIGHT * aspect * 1.5, HEIGHT * 1.15]} />
+          <meshBasicMaterial
+            color="#d4af37"
+            transparent
+            opacity={0.12}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
+        </mesh>
+        {/* Main photographic packshot bottle */}
+        <mesh material={material}>
+          <planeGeometry args={[HEIGHT * aspect, HEIGHT]} />
+        </mesh>
+      </group>
     </Billboard>
   );
 }

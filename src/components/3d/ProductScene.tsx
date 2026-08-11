@@ -10,11 +10,60 @@ import type { DeviceProfile } from "@/hooks/useDevicePerformance";
 // Bottle image served from /public — no CDN dependency, works on Vercel
 const BOTTLE_URL = "/bottle-real.webp";
 
+function LuxParticles({ mobile = false }: { mobile?: boolean }) {
+  const count = mobile ? 16 : 32;
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+
+  const particles = useMemo(() => {
+    const temp = [];
+    for (let i = 0; i < count; i++) {
+      const x = (Math.random() - 0.5) * 11;
+      const y = (Math.random() - 0.5) * 12;
+      const z = (Math.random() - 0.5) * 7 - 0.5;
+      const speed = 0.2 + Math.random() * 0.35;
+      const scale = 0.02 + Math.random() * 0.04;
+      const phase = Math.random() * Math.PI * 2;
+      temp.push({ x, y, z, speed, scale, phase });
+    }
+    return temp;
+  }, [count]);
+
+  useFrame((state) => {
+    if (!meshRef.current) return;
+    const t = state.clock.getElapsedTime();
+    particles.forEach((p, i) => {
+      let y = p.y + (t * p.speed * 0.3) % 10;
+      if (y > 5) y -= 10;
+      const x = p.x + Math.sin(t * p.speed + p.phase) * 0.25;
+      dummy.position.set(x, y, p.z);
+      dummy.scale.setScalar(p.scale * (1 + Math.sin(t * 1.5 + p.phase) * 0.25));
+      dummy.updateMatrix();
+      meshRef.current!.setMatrixAt(i, dummy.matrix);
+    });
+    meshRef.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
+      <sphereGeometry args={[1, 10, 10]} />
+      <meshBasicMaterial
+        color="#d4af37"
+        transparent
+        opacity={0.4}
+        blending={THREE.AdditiveBlending}
+      />
+    </instancedMesh>
+  );
+}
+
 function SceneContents({ device }: { device: DeviceProfile }) {
   return (
     <>
       <CameraController mobile={device.mobile} reducedMotion={device.reducedMotion} />
       <Lighting shadows={device.shadows} />
+
+      {!device.reducedMotion && <LuxParticles mobile={device.mobile} />}
 
       <Suspense fallback={null}>
         <ProductRig
