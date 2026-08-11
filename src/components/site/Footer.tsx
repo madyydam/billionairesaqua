@@ -6,35 +6,13 @@ export function Footer() {
       <div className="mx-auto max-w-[1600px]">
         {/* Main Grid */}
         <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-16">
-          {/* Left Column: Stacked Logos (Up & Down) + Brand Text */}
-          <div className="md:col-span-2 space-y-6">
-            {/* Logos Stacked Up and Down */}
-            <div className="space-y-4">
-              <img
-                src="/logos/billionaires-aqua-emblem.webp"
-                alt="The Billionaire's Aqua Official Brand Emblem"
-                className="h-32 md:h-40 w-auto object-contain rounded-2xl border border-accent-gold/40 bg-emerald-950/40 p-3 shadow-[0_0_30px_rgba(212,175,55,0.15)]"
-              />
-              <img
-                src="/logos/suraj-ishwar-group.webp"
-                alt="The Suraj Ishwar Group"
-                className="h-20 md:h-24 w-auto object-contain rounded-xl border border-accent-gold/25 bg-black/50 p-3 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-              />
-            </div>
-
-            {/* Brand Text */}
-            <div className="space-y-3 pt-2">
-              <p className="font-editorial font-bold text-lg md:text-xl tracking-wide text-white uppercase">
-                <span className="font-display text-xs tracking-[0.32em] text-accent-gold block mb-0.5">THE</span>
-                BILLIONAIRE&apos;S <span className="font-display text-xs tracking-[0.32em] text-accent-gold inline-block ml-1">AQUA</span>
-              </p>
-              <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase font-medium">
-                More Than Water. A Standard.
-              </p>
-              <p className="font-body text-[0.68rem] leading-relaxed text-muted-foreground uppercase max-w-xs">
-                Premium packaged drinking water crafted for quality, consistency, and a bigger vision.
-              </p>
-            </div>
+          {/* Left Column: Official Brand Emblem Logo */}
+          <div className="md:col-span-2 space-y-4">
+            <img
+              src="/logos/billionaires-aqua-emblem.webp"
+              alt="The Billionaire's Aqua Official Brand Emblem"
+              className="h-44 md:h-56 w-auto object-contain rounded-2xl border border-accent-gold/40 bg-emerald-950/40 p-4 shadow-[0_0_35px_rgba(212,175,55,0.2)]"
+            />
           </div>
 
           {/* Company Column */}
