@@ -7,7 +7,7 @@ const PRODUCTS = [
   {
     id: "250ml",
     size: "250 ML",
-    image: "/products/250ml.png",
+    image: "/products/250ml.webp",
     tagline: "For events, hospitality & on-the-go occasions.",
     specs: {
       product: "Packaged Drinking Water",
@@ -25,7 +25,7 @@ const PRODUCTS = [
   {
     id: "500ml",
     size: "500 ML",
-    image: "/products/500ml.png",
+    image: "/products/500ml.webp",
     tagline: "For everyday convenience.",
     specs: {
       product: "Packaged Drinking Water",
@@ -43,7 +43,7 @@ const PRODUCTS = [
   {
     id: "1l",
     size: "1 L",
-    image: "/products/1l.png",
+    image: "/products/1l.webp",
     tagline: "For personal everyday hydration.",
     specs: {
       product: "Packaged Drinking Water",
@@ -61,7 +61,7 @@ const PRODUCTS = [
   {
     id: "2l",
     size: "2 L",
-    image: "/products/2l.png",
+    image: "/products/2l.webp",
     tagline: "For sharing and extended use.",
     specs: {
       product: "Packaged Drinking Water",
@@ -79,7 +79,7 @@ const PRODUCTS = [
   {
     id: "5l",
     size: "5 L",
-    image: "/products/5l.png",
+    image: "/products/5l.webp",
     tagline: "For larger-volume requirements.",
     specs: {
       product: "Packaged Drinking Water",
@@ -97,7 +97,7 @@ const PRODUCTS = [
   {
     id: "20l",
     size: "20 L",
-    image: "/products/20l.png",
+    image: "/products/20l.webp",
     tagline: "For homes, offices and institutional requirements.",
     specs: {
       product: "Packaged Drinking Water",

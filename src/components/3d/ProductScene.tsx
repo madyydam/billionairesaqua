@@ -8,7 +8,7 @@ import { ProductRig } from "./ProductRig";
 import { useProductInteraction } from "@/hooks/useProductInteraction";
 import type { DeviceProfile } from "@/hooks/useDevicePerformance";
 // Bottle image served from /public — no CDN dependency, works on Vercel
-const BOTTLE_URL = "/bottle-real.png";
+const BOTTLE_URL = "/bottle-real.webp";
 
 function SceneContents({ device }: { device: DeviceProfile }) {
   return (

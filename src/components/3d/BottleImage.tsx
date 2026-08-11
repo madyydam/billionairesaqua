@@ -7,7 +7,7 @@ const ASPECT = 402 / 1298;
 
 // Direct public-folder URL — bypasses the Lovable vite plugin that rewrites
 // asset.json imports back to /__l5e/... CDN paths (which 404 on Vercel).
-const BOTTLE_URL = "/bottle-real.png";
+const BOTTLE_URL = "/bottle-real.webp";
 
 /**
  * The real product shot, rendered as a camera-facing billboard so the bottle

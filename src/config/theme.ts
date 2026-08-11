@@ -13,9 +13,9 @@ export const theme = {
   brand: "#006B5D",
   brandDark: "#004D43",
   brandLight: "#00A99D",
-  /** yellow and cyan accents */
-  gold: "#FDD000",
-  goldLight: "#00B3C6",
+  /** authentic metallic champagne gold matching the bottle label */
+  gold: "#D4AF37",
+  goldLight: "#E5C158",
   accentBlue: "#1A8CFF",
 } as const;
 
