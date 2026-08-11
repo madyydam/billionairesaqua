@@ -19,7 +19,9 @@ export function CenterFocus() {
             id="focus-title"
             className="mx-auto max-w-[20ch] text-[clamp(2.2rem,5vw,4.4rem)] font-editorial normal-case"
           >
-            Billionaires aren&apos;t born, they&apos;re built.
+            Billionaire&apos;s aren&apos;t born,
+            <br />
+            They are built.
           </Display>
         </Reveal>
         <Reveal className="mt-8 w-full space-y-6" delay={0.2}>
