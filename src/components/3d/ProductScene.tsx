@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer, AdaptiveDpr } from "@react-three/drei";
 import * as THREE from "three";
 import { Lighting } from "./Lighting";
