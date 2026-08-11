@@ -67,7 +67,7 @@ function StaticFallback() {
     <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
       <img
         src={BOTTLE_URL}
-        alt="The Billionaire's Aqua 500ml packaged drinking water bottle, deep green label with gold trim"
+        alt="The Billionaire's Aqua 1L packaged drinking water bottle, deep green label with gold trim"
         className="h-[68vh] w-auto max-w-[70vw] object-contain opacity-95 md:h-[78vh]"
       />
     </div>
