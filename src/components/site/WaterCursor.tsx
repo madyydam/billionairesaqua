@@ -103,12 +103,12 @@ export function WaterCursor() {
         .water-cursor svg {
           width: 28px;
           height: 34px;
-          filter: drop-shadow(0 2px 6px rgba(212,175,55,0.55));
+          filter: drop-shadow(0 2px 6px rgba(0,179,198,0.55));
           transition: transform 0.25s ease, filter 0.25s ease;
         }
         .water-cursor--hover svg {
           transform: scale(1.45);
-          filter: drop-shadow(0 4px 14px rgba(212,175,55,0.85));
+          filter: drop-shadow(0 4px 14px rgba(0,179,198,0.85));
         }
 
         /* ── Click ripple ── */
@@ -120,7 +120,7 @@ export function WaterCursor() {
           width: 8px; height: 8px;
           margin-left: -4px; margin-top: -4px;
           border-radius: 50%;
-          border: 1.5px solid rgba(212,175,55,0.7);
+          border: 1.5px solid rgba(0,179,198,0.7);
           animation: water-ripple-expand 0.6s ease-out forwards;
         }
         @keyframes water-ripple-expand {
@@ -135,8 +135,8 @@ export function WaterCursor() {
           {/* Drop outer shape */}
           <path
             d="M14 2 C14 2 3 14 3 22 C3 28.627 7.925 34 14 34 C20.075 34 25 28.627 25 22 C25 14 14 2 14 2Z"
-            fill="rgba(212,175,55,0.22)"
-            stroke="rgba(212,175,55,0.95)"
+            fill="rgba(0,179,198,0.18)"
+            stroke="rgba(0,179,198,0.9)"
             strokeWidth="1.5"
           />
           {/* Inner highlight */}

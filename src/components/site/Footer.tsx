@@ -6,13 +6,32 @@ export function Footer() {
       <div className="mx-auto max-w-[1600px]">
         {/* Main Grid */}
         <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-16">
-          {/* Left Column: Brand Tagline Logo taking full space */}
-          <div className="md:col-span-2 flex items-center justify-start">
-            <img
-              src="/logos/the-b-aqua-tagline.webp"
-              alt="The Billionaire's Aqua Logo with Tagline"
-              className="h-36 md:h-48 w-auto object-contain rounded-2xl shadow-[0_0_30px_rgba(212,175,55,0.2)]"
-            />
+          {/* Left Column: Brand Text Block + Tagline Logo underneath */}
+          <div className="md:col-span-2 space-y-6">
+            {/* Brand Text Block */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="size-2.5 rounded-full bg-accent-gold shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
+                <p className="font-display text-base md:text-lg tracking-[0.25em] text-foreground uppercase font-bold">
+                  THE BILLIONAIRE&apos;S AQUA
+                </p>
+              </div>
+              <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase font-semibold">
+                MORE THAN WATER. A STANDARD.
+              </p>
+              <p className="font-body text-[0.66rem] leading-relaxed text-muted-foreground uppercase max-w-xs">
+                PREMIUM PACKAGED DRINKING WATER CRAFTED FOR QUALITY, CONSISTENCY, AND A BIGGER VISION.
+              </p>
+            </div>
+
+            {/* Brand Tagline Logo underneath */}
+            <div className="pt-1">
+              <img
+                src="/logos/the-b-aqua-tagline.webp"
+                alt="The Billionaire's Aqua Logo with Tagline"
+                className="h-32 md:h-44 w-auto object-contain rounded-2xl shadow-[0_0_30px_rgba(212,175,55,0.2)]"
+              />
+            </div>
           </div>
 
           {/* Company Column */}
