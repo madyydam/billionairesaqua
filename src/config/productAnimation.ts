@@ -124,9 +124,9 @@ export const TIMELINE: SceneKeyframe[] = [
   {
     id: "cta",
     at: 1.0,
-    position: [1.45, -0.05, 0],
+    position: [0, -0.05, 0],
     rotation: [0, 10.6, 0],
-    scale: 0.85,
+    scale: 0.95,
     cameraPosition: [0, 0.05, 5.9],
     cameraFov: 33,
     packagingOpen: 1,
