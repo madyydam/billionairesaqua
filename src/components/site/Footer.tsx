@@ -126,11 +126,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar with Centered Emblem Logo */}
-        <div className="border-t border-hairline pt-10 flex flex-col items-center gap-8">
+        <div className="border-t border-hairline pt-10 flex flex-col items-center gap-6">
           <img
             src="/logos/billionaires-aqua-emblem.webp"
             alt="The Billionaire's Aqua Official Brand Emblem"
-            className="h-32 md:h-44 w-auto object-contain"
+            className="h-20 md:h-28 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
 
           <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-6 pt-4 border-t border-hairline/40">
