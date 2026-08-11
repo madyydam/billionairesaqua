@@ -2,10 +2,10 @@ import { scrollToSection } from "@/components/SmoothScrollProvider";
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-hairline bg-black/60 px-6 py-20 md:px-10">
+    <footer className="relative z-10 border-t border-hairline bg-black/60 px-6 pt-16 pb-6 md:px-10 md:pt-20 md:pb-8">
       <div className="mx-auto max-w-[1600px]">
         {/* Main Grid */}
-        <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-16">
+        <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-10">
           {/* Left Column: Brand Text Block + Tagline Logo underneath */}
           <div className="md:col-span-2 space-y-6">
             {/* Brand Text Block */}
@@ -126,14 +126,14 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar with Centered Emblem Logo */}
-        <div className="border-t border-hairline pt-10 flex flex-col items-center gap-6">
+        <div className="border-t border-hairline pt-6 flex flex-col items-center gap-4">
           <img
             src="/logos/billionaires-aqua-emblem.webp"
             alt="The Billionaire's Aqua Official Brand Emblem"
             className="h-20 md:h-28 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
 
-          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-6 pt-4 border-t border-hairline/40">
+          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 pt-4 border-t border-hairline/40">
             <p className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase">
               © 2026 THE BILLIONAIRE&apos;S AQUA. All Rights Reserved.
             </p>
