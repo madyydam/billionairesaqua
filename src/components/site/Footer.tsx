@@ -16,7 +16,7 @@ export function Footer() {
             <img
               src="/logos/the-b-aqua-tagline.webp"
               alt="The Billionaire's Aqua Logo with Tagline"
-              className="h-28 md:h-36 w-auto object-contain rounded-xl shadow-[0_0_25px_rgba(212,175,55,0.2)]"
+              className="w-full max-w-[280px] md:max-w-xs h-auto object-contain rounded-xl shadow-[0_0_25px_rgba(212,175,55,0.2)]"
             />
           </div>
 
@@ -111,11 +111,18 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between border-t border-hairline pt-10 gap-6">
-          <p className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase">
-            © 2026 THE BILLIONAIRE&apos;S AQUA. All Rights Reserved.
-          </p>
+        {/* Bottom Bar: Suraj Ishwar Group Logo + Copyright */}
+        <div className="flex flex-col md:flex-row items-center justify-between border-t border-hairline pt-10 gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <img
+              src="/logos/suraj-ishwar-group.webp"
+              alt="The Suraj Ishwar Group Logo"
+              className="h-12 md:h-14 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+            />
+            <p className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase">
+              © 2026 THE BILLIONAIRE&apos;S AQUA. All Rights Reserved.
+            </p>
+          </div>
           <div className="flex gap-6">
             <a
               href="#"
