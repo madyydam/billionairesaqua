@@ -42,7 +42,7 @@ export function Hero({ ready }: { ready: boolean }) {
       <div ref={root} className="relative z-10 grid gap-10 md:grid-cols-12 md:items-center">
         <div className="md:col-span-6 lg:col-span-5">
           <div data-hero-item className="opacity-0">
-            <Eyebrow className="border-white/30 text-white/80">THE BILLIONAIRE&apos;S AQUA</Eyebrow>
+            <Eyebrow className="border-accent-gold/40 text-accent-gold font-bold">THE BILLIONAIRE&apos;S AQUA</Eyebrow>
           </div>
 
           <Display
@@ -55,7 +55,7 @@ export function Hero({ ready }: { ready: boolean }) {
             </span>
             <span
               data-hero-item
-              className="block italic opacity-0 text-[#00B3C6] drop-shadow-[0_2px_18px_rgba(0,179,198,0.6)]"
+              className="block italic opacity-0 text-accent-gold drop-shadow-[0_2px_18px_rgba(212,175,55,0.6)]"
             >
               A Standard.
             </span>
@@ -64,7 +64,7 @@ export function Hero({ ready }: { ready: boolean }) {
           <div data-hero-item className="mt-8 opacity-0">
             <Body className="text-white/85 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
               Premium packaged drinking water created for those who believe that quality is not an
-              option — it is a standard.
+              option. It is a standard.
             </Body>
           </div>
 

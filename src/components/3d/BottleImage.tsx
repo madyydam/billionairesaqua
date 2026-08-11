@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { Billboard, useTexture } from "@react-three/drei";
 
 const HEIGHT = 2.55;
-const ASPECT = 402 / 1298;
 
 // Direct public-folder URL — bypasses the Lovable vite plugin that rewrites
 // asset.json imports back to /__l5e/... CDN paths (which 404 on Vercel).
@@ -16,6 +15,13 @@ const BOTTLE_URL = "/bottle-real.webp";
  */
 export function BottleImage() {
   const map = useTexture(BOTTLE_URL);
+
+  const aspect = useMemo(() => {
+    if (map && map.image && map.image.width && map.image.height) {
+      return map.image.width / map.image.height;
+    }
+    return 0.43;
+  }, [map]);
 
   const material = useMemo(() => {
     map.colorSpace = THREE.SRGBColorSpace;
@@ -34,7 +40,7 @@ export function BottleImage() {
   return (
     <Billboard follow lockZ>
       <mesh material={material}>
-        <planeGeometry args={[HEIGHT * ASPECT, HEIGHT]} />
+        <planeGeometry args={[HEIGHT * aspect, HEIGHT]} />
       </mesh>
     </Billboard>
   );

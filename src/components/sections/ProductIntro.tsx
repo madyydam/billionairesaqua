@@ -16,7 +16,7 @@ export function ProductIntro() {
               just water.
             </Display>
             <Body className="mt-8">
-              THE BILLIONAIRE&apos;S AQUA is built on a simple belief — the things we consume every
+              <strong className="font-bold text-accent-gold">THE BILLIONAIRE&apos;S AQUA</strong> is built on a simple belief that the things we consume every
               day should reflect the standards we choose to live by.
             </Body>
             <Body className="mt-4">
