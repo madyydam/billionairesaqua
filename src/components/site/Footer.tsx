@@ -137,19 +137,22 @@ export function Footer() {
             <p className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase">
               © 2026 THE BILLIONAIRE&apos;S AQUA. All Rights Reserved.
             </p>
-            <div className="flex gap-6">
-              <a
-                href="#"
-                className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground transition-colors"
-              >
-                Instagram
-              </a>
-              <a
-                href="#"
-                className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase hover:text-foreground transition-colors"
-              >
-                LinkedIn
-              </a>
+            <div className="flex flex-wrap items-center gap-6">
+              {[
+                { name: "Instagram", href: "#" },
+                { name: "Facebook", href: "#" },
+                { name: "YouTube", href: "#" },
+                { name: "LinkedIn", href: "#" },
+                { name: "Twitter", href: "#" },
+              ].map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase hover:text-accent-gold transition-colors"
+                >
+                  {item.name}
+                </a>
+              ))}
             </div>
           </div>
         </div>
