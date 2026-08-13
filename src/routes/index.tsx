@@ -21,7 +21,7 @@ import { CallToAction } from "@/components/sections/CallToAction";
 
 const TITLE = "The Billionaire's Aqua | Premium Packaged Drinking Water";
 const DESCRIPTION =
-  "Discover THE BILLIONAIRE'S AQUA — a premium packaged drinking water brand built around quality, consistency and a bigger vision. Starting from Pune, Maharashtra.";
+  "Discover THE BILLIONAIRE'S AQUA - A Premium Packaged Drinking Water Brand built around quality, consistency and a bigger vision. Starting from Pune, Maharashtra.";
 
 export const Route = createFileRoute("/")({
   component: Index,
