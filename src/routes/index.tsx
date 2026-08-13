@@ -19,7 +19,7 @@ import { FullscreenMoment } from "@/components/sections/FullscreenMoment";
 import { Benefits } from "@/components/sections/Benefits";
 import { CallToAction } from "@/components/sections/CallToAction";
 
-const TITLE = "Billionaire's Aqua | Premium Packaged Drinking Water";
+const TITLE = "The Billionaire's Aqua | Premium Packaged Drinking Water";
 const DESCRIPTION =
   "Discover THE BILLIONAIRE'S AQUA — a premium packaged drinking water brand built around quality, consistency and a bigger vision. Starting from Pune, Maharashtra.";
 
