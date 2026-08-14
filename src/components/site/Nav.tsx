@@ -42,6 +42,7 @@ export function Nav() {
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
         <button
           onClick={() => go("hero")}
+          suppressHydrationWarning
           className="flex items-center gap-2 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
           aria-label="The Billionaire's Aqua back to top"
         >
@@ -60,6 +61,7 @@ export function Nav() {
           {LINKS.map((link) => (
             <button
               key={link.id}
+              suppressHydrationWarning
               onClick={() => go(link.id)}
               className="group relative font-body text-[0.72rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground focus-visible:outline-none focus-visible:text-foreground"
             >
@@ -69,6 +71,7 @@ export function Nav() {
           ))}
           <button
             onClick={() => go("contact")}
+            suppressHydrationWarning
             className="rounded-full border border-hairline px-6 py-2.5 font-body text-[0.7rem] tracking-[0.2em] text-foreground uppercase transition-colors duration-500 hover:border-accent-gold hover:text-accent-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           >
             Enquire now
@@ -77,6 +80,7 @@ export function Nav() {
 
         <button
           onClick={() => setOpen((v) => !v)}
+          suppressHydrationWarning
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           className="flex min-h-11 min-w-11 items-center justify-center text-foreground md:hidden"

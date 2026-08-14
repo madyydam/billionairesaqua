@@ -31,6 +31,7 @@ export function MagneticButton({ variant = "solid", className, children, ...prop
   return (
     <button
       ref={ref}
+      suppressHydrationWarning
       onMouseMove={move}
       onMouseLeave={leave}
       className={cn(

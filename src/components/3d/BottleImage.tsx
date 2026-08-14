@@ -17,8 +17,9 @@ export function BottleImage() {
   const map = useTexture(BOTTLE_URL);
 
   const aspect = useMemo(() => {
-    if (map && map.image && map.image.width && map.image.height) {
-      return map.image.width / map.image.height;
+    const img = map?.image as { width?: number; height?: number } | undefined;
+    if (img && img.width && img.height) {
+      return img.width / img.height;
     }
     return 0.43;
   }, [map]);

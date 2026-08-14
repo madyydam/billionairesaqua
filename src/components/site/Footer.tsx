@@ -1,11 +1,53 @@
 import { scrollToSection } from "@/components/SmoothScrollProvider";
+import { Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
+
+function XTwitterIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+const SOCIAL_LINKS = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/company/141063907/",
+    icon: Linkedin,
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/thebillionairesaqua/",
+    icon: Instagram,
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61593097688006",
+    icon: Facebook,
+  },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@THEBILLIONAIRESAQUA",
+    icon: Youtube,
+  },
+  {
+    name: "X (Twitter)",
+    href: "https://x.com/thebbaqua",
+    icon: XTwitterIcon,
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-hairline bg-black/60 px-6 pt-16 pb-6 md:px-10 md:pt-20 md:pb-8">
+    <footer className="relative z-10 border-t border-hairline bg-black/60 px-6 pt-14 pb-3 md:px-10 md:pt-16 md:pb-4">
       <div className="mx-auto max-w-[1600px]">
         {/* Main Grid */}
-        <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-6 mb-10">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-6 mb-8 md:mb-10">
           {/* Left Column: Brand Text Block + Tagline Logo underneath */}
           <div className="md:col-span-2 space-y-6">
             {/* Brand Text Block */}
@@ -24,12 +66,12 @@ export function Footer() {
               </p>
             </div>
 
-            {/* Brand Tagline Logo underneath */}
+            {/* Brand Tagline Logo underneath (reduced ~10-15% in size) */}
             <div className="pt-1">
               <img
                 src="/logos/the-b-aqua-tagline.webp"
                 alt="The Billionaire's Aqua Logo with Tagline"
-                className="h-32 md:h-44 w-auto object-contain rounded-2xl shadow-[0_0_30px_rgba(212,175,55,0.2)]"
+                className="h-28 md:h-38 w-auto object-contain rounded-2xl shadow-[0_0_25px_rgba(212,175,55,0.18)]"
               />
             </div>
           </div>
@@ -125,34 +167,43 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar with Centered Emblem Logo */}
-        <div className="border-t border-hairline pt-6 flex flex-col items-center gap-4">
-          <img
-            src="/logos/billionaires-aqua-emblem.webp"
-            alt="The Billionaire's Aqua Official Brand Emblem"
-            className="h-20 md:h-28 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-          />
-
-          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 pt-4 border-t border-hairline/40">
-            <p className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase">
-              © 2026 THE BILLIONAIRE&apos;S AQUA. All Rights Reserved.
+        {/* Bottom Section: Copyright — Suraj Ishwar Group Logo — Social Links (No horizontal divider line, perfectly centered) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-center md:text-left pt-1">
+          {/* Left: Copyright */}
+          <div className="flex justify-center md:justify-start items-center">
+            <p className="font-body text-[0.62rem] md:text-[0.66rem] tracking-[0.2em] text-muted-foreground uppercase">
+              © 2026 THE BILLIONAIRE&apos;S AQUA. ALL RIGHTS RESERVED.
             </p>
-            <div className="flex flex-wrap items-center gap-6">
-              {[
-                { name: "Instagram", href: "#" },
-                { name: "Facebook", href: "#" },
-                { name: "YouTube", href: "#" },
-                { name: "LinkedIn", href: "#" },
-                { name: "Twitter", href: "#" },
-              ].map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="font-body text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase hover:text-accent-gold transition-colors"
-                >
-                  {item.name}
-                </a>
-              ))}
+          </div>
+
+          {/* Center: Suraj Ishwar Group Emblem Logo (Prominent, Perfect Middle) */}
+          <div className="flex justify-center items-center justify-self-center">
+            <img
+              src="/logos/billionaires-aqua-emblem.webp"
+              alt="Suraj Ishwar Group - The Billionaire's Aqua Emblem"
+              className="h-20 md:h-28 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity drop-shadow-[0_0_20px_rgba(212,175,55,0.2)]"
+            />
+          </div>
+
+          {/* Right: Social Media Links (Slightly Smaller Icons) */}
+          <div className="flex justify-center md:justify-end items-center">
+            <div className="flex items-center justify-center md:justify-end gap-4 md:gap-5">
+              {SOCIAL_LINKS.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.name}
+                    title={item.name}
+                    className="text-muted-foreground hover:text-accent-gold transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.4)] focus-visible:outline-none focus-visible:text-accent-gold"
+                  >
+                    <Icon className="size-4 md:size-[1.125rem]" />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -160,3 +211,4 @@ export function Footer() {
     </footer>
   );
 }
+
