@@ -4,8 +4,7 @@ import { Billboard, useTexture } from "@react-three/drei";
 
 const HEIGHT = 2.55;
 
-// Direct public-folder URL — bypasses the Lovable vite plugin that rewrites
-// asset.json imports back to /__l5e/... CDN paths (which 404 on Vercel).
+// Direct public-folder URL for reliable static asset resolution
 const BOTTLE_URL = "/bottle-real.webp";
 
 /**

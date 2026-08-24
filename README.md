@@ -1118,25 +1118,17 @@ Build the actual interactive experience.
 
 The final result should be production-quality, premium, cinematic and responsive, not a prototype or static mockup.
 
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://cinematic-product-story.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/99cef998-cdf7-48fb-9e22-e969931c59e8).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+To run the project locally:
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+npm install
 npm run dev
+```
+
+To build for production:
+
+```sh
+npm run build
 ```

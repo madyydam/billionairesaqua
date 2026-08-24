@@ -10,6 +10,31 @@ import type { DeviceProfile } from "@/hooks/useDevicePerformance";
 // Bottle image served from /public — no CDN dependency, works on Vercel
 const BOTTLE_URL = "/bottle-real.webp";
 
+// Prevent TanStack Devtools data-tsd-source JSX injection from crashing R3F
+if (typeof window !== "undefined") {
+  const classes = [
+    THREE.Object3D,
+    THREE.Material,
+    THREE.BufferGeometry,
+    THREE.Texture,
+    THREE.Color,
+  ];
+  for (const cls of classes) {
+    if (cls && cls.prototype && !("data" in cls.prototype)) {
+      Object.defineProperty(cls.prototype, "data", {
+        get() {
+          if (!this._data) this._data = {};
+          return this._data;
+        },
+        set(v) {
+          this._data = v;
+        },
+        configurable: true,
+      });
+    }
+  }
+}
+
 function SceneContents({ device }: { device: DeviceProfile }) {
   return (
     <>

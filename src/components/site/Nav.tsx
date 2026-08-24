@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import { scrollToSection } from "@/components/SmoothScrollProvider";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { label: "Home", id: "hero" },
-  { label: "Our Story", id: "intro" },
-  { label: "Our Water", id: "reveal" },
-  { label: "Products", id: "details" },
-  { label: "Quality", id: "technology" },
-  { label: "Partner With Us", id: "cta" },
+  { label: "Home", id: "hero", to: "/" },
+  { label: "Our Story", id: "intro", to: "/#intro" },
+  { label: "Our Water", id: "reveal", to: "/#reveal" },
+  { label: "Products", id: "details", to: "/#details" },
+  { label: "Quality", id: "technology", to: "/#technology" },
+  { label: "Our Team", id: "team", to: "/team" },
+  { label: "Partner With Us", id: "cta", to: "/#cta" },
 ];
 
 export function Nav() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathname = location.pathname;
+  const isTeamPage = pathname === "/team";
+
   const progress = useScrollProgress(60);
   const [open, setOpen] = useState(false);
-  const solid = progress > 0.03;
+  const solid = progress > 0.03 || isTeamPage;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -25,9 +32,51 @@ export function Nav() {
     };
   }, [open]);
 
-  const go = (id: string) => {
+  const go = (link: (typeof LINKS)[number]) => {
     setOpen(false);
-    scrollToSection(id);
+
+    if (link.to === "/team") {
+      if (isTeamPage) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate({ to: "/team" });
+      }
+      return;
+    }
+
+    if (link.id === "hero") {
+      if (isTeamPage) {
+        navigate({ to: "/" });
+      } else {
+        scrollToSection("hero");
+      }
+      return;
+    }
+
+    // Anchor sections on homepage
+    if (isTeamPage) {
+      window.location.href = `/#${link.id}`;
+    } else {
+      scrollToSection(link.id);
+    }
+  };
+
+  const goContact = () => {
+    setOpen(false);
+    if (isTeamPage) {
+      window.location.href = "/#contact";
+    } else {
+      scrollToSection("contact");
+    }
+  };
+
+  const goHome = () => {
+    setOpen(false);
+    if (isTeamPage) {
+      navigate({ to: "/" });
+    } else {
+      scrollToSection("hero");
+    }
   };
 
   return (
@@ -35,44 +84,57 @@ export function Nav() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-700",
         solid
-          ? "border-b border-hairline bg-background/70 backdrop-blur-xl"
+          ? "border-b border-hairline bg-background/80 backdrop-blur-xl"
           : "border-b border-transparent",
       )}
     >
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 py-3 md:px-8 md:py-3.5">
         <button
-          onClick={() => go("hero")}
+          onClick={goHome}
           suppressHydrationWarning
-          className="flex items-center gap-2 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
-          aria-label="The Billionaire's Aqua back to top"
+          className="flex items-center gap-1.5 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group cursor-pointer"
+          aria-label="The Billionaire's Aqua home"
         >
-          <span className="font-display font-bold text-xs tracking-[0.32em] text-accent-gold uppercase">
+          <span className="font-display font-bold text-[0.62rem] tracking-[0.28em] text-accent-gold uppercase">
             THE
           </span>
-          <span className="font-editorial font-bold text-base md:text-lg tracking-[0.12em] text-white uppercase drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)]">
+          <span className="font-editorial font-bold text-sm md:text-[0.95rem] tracking-[0.1em] text-white uppercase drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)]">
             BILLIONAIRE&apos;S
           </span>
-          <span className="font-display font-bold text-xs tracking-[0.32em] text-accent-gold uppercase">
+          <span className="font-display font-bold text-[0.62rem] tracking-[0.28em] text-accent-gold uppercase">
             AQUA
           </span>
         </button>
 
-        <nav aria-label="Primary" className="hidden items-center gap-10 md:flex">
-          {LINKS.map((link) => (
-            <button
-              key={link.id}
-              suppressHydrationWarning
-              onClick={() => go(link.id)}
-              className="group relative font-body text-[0.72rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground focus-visible:outline-none focus-visible:text-foreground"
-            >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent-gold transition-all duration-500 group-hover:w-full" />
-            </button>
-          ))}
+        <nav aria-label="Primary" className="hidden items-center gap-6 lg:gap-7 md:flex">
+          {LINKS.map((link) => {
+            const isActive = link.to === "/team" ? isTeamPage : !isTeamPage && link.id === "hero";
+            return (
+              <button
+                key={link.id}
+                suppressHydrationWarning
+                onClick={() => go(link)}
+                className={cn(
+                  "group relative font-body text-[0.64rem] tracking-[0.16em] uppercase transition-colors focus-visible:outline-none focus-visible:text-foreground cursor-pointer",
+                  isActive
+                    ? "text-accent-gold font-semibold"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {link.label}
+                <span
+                  className={cn(
+                    "absolute -bottom-1 left-0 h-px bg-accent-gold transition-all duration-500",
+                    isActive ? "w-full" : "w-0 group-hover:w-full",
+                  )}
+                />
+              </button>
+            );
+          })}
           <button
-            onClick={() => go("contact")}
+            onClick={goContact}
             suppressHydrationWarning
-            className="rounded-full border border-hairline px-6 py-2.5 font-body text-[0.7rem] tracking-[0.2em] text-foreground uppercase transition-colors duration-500 hover:border-accent-gold hover:text-accent-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            className="rounded-full border border-hairline px-4 py-1.5 md:px-4.5 md:py-1.5 font-body text-[0.62rem] tracking-[0.16em] text-foreground uppercase transition-colors duration-500 hover:border-accent-gold hover:text-accent-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring cursor-pointer"
           >
             Enquire now
           </button>
@@ -83,27 +145,33 @@ export function Nav() {
           suppressHydrationWarning
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="flex min-h-11 min-w-11 items-center justify-center text-foreground md:hidden"
+          className="flex min-h-9 min-w-9 items-center justify-center text-foreground md:hidden cursor-pointer"
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          {open ? <X className="size-4.5" /> : <Menu className="size-4.5" />}
         </button>
       </div>
 
       {open && (
         <div className="border-t border-hairline bg-background/95 backdrop-blur-xl md:hidden">
-          <nav aria-label="Mobile" className="flex flex-col px-6 py-6">
-            {LINKS.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => go(link.id)}
-                className="border-b border-hairline py-5 text-left font-display text-xl tracking-[0.08em] text-foreground uppercase"
-              >
-                {link.label}
-              </button>
-            ))}
+          <nav aria-label="Mobile" className="flex flex-col px-6 py-5">
+            {LINKS.map((link) => {
+              const isActive = link.to === "/team" ? isTeamPage : false;
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => go(link)}
+                  className={cn(
+                    "border-b border-hairline py-3.5 text-left font-display text-base tracking-[0.08em] uppercase transition-colors",
+                    isActive ? "text-accent-gold font-semibold" : "text-foreground",
+                  )}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
             <button
-              onClick={() => go("contact")}
-              className="mt-6 rounded-full bg-foreground py-4 font-body text-[0.72rem] tracking-[0.22em] text-background uppercase"
+              onClick={goContact}
+              className="mt-4 rounded-full bg-foreground py-3 font-body text-[0.66rem] tracking-[0.2em] text-background uppercase"
             >
               Enquire now
             </button>

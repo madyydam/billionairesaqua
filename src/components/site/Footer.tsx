@@ -22,7 +22,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Instagram",
-    href: "https://www.instagram.com/thebillionairesaqua/",
+    href: "https://www.instagram.com/thebillionairesaqua.india/",
     icon: Instagram,
   },
   {
@@ -43,6 +43,18 @@ const SOCIAL_LINKS = [
 ];
 
 export function Footer() {
+  const handleNav = (id: string, href?: string) => {
+    if (href) {
+      window.location.href = href;
+      return;
+    }
+    if (window.location.pathname !== "/") {
+      window.location.href = `/#${id}`;
+      return;
+    }
+    scrollToSection(id);
+  };
+
   return (
     <footer className="relative z-10 border-t border-hairline bg-black/60 px-6 pt-14 pb-3 md:px-10 md:pt-16 md:pb-4">
       <div className="mx-auto max-w-[1600px]">
@@ -84,13 +96,14 @@ export function Footer() {
             <ul className="space-y-4">
               {[
                 { label: "Our Story", id: "intro" },
+                { label: "Our Team", id: "team", href: "/team" },
                 { label: "Our Water", id: "reveal" },
                 { label: "Quality", id: "technology" },
                 { label: "Products", id: "details" },
               ].map((item) => (
                 <li key={item.label}>
                   <button
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => handleNav(item.id, item.href)}
                     className="font-body text-[0.66rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground text-left"
                   >
                     {item.label}
@@ -113,7 +126,7 @@ export function Footer() {
               ].map((item) => (
                 <li key={item.label}>
                   <button
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => handleNav(item.id)}
                     className="font-body text-[0.66rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground text-left"
                   >
                     {item.label}
@@ -135,7 +148,7 @@ export function Footer() {
               ].map((item) => (
                 <li key={item.label}>
                   <button
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => handleNav(item.id)}
                     className="font-body text-[0.66rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground text-left"
                   >
                     {item.label}
@@ -155,7 +168,7 @@ export function Footer() {
                 (policy) => (
                   <li key={policy}>
                     <button
-                      onClick={() => scrollToSection("contact")}
+                      onClick={() => handleNav("contact")}
                       className="font-body text-[0.66rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground text-left"
                     >
                       {policy}
