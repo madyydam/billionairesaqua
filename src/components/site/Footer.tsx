@@ -192,7 +192,7 @@ export function Footer() {
           {/* Center: Suraj Ishwar Group Emblem Logo (Prominent, Perfect Middle) */}
           <div className="flex justify-center items-center justify-self-center">
             <img
-              src="/logos/the-b-aqua-footer.jpg"
+              src="/logos/billionaires-aqua-emblem.webp"
               alt="Suraj Ishwar Group - The Billionaire's Aqua Emblem"
               className="h-20 md:h-28 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity drop-shadow-[0_0_20px_rgba(212,175,55,0.2)]"
             />
