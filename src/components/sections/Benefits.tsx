@@ -261,11 +261,14 @@ export function Benefits() {
             </Reveal>
 
             <Reveal className="pt-2" delay={0.15}>
-              <p className="font-display text-lg tracking-[0.15em] text-foreground uppercase">
-                Suraj Ishwar
+              <p className="font-display text-lg tracking-[0.15em] text-foreground uppercase font-bold">
+                SURAJ ISHWAR
               </p>
-              <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase mt-1">
-                Founder &amp; Chairman / Managing Director
+              <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase mt-1 font-semibold">
+                FOUNDER, CHAIRMAN &amp; MANAGING DIRECTOR
+              </p>
+              <p className="font-display text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase mt-0.5">
+                THE BILLIONAIRE&apos;S AQUA™
               </p>
             </Reveal>
           </div>
@@ -281,25 +284,28 @@ export function Benefits() {
               <div className="absolute -bottom-1/4 -left-1/4 size-80 rounded-full bg-emerald-800/15 blur-[80px]" />
 
               <div className="relative z-10 space-y-4">
-                <span className="font-display text-[0.62rem] tracking-[0.35em] text-accent-gold uppercase">
-                  THE BILLIONAIRE&apos;S AQUA
+                <span className="font-display text-[0.62rem] tracking-[0.35em] text-accent-gold uppercase font-semibold">
+                  THE BILLIONAIRE&apos;S AQUA™
                 </span>
                 <h4 className="font-display text-xl md:text-2xl tracking-[0.15em] text-foreground uppercase">
                   ONE VISION. ONE STANDARD. ONE FAMILY.
                 </h4>
-                <div className="inline-block px-3 py-1 rounded bg-accent-gold/20 border border-accent-gold/50 font-display text-xs tracking-[0.2em] text-accent-gold uppercase">
+                <div className="inline-block px-3 py-1 rounded bg-accent-gold/20 border border-accent-gold/50 font-display text-xs tracking-[0.2em] text-accent-gold uppercase font-semibold">
                   ₹5,000 CRORE BY 2030
                 </div>
               </div>
 
               {/* Founder Sign-off Graphic */}
-              <div className="relative z-10 space-y-3 pt-10">
+              <div className="relative z-10 space-y-2 pt-10">
                 <div className="w-16 h-px bg-accent-gold/60" />
-                <p className="font-display text-base tracking-[0.25em] text-foreground uppercase">
+                <p className="font-display text-base tracking-[0.25em] text-foreground uppercase font-bold">
                   — SURAJ ISHWAR
                 </p>
-                <p className="font-body text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">
-                  Founder &amp; Chairman / Managing Director
+                <p className="font-body text-[0.65rem] tracking-[0.2em] text-accent-gold uppercase font-semibold">
+                  FOUNDER, CHAIRMAN &amp; MANAGING DIRECTOR
+                </p>
+                <p className="font-display text-[0.6rem] tracking-[0.2em] text-muted-foreground uppercase">
+                  THE BILLIONAIRE&apos;S AQUA™
                 </p>
               </div>
             </Reveal>

@@ -13,31 +13,37 @@ export function WaterCursor() {
   const rippleContainer = useRef<HTMLDivElement>(null);
 
   const pos = useRef({ x: -200, y: -200 });
-  const raf = useRef<number>(0);
-  const hovered = useRef(false);
-
-  const animate = useCallback(() => {
-    const drop = dropRef.current;
-    if (drop) {
-      drop.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) translateX(-50%) translateY(-50%)`;
-    }
-    raf.current = requestAnimationFrame(animate);
-  }, []);
+  const rafId = useRef<number | null>(null);
+  const isDirty = useRef(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+    if (!isFinePointer) return;
+
     // Inject global cursor:none
     const style = document.createElement("style");
     style.id = "water-cursor-hide";
     style.textContent = `*, *::before, *::after { cursor: none !important; }`;
     document.head.appendChild(style);
 
+    const updatePosition = () => {
+      if (isDirty.current && dropRef.current) {
+        dropRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) translate(-50%, -50%)`;
+        isDirty.current = false;
+      }
+      rafId.current = requestAnimationFrame(updatePosition);
+    };
+
     const onMove = (e: PointerEvent) => {
       pos.current.x = e.clientX;
       pos.current.y = e.clientY;
+      isDirty.current = true;
     };
 
     const onEnter = (e: MouseEvent) => {
-      const t = e.target as HTMLElement;
+      const t = e.target as HTMLElement | null;
+      if (!t) return;
       if (
         t.tagName === "BUTTON" ||
         t.tagName === "A" ||
@@ -47,13 +53,11 @@ export function WaterCursor() {
         t.closest("button") ||
         t.closest("a")
       ) {
-        hovered.current = true;
         dropRef.current?.classList.add("water-cursor--hover");
       }
     };
 
     const onLeave = () => {
-      hovered.current = false;
       dropRef.current?.classList.remove("water-cursor--hover");
     };
 
@@ -66,7 +70,7 @@ export function WaterCursor() {
     window.addEventListener("mouseout", onLeave, { passive: true });
     window.addEventListener("click", onClick, { passive: true });
 
-    raf.current = requestAnimationFrame(animate);
+    rafId.current = requestAnimationFrame(updatePosition);
 
     return () => {
       style.remove();
@@ -74,9 +78,11 @@ export function WaterCursor() {
       window.removeEventListener("mouseover", onEnter);
       window.removeEventListener("mouseout", onLeave);
       window.removeEventListener("click", onClick);
-      cancelAnimationFrame(raf.current);
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current);
+      }
     };
-  }, [animate]);
+  }, []);
 
   function spawnRipple(x: number, y: number) {
     if (!rippleContainer.current) return;

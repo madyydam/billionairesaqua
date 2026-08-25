@@ -1,22 +1,25 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDevicePerformance } from "@/hooks/useDevicePerformance";
+import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import {
   Sparkles,
   Users,
-  Search,
   ArrowRight,
   ShieldCheck,
   Target,
   Compass,
   Zap,
-  Mail,
   Award,
   ChevronRight,
   X,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TeamMember {
   id: string;
@@ -182,15 +185,6 @@ const TEAM_MEMBERS: TeamMember[] = [
   },
 ];
 
-const CATEGORIES = [
-  { label: "All Team Members", value: "all" },
-  { label: "Marketing & Strategy", value: "leadership" },
-  { label: "Brand & Creative", value: "brand" },
-  { label: "Sales & Business Development", value: "sales" },
-  { label: "Research & Intelligence", value: "research" },
-  { label: "Community & Partnerships", value: "community" },
-];
-
 const TITLE = "The People Behind The Vision | The Billionaire's Aqua™";
 const DESCRIPTION =
   "Behind every ambitious brand is a team of people who bring different skills, perspectives and responsibilities together. Meet the dedicated team building THE BILLIONAIRE'S AQUA™.";
@@ -222,8 +216,8 @@ export const Route = createFileRoute("/team")({
             url: "https://thebillionairesaqua.com",
             founder: {
               "@type": "Person",
-              name: "Suraj Ishwar",
-              jobTitle: "Founder & Chairman / Managing Director",
+              name: "SURAJ ISHWAR",
+              jobTitle: "FOUNDER, CHAIRMAN & MANAGING DIRECTOR",
             },
           },
         }),
@@ -234,13 +228,174 @@ export const Route = createFileRoute("/team")({
 
 function TeamPage() {
   const [activeModalMember, setActiveModalMember] = useState<TeamMember | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const device = useDevicePerformance();
+
+  // Handle modal keyboard accessibility & body scroll lock
+  useEffect(() => {
+    if (!activeModalMember) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveModalMember(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [activeModalMember]);
+
+  useEffect(() => {
+    if (device.reducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Hero text & metrics staggered entrance
+      gsap.fromTo(
+        ".hero-anim-item",
+        { opacity: 0, y: 30, filter: "blur(6px)" },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 1,
+          stagger: 0.12,
+          ease: "power3.out",
+        }
+      );
+
+      // 2. Founder spotlight entrance on scroll
+      gsap.fromTo(
+        ".founder-spotlight-animate",
+        {
+          opacity: 0,
+          y: 45,
+          scale: 0.96,
+          filter: "blur(6px)",
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: 1.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".founder-spotlight-animate",
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // 3. Team cards staggered scroll entrance
+      gsap.fromTo(
+        ".team-card-animate",
+        {
+          opacity: 0,
+          y: 45,
+          scale: 0.94,
+          filter: "blur(5px)",
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: 0.85,
+          stagger: 0.07,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".team-grid-container",
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // 4. Philosophy Section entrance on scroll
+      gsap.fromTo(
+        ".philosophy-section-animate",
+        {
+          opacity: 0,
+          y: 40,
+          scale: 0.98,
+          filter: "blur(4px)",
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".philosophy-section-animate",
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // 5. CTA Section entrance on scroll
+      gsap.fromTo(
+        ".cta-section-animate",
+        {
+          opacity: 0,
+          y: 35,
+          filter: "blur(4px)",
+        },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".cta-section-animate",
+            start: "top 88%",
+            once: true,
+          },
+        }
+      );
+
+      // 6. Background ambient glow parallax on scroll
+      gsap.to(".bg-glow-orb-1", {
+        y: 160,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "main",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.2,
+        },
+      });
+
+      gsap.to(".bg-glow-orb-2", {
+        y: -160,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "main",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.5,
+        },
+      });
+
+      ScrollTrigger.refresh();
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [device.reducedMotion]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-accent-gold selection:text-background">
-      {/* Background cinematic atmosphere */}
+    <div ref={containerRef} className="min-h-screen bg-background text-foreground selection:bg-accent-gold selection:text-background">
+      <SmoothScrollProvider reducedMotion={device.reducedMotion} />
+
+      {/* Background cinematic atmosphere with scroll parallax */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-radial from-accent-gold/10 via-brand-green/5 to-transparent blur-3xl opacity-60" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-radial from-accent-gold/5 via-emerald-950/20 to-transparent blur-3xl opacity-40" />
+        <div className="bg-glow-orb-1 absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-radial from-accent-gold/10 via-brand-green/5 to-transparent blur-3xl opacity-60 will-change-transform" />
+        <div className="bg-glow-orb-2 absolute bottom-0 right-0 w-[500px] h-[500px] bg-radial from-accent-gold/5 via-emerald-950/20 to-transparent blur-3xl opacity-40 will-change-transform" />
       </div>
 
       <Nav />
@@ -250,20 +405,20 @@ function TeamPage() {
         {/* SECTION 1: HERO HEADER                                                    */}
         {/* ========================================================================= */}
         <section className="px-6 md:px-10 max-w-[1400px] mx-auto text-center space-y-5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-accent-gold/40 bg-accent-gold/10 backdrop-blur-md">
+          <div className="hero-anim-item inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-accent-gold/40 bg-accent-gold/10 backdrop-blur-md">
             <Sparkles className="size-3 text-accent-gold" />
             <span className="font-display text-[0.62rem] tracking-[0.3em] text-accent-gold uppercase font-bold">
               THE BILLIONAIRE&apos;S AQUA™
             </span>
           </div>
 
-          <h1 className="font-display font-bold text-[clamp(2.2rem,5.5vw,4.2rem)] tracking-[0.04em] text-foreground uppercase leading-[1.08] max-w-5xl mx-auto drop-shadow-md">
+          <h1 className="hero-anim-item font-display font-bold text-[clamp(2.2rem,5.5vw,4.2rem)] tracking-[0.04em] text-foreground uppercase leading-[1.08] max-w-5xl mx-auto drop-shadow-md">
             THE PEOPLE BEHIND THE VISION
           </h1>
 
-          <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-accent-gold to-transparent mx-auto" />
+          <div className="hero-anim-item w-20 h-0.5 bg-gradient-to-r from-transparent via-accent-gold to-transparent mx-auto" />
 
-          <p className="font-body text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto tracking-wide">
+          <p className="hero-anim-item font-body text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto tracking-wide">
             Behind every ambitious brand is a team of people who bring different skills,
             perspectives and responsibilities together. At{" "}
             <span className="text-foreground font-semibold">THE BILLIONAIRE’S AQUA™</span>, each team
@@ -272,7 +427,7 @@ function TeamPage() {
           </p>
 
           {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto pt-6 border-y border-hairline/80">
+          <div className="hero-anim-item grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto pt-6 border-y border-hairline/80">
             <div className="p-3 bg-black/40 border border-hairline rounded-xl backdrop-blur-sm">
               <p className="font-display text-xl md:text-2xl font-bold text-accent-gold">10+</p>
               <p className="font-body text-[0.6rem] tracking-[0.18em] text-muted-foreground uppercase mt-0.5">
@@ -303,31 +458,32 @@ function TeamPage() {
         {/* ========================================================================= */}
         {/* SECTION 2: FOUNDER & CHAIRMAN SPOTLIGHT                                   */}
         {/* ========================================================================= */}
-        <section className="px-6 md:px-10 max-w-[1400px] mx-auto mt-16 md:mt-20">
+        <section className="founder-spotlight-animate px-6 md:px-10 max-w-[1400px] mx-auto mt-16 md:mt-20">
           <div className="relative overflow-hidden rounded-3xl border border-accent-gold/40 bg-gradient-to-br from-black via-neutral-950 to-emerald-950/40 p-6 md:p-10 shadow-[0_0_50px_rgba(212,175,55,0.12)]">
             <div className="absolute top-0 right-0 size-80 bg-accent-gold/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="grid lg:grid-cols-12 gap-8 items-center">
-              {/* Left Portrait */}
-              <div className="lg:col-span-4 flex justify-center">
-                <div className="relative group w-full max-w-[280px] aspect-[3/3.8] rounded-2xl overflow-hidden border border-accent-gold/50 shadow-[0_0_25px_rgba(212,175,55,0.2)]">
+              {/* Left Portrait with details downside */}
+              <div className="lg:col-span-4 flex flex-col items-center">
+                <div className="relative group w-full max-w-[260px] aspect-[3/3.8] rounded-2xl overflow-hidden border border-accent-gold/50 shadow-[0_0_25px_rgba(212,175,55,0.2)] bg-neutral-950">
                   <img
                     src="/team/suraj-ishwar.png"
-                    alt="Suraj Ishwar - Founder & Chairman / Managing Director"
+                    alt="SURAJ ISHWAR - FOUNDER, CHAIRMAN & MANAGING DIRECTOR - THE BILLIONAIRE'S AQUA™"
                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="font-display text-[0.6rem] tracking-[0.25em] text-accent-gold uppercase font-semibold block">
-                      FOUNDER &amp; CHAIRMAN
-                    </span>
-                    <h3 className="font-display text-xl tracking-[0.08em] text-white uppercase font-bold">
-                      Suraj Ishwar
-                    </h3>
-                    <p className="font-body text-[0.65rem] text-white/70 tracking-wider uppercase">
-                      Managing Director
-                    </p>
-                  </div>
+                </div>
+                {/* Details Downside of Photo */}
+                <div className="mt-4 text-center space-y-1">
+                  <h3 className="font-display text-lg md:text-xl tracking-[0.08em] text-white uppercase font-bold">
+                    SURAJ ISHWAR
+                  </h3>
+                  <p className="font-body text-[0.62rem] md:text-[0.68rem] tracking-[0.16em] text-accent-gold uppercase font-semibold leading-tight">
+                    FOUNDER, CHAIRMAN &amp; MANAGING DIRECTOR
+                  </p>
+                  <p className="font-display text-[0.58rem] md:text-[0.62rem] text-white/80 tracking-[0.2em] uppercase font-semibold pt-0.5">
+                    THE BILLIONAIRE&apos;S AQUA™
+                  </p>
                 </div>
               </div>
 
@@ -387,7 +543,7 @@ function TeamPage() {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 3: TEAM DIRECTORY (SMALL COMPACT CARDS)                          */}
+        {/* SECTION 3: TEAM DIRECTORY (CLEAN PHOTOS + DETAILS DOWNSIDE + STAGGER)     */}
         {/* ========================================================================= */}
         <section className="px-6 md:px-10 max-w-[1400px] mx-auto mt-16 md:mt-20">
           <div className="mb-8 pb-4 border-b border-hairline flex items-center justify-between">
@@ -404,54 +560,58 @@ function TeamPage() {
             </span>
           </div>
 
-          {/* Responsive 3-in-a-row grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+          {/* 5 in a row on laptop/desktop (lg:grid-cols-5), 2 in a row on mobile (grid-cols-2) */}
+          <div className="team-grid-container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-3.5 lg:gap-4">
             {TEAM_MEMBERS.map((member) => (
               <div
                 key={member.id}
-                className="group relative flex flex-col justify-between rounded-2xl border border-hairline bg-black/40 hover:border-accent-gold/60 backdrop-blur-sm overflow-hidden transition-all duration-400 hover:shadow-[0_0_25px_rgba(212,175,55,0.15)] hover:-translate-y-1"
+                className="team-card-animate group relative flex flex-col justify-between rounded-2xl border border-hairline bg-black/50 hover:border-accent-gold/60 backdrop-blur-sm overflow-hidden p-3 transition-all duration-400 hover:shadow-[0_0_25px_rgba(212,175,55,0.15)] hover:-translate-y-1.5"
               >
-                {/* Member Image */}
-                <div className="relative aspect-[4/4] w-full overflow-hidden bg-neutral-900 border-b border-hairline">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-
-                  {/* Department Tag */}
-                  <div className="absolute top-3 left-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-[0.56rem] tracking-[0.2em] font-display uppercase bg-black/80 border border-accent-gold/40 text-accent-gold backdrop-blur-md">
-                      {member.department}
-                    </span>
+                {/* Top Section: Clean Photo + Info downside */}
+                <div className="space-y-3">
+                  {/* Clean Framed Photo */}
+                  <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-neutral-900 border border-hairline group-hover:border-accent-gold/40 transition-colors">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
 
-                  {/* Name & Title over Bottom of Image */}
-                  <div className="absolute bottom-3 left-3.5 right-3.5">
-                    <h3 className="font-display text-base md:text-lg font-bold tracking-[0.05em] text-white uppercase leading-snug">
+                  {/* Information Downside of Photo */}
+                  <div className="space-y-1.5">
+                    {/* Department Tag */}
+                    <span className="inline-block px-2 py-0.5 rounded-md text-[0.48rem] sm:text-[0.52rem] tracking-[0.12em] font-display uppercase bg-accent-gold/10 border border-accent-gold/30 text-accent-gold max-w-full truncate font-semibold">
+                      {member.department}
+                    </span>
+
+                    {/* Member Name */}
+                    <h3 className="font-display text-[0.74rem] sm:text-[0.82rem] lg:text-[0.85rem] xl:text-[0.92rem] font-bold tracking-[0.03em] text-foreground uppercase leading-snug line-clamp-2 pt-0.5">
                       {member.name}
                     </h3>
-                    <p className="font-body text-[0.66rem] tracking-[0.14em] text-accent-gold uppercase font-semibold mt-0.5">
+
+                    {/* Member Role / Title */}
+                    <p className="font-body text-[0.54rem] sm:text-[0.58rem] lg:text-[0.6rem] tracking-[0.08em] text-accent-gold uppercase font-semibold line-clamp-2 leading-tight">
                       {member.role}
+                    </p>
+
+                    {/* Bio excerpt */}
+                    <p className="font-body text-[0.66rem] sm:text-[0.72rem] text-muted-foreground leading-relaxed line-clamp-3 pt-0.5">
+                      {member.bio}
                     </p>
                   </div>
                 </div>
 
-                {/* Card Content */}
-                <div className="p-4 flex-1 flex flex-col justify-between space-y-3.5">
-                  <p className="font-body text-xs text-muted-foreground leading-relaxed line-clamp-3">
-                    {member.bio}
-                  </p>
-
-                  {/* Action Button */}
+                {/* Bottom Action Button */}
+                <div className="pt-3 mt-2 border-t border-hairline/60">
                   <button
                     onClick={() => setActiveModalMember(member)}
-                    className="w-full py-2 px-3.5 rounded-xl border border-accent-gold/30 bg-accent-gold/5 hover:bg-accent-gold hover:text-black font-body text-[0.62rem] tracking-[0.18em] text-accent-gold uppercase font-semibold transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full py-1.5 px-2 rounded-lg border border-accent-gold/30 bg-accent-gold/5 hover:bg-accent-gold hover:text-black font-body text-[0.54rem] sm:text-[0.58rem] tracking-[0.12em] text-accent-gold uppercase font-semibold transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer"
                   >
-                    <span>Read In-Depth Profile</span>
-                    <ArrowRight className="size-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <span>View Profile</span>
+                    <ArrowRight className="size-2.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                   </button>
                 </div>
               </div>
@@ -460,77 +620,74 @@ function TeamPage() {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 4: OUR TEAM PHILOSOPHY (At Last Section)                          */}
+        {/* SECTION 4: OUR TEAM PHILOSOPHY (COMPACT SINGLE-SCREEN VIEW)               */}
         {/* ========================================================================= */}
-        <section className="px-6 md:px-10 max-w-[1400px] mx-auto mt-24 md:mt-32">
-          <div className="relative overflow-hidden rounded-3xl border border-accent-gold/50 bg-gradient-to-b from-neutral-950 via-black to-emerald-950/60 p-8 md:p-16 text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
+        <section className="philosophy-section-animate px-6 md:px-10 max-w-[1400px] mx-auto mt-14 md:mt-16">
+          <div className="relative overflow-hidden rounded-3xl border border-accent-gold/50 bg-gradient-to-b from-neutral-950 via-black to-emerald-950/60 p-6 md:p-8 lg:p-10 text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
             <div className="absolute -top-32 left-1/2 -translate-x-1/2 size-96 bg-accent-gold/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent-gold/50 bg-accent-gold/15 backdrop-blur-md">
-                <Compass className="size-3.5 text-accent-gold" />
-                <span className="font-display text-[0.68rem] tracking-[0.3em] text-accent-gold uppercase font-bold">
-                  GUIDING PRINCIPLES
-                </span>
+            <div className="relative z-10 max-w-5xl mx-auto space-y-4 sm:space-y-5">
+              {/* Badge & Title */}
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-accent-gold/50 bg-accent-gold/15 backdrop-blur-md">
+                  <Compass className="size-3 text-accent-gold" />
+                  <span className="font-display text-[0.62rem] tracking-[0.25em] text-accent-gold uppercase font-bold">
+                    GUIDING PRINCIPLES
+                  </span>
+                </div>
+
+                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl tracking-[0.06em] text-foreground uppercase font-bold leading-tight">
+                  OUR TEAM PHILOSOPHY
+                </h2>
               </div>
 
-              <h2 className="font-display text-3xl md:text-5xl tracking-[0.08em] text-foreground uppercase font-bold leading-tight">
-                OUR TEAM PHILOSOPHY
-              </h2>
-
-              <div className="w-20 h-0.5 bg-accent-gold mx-auto" />
-
-              <div className="space-y-6 text-muted-foreground font-body text-sm md:text-base lg:text-lg leading-relaxed max-w-3xl mx-auto">
-                <p>
-                  At <strong className="text-foreground">THE BILLIONAIRE’S AQUA™</strong>, we believe
-                  a strong brand is not built by one person alone. It is built by people who take
-                  ownership of their responsibilities, bring their ideas forward and work together
-                  towards a common vision.
-                </p>
-                <p>
-                  Each member of our team has a different area of expertise, but every role
-                  contributes to the same larger mission, building a premium Indian brand with the
-                  ambition to grow from Pune to India and eventually to the world.
-                </p>
-              </div>
-
-              {/* Bold Closing Motto */}
-              <div className="pt-6 border-t border-hairline/80">
-                <p className="font-display text-lg md:text-2xl tracking-[0.22em] text-accent-gold uppercase font-bold drop-shadow-[0_2px_12px_rgba(212,175,55,0.4)]">
+              {/* Slogan Banner */}
+              <div className="inline-block py-1.5 px-4 rounded-xl border border-accent-gold/40 bg-accent-gold/10 backdrop-blur-sm">
+                <p className="font-display text-xs sm:text-sm md:text-base tracking-[0.16em] text-accent-gold uppercase font-bold">
                   Different Skills. Different Responsibilities. One Team. One Vision.
                 </p>
               </div>
 
+              {/* Core Narrative */}
+              <p className="font-body text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+                At <strong className="text-foreground">THE BILLIONAIRE’S AQUA™</strong>, a strong brand is built by people who take ownership of their responsibilities, bring ideas forward, and work together toward a common mission: building a premium Indian brand from Pune to India and eventually to the world.
+              </p>
+
               {/* 3 Core Execution Pillars */}
-              <div className="grid sm:grid-cols-3 gap-6 pt-8 text-left">
-                <div className="p-6 bg-black/50 border border-hairline rounded-2xl space-y-2">
-                  <Award className="size-5 text-accent-gold" />
-                  <h4 className="font-display text-sm tracking-[0.15em] text-foreground uppercase font-bold">
-                    Individual Ownership
-                  </h4>
-                  <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                    Every team member owns their domain with autonomy, precision, and unwavering
-                    accountability.
+              <div className="grid sm:grid-cols-3 gap-3 md:gap-4 pt-1 text-left">
+                <div className="p-4 bg-black/60 border border-hairline hover:border-accent-gold/40 rounded-xl space-y-1.5 transition-colors">
+                  <div className="flex items-center gap-2">
+                    <Award className="size-4 text-accent-gold shrink-0" />
+                    <h4 className="font-display text-xs sm:text-sm tracking-[0.12em] text-foreground uppercase font-bold">
+                      Individual Ownership
+                    </h4>
+                  </div>
+                  <p className="font-body text-[0.68rem] sm:text-xs text-muted-foreground leading-relaxed">
+                    Every team member owns their domain with autonomy, precision, and unwavering accountability.
                   </p>
                 </div>
-                <div className="p-6 bg-black/50 border border-hairline rounded-2xl space-y-2">
-                  <Zap className="size-5 text-accent-gold" />
-                  <h4 className="font-display text-sm tracking-[0.15em] text-foreground uppercase font-bold">
-                    Speed &amp; Adaptability
-                  </h4>
-                  <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                    Rapid execution from research and client calls to viral digital campaigns and
-                    retail expansion.
+
+                <div className="p-4 bg-black/60 border border-hairline hover:border-accent-gold/40 rounded-xl space-y-1.5 transition-colors">
+                  <div className="flex items-center gap-2">
+                    <Zap className="size-4 text-accent-gold shrink-0" />
+                    <h4 className="font-display text-xs sm:text-sm tracking-[0.12em] text-foreground uppercase font-bold">
+                      Speed &amp; Adaptability
+                    </h4>
+                  </div>
+                  <p className="font-body text-[0.68rem] sm:text-xs text-muted-foreground leading-relaxed">
+                    Rapid execution across research, client pitching, creative media, and market expansion.
                   </p>
                 </div>
-                <div className="p-6 bg-black/50 border border-hairline rounded-2xl space-y-2">
-                  <Users className="size-5 text-accent-gold" />
-                  <h4 className="font-display text-sm tracking-[0.15em] text-foreground uppercase font-bold">
-                    Unified Ambition
-                  </h4>
-                  <p className="font-body text-xs text-muted-foreground leading-relaxed">
-                    Standing as one family dedicated to achieving our ₹5,000 Crore milestone and
-                    global recognition.
+
+                <div className="p-4 bg-black/60 border border-hairline hover:border-accent-gold/40 rounded-xl space-y-1.5 transition-colors">
+                  <div className="flex items-center gap-2">
+                    <Users className="size-4 text-accent-gold shrink-0" />
+                    <h4 className="font-display text-xs sm:text-sm tracking-[0.12em] text-foreground uppercase font-bold">
+                      Unified Ambition
+                    </h4>
+                  </div>
+                  <p className="font-body text-[0.68rem] sm:text-xs text-muted-foreground leading-relaxed">
+                    Standing as one family dedicated to achieving our ₹5,000 Crore milestone and national leadership.
                   </p>
                 </div>
               </div>
@@ -541,7 +698,7 @@ function TeamPage() {
         {/* ========================================================================= */}
         {/* SECTION 5: CAREERS & COLLABORATION CTA                                    */}
         {/* ========================================================================= */}
-        <section className="px-6 md:px-10 max-w-[1400px] mx-auto mt-20 text-center space-y-6">
+        <section className="cta-section-animate px-6 md:px-10 max-w-[1400px] mx-auto mt-20 text-center space-y-6">
           <div className="p-8 md:p-12 rounded-2xl border border-hairline bg-black/30 backdrop-blur-sm max-w-3xl mx-auto space-y-4">
             <h3 className="font-display text-xl md:text-2xl tracking-[0.15em] text-foreground uppercase font-bold">
               Want to Join The Billionaire&apos;s Aqua Family?
