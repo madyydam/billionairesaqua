@@ -81,7 +81,7 @@ export function Footer() {
             {/* Brand Tagline Logo underneath (reduced ~10-15% in size) */}
             <div className="pt-1">
               <img
-                src="/logos/the-b-aqua-tagline.webp"
+                src="/logos/the-b-aqua-footer.jpg"
                 alt="The Billionaire's Aqua Logo with Tagline"
                 className="h-28 md:h-38 w-auto object-contain rounded-2xl shadow-[0_0_25px_rgba(212,175,55,0.18)]"
               />
@@ -192,7 +192,7 @@ export function Footer() {
           {/* Center: Suraj Ishwar Group Emblem Logo (Prominent, Perfect Middle) */}
           <div className="flex justify-center items-center justify-self-center">
             <img
-              src="/logos/billionaires-aqua-emblem.webp"
+              src="/logos/the-b-aqua-footer.jpg"
               alt="Suraj Ishwar Group - The Billionaire's Aqua Emblem"
               className="h-20 md:h-28 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity drop-shadow-[0_0_20px_rgba(212,175,55,0.2)]"
             />

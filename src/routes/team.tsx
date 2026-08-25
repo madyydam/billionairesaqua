@@ -502,7 +502,7 @@ function TeamPage() {
 
                 <blockquote className="border-l-2 border-accent-gold pl-4 space-y-2.5 italic text-foreground/90 font-body text-xs md:text-sm leading-relaxed">
                   <p>
-                    &ldquo;I believe every great brand begins with a simple decision — to build
+                    &ldquo;I believe every great brand begins with a simple decision to build
                     something that people can trust and remember.&rdquo;
                   </p>
                   <p>

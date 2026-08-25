@@ -248,7 +248,7 @@ export function Benefits() {
             <Reveal className="space-y-4" delay={0.1}>
               <blockquote className="border-l-2 border-accent-gold pl-6 italic">
                 <p className="font-body text-sm text-foreground leading-relaxed tracking-wide">
-                  &ldquo;I believe every great brand begins with a simple decision — to build
+                  &ldquo;I believe every great brand begins with a simple decision to build
                   something that people can trust and remember.&rdquo;
                 </p>
               </blockquote>
