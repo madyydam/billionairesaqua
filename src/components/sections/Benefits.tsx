@@ -1,3 +1,5 @@
+import { useNavigate } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { Section, Display, Eyebrow, Body } from "@/components/site/Primitives";
 import { Reveal } from "@/components/site/Reveal";
 
@@ -53,6 +55,7 @@ const MANIFESTO_PILLARS = [
 ];
 
 export function Benefits() {
+  const navigate = useNavigate();
   return (
     <Section
       id="benefits"
@@ -210,7 +213,7 @@ export function Benefits() {
 
             <h3 className="font-display text-2xl md:text-4xl tracking-[0.12em] text-foreground uppercase leading-tight">
               To build THE BILLIONAIRE&apos;S AQUA into a{" "}
-              <span className="text-accent-gold underline decoration-accent-gold/40 underline-offset-8">
+              <span className="text-accent-gold">
                 ₹5,000 Crore business by 2030
               </span>
               , without compromising the standards that define our brand.
@@ -231,9 +234,9 @@ export function Benefits() {
         {/* ========================================================================= */}
         {/* PART 3: LEADERSHIP & SLOGAN (Suraj Ishwar)                                */}
         {/* ========================================================================= */}
-        <div className="grid gap-12 lg:grid-cols-12 items-center border-t border-hairline pt-20 max-w-5xl mx-auto">
-          {/* Left Column: Slogan & Vision */}
-          <div className="lg:col-span-6 space-y-6">
+        <div className="grid gap-12 items-center border-t border-hairline pt-20 max-w-5xl mx-auto">
+          {/* Leadership & Slogan */}
+          <div className="space-y-6">
             <Reveal>
               <Eyebrow>Leadership &amp; Slogan</Eyebrow>
               <Display className="mt-4 text-[clamp(1.8rem,3.5vw,2.8rem)] leading-tight">
@@ -260,53 +263,27 @@ export function Benefits() {
               </blockquote>
             </Reveal>
 
-            <Reveal className="pt-2" delay={0.15}>
-              <p className="font-display text-lg tracking-[0.15em] text-foreground uppercase font-bold">
-                SURAJ ISHWAR
-              </p>
-              <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase mt-1 font-semibold">
-                FOUNDER, CHAIRMAN &amp; MANAGING DIRECTOR
-              </p>
-              <p className="font-display text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase mt-0.5">
-                THE BILLIONAIRE&apos;S AQUA™
-              </p>
-            </Reveal>
-          </div>
-
-          {/* Right Column: Founder Badge Card */}
-          <div className="lg:col-span-6 flex justify-center lg:justify-end">
-            <Reveal
-              className="w-full max-w-md bg-gradient-to-br from-emerald-950 via-black to-neutral-950 border border-accent-gold/40 rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group hover:border-accent-gold transition-all duration-700 shadow-2xl"
-              delay={0.2}
-            >
-              {/* Graphic background elements */}
-              <div className="absolute -top-1/4 -right-1/4 size-80 rounded-full bg-accent-gold/10 blur-[80px]" />
-              <div className="absolute -bottom-1/4 -left-1/4 size-80 rounded-full bg-emerald-800/15 blur-[80px]" />
-
-              <div className="relative z-10 space-y-4">
-                <span className="font-display text-[0.62rem] tracking-[0.35em] text-accent-gold uppercase font-semibold">
-                  THE BILLIONAIRE&apos;S AQUA™
-                </span>
-                <h4 className="font-display text-xl md:text-2xl tracking-[0.15em] text-foreground uppercase">
-                  ONE VISION. ONE STANDARD. ONE FAMILY.
-                </h4>
-                <div className="inline-block px-3 py-1 rounded bg-accent-gold/20 border border-accent-gold/50 font-display text-xs tracking-[0.2em] text-accent-gold uppercase font-semibold">
-                  ₹5,000 CRORE BY 2030
-                </div>
-              </div>
-
-              {/* Founder Sign-off Graphic */}
-              <div className="relative z-10 space-y-2 pt-10">
-                <div className="w-16 h-px bg-accent-gold/60" />
-                <p className="font-display text-base tracking-[0.25em] text-foreground uppercase font-bold">
-                  — SURAJ ISHWAR
+            <Reveal className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4" delay={0.15}>
+              <div>
+                <p className="font-display text-lg tracking-[0.15em] text-foreground uppercase font-bold">
+                  SURAJ ISHWAR
                 </p>
-                <p className="font-body text-[0.65rem] tracking-[0.2em] text-accent-gold uppercase font-semibold">
+                <p className="font-body text-[0.72rem] tracking-[0.24em] text-accent-gold uppercase mt-1 font-semibold">
                   FOUNDER, CHAIRMAN &amp; MANAGING DIRECTOR
                 </p>
-                <p className="font-display text-[0.6rem] tracking-[0.2em] text-muted-foreground uppercase">
+                <p className="font-display text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase mt-0.5">
                   THE BILLIONAIRE&apos;S AQUA™
                 </p>
+              </div>
+
+              <div>
+                <button
+                  onClick={() => navigate({ to: "/founder" })}
+                  className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-accent-gold text-black font-body text-[0.68rem] tracking-[0.16em] uppercase font-bold transition-all hover:bg-accent-gold-light hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] cursor-pointer"
+                >
+                  See Full Story of Founder
+                  <ArrowRight className="size-3.5" />
+                </button>
               </div>
             </Reveal>
           </div>

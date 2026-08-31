@@ -8,10 +8,11 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { label: "Home", id: "hero", to: "/" },
   { label: "Our Story", id: "intro", to: "/#intro" },
+  { label: "Founder", id: "founder", to: "/founder" },
+  { label: "Our Team", id: "team", to: "/team" },
   { label: "Our Water", id: "reveal", to: "/#reveal" },
   { label: "Products", id: "details", to: "/#details" },
   { label: "Quality", id: "technology", to: "/#technology" },
-  { label: "Our Team", id: "team", to: "/team" },
   { label: "Partner With Us", id: "cta", to: "/#cta" },
 ];
 
@@ -20,10 +21,11 @@ export function Nav() {
   const navigate = useNavigate();
   const pathname = location.pathname;
   const isTeamPage = pathname === "/team";
+  const isFounderPage = pathname === "/founder";
 
   const progress = useScrollProgress(60);
   const [open, setOpen] = useState(false);
-  const solid = progress > 0.03 || isTeamPage;
+  const solid = progress > 0.03 || isTeamPage || isFounderPage;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -44,8 +46,17 @@ export function Nav() {
       return;
     }
 
+    if (link.to === "/founder") {
+      if (isFounderPage) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate({ to: "/founder" });
+      }
+      return;
+    }
+
     if (link.id === "hero") {
-      if (isTeamPage) {
+      if (pathname !== "/") {
         navigate({ to: "/" });
       } else {
         scrollToSection("hero");
@@ -54,7 +65,7 @@ export function Nav() {
     }
 
     // Anchor sections on homepage
-    if (isTeamPage) {
+    if (pathname !== "/") {
       window.location.href = `/#${link.id}`;
     } else {
       scrollToSection(link.id);
@@ -63,7 +74,7 @@ export function Nav() {
 
   const goContact = () => {
     setOpen(false);
-    if (isTeamPage) {
+    if (pathname !== "/") {
       window.location.href = "/#contact";
     } else {
       scrollToSection("contact");
@@ -72,7 +83,7 @@ export function Nav() {
 
   const goHome = () => {
     setOpen(false);
-    if (isTeamPage) {
+    if (pathname !== "/") {
       navigate({ to: "/" });
     } else {
       scrollToSection("hero");
@@ -95,20 +106,25 @@ export function Nav() {
           className="flex items-center gap-1.5 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group cursor-pointer"
           aria-label="The Billionaire's Aqua home"
         >
-          <span className="font-display font-bold text-[0.62rem] tracking-[0.28em] text-accent-gold uppercase">
+          <span className="font-brand font-bold text-sm md:text-[0.95rem] tracking-[0.18em] text-white uppercase">
             THE
           </span>
-          <span className="font-editorial font-bold text-sm md:text-[0.95rem] tracking-[0.1em] text-white uppercase drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)]">
+          <span className="font-brand font-bold text-sm md:text-[0.95rem] tracking-[0.18em] text-white uppercase">
             BILLIONAIRE&apos;S
           </span>
-          <span className="font-display font-bold text-[0.62rem] tracking-[0.28em] text-accent-gold uppercase">
+          <span className="font-brand font-bold text-sm md:text-[0.95rem] tracking-[0.18em] text-white uppercase">
             AQUA
           </span>
         </button>
 
         <nav aria-label="Primary" className="hidden items-center gap-6 lg:gap-7 md:flex">
           {LINKS.map((link) => {
-            const isActive = link.to === "/team" ? isTeamPage : !isTeamPage && link.id === "hero";
+            const isActive =
+              link.to === "/team"
+                ? isTeamPage
+                : link.to === "/founder"
+                  ? isFounderPage
+                  : !isTeamPage && !isFounderPage && link.id === "hero";
             return (
               <button
                 key={link.id}
@@ -155,7 +171,12 @@ export function Nav() {
         <div className="border-t border-hairline bg-background/95 backdrop-blur-xl md:hidden">
           <nav aria-label="Mobile" className="flex flex-col px-6 py-5">
             {LINKS.map((link) => {
-              const isActive = link.to === "/team" ? isTeamPage : false;
+              const isActive =
+                link.to === "/team"
+                  ? isTeamPage
+                  : link.to === "/founder"
+                    ? isFounderPage
+                    : false;
               return (
                 <button
                   key={link.id}

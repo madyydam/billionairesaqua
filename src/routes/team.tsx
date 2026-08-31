@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useDevicePerformance } from "@/hooks/useDevicePerformance";
@@ -227,6 +227,7 @@ export const Route = createFileRoute("/team")({
 });
 
 function TeamPage() {
+  const navigate = useNavigate();
   const [activeModalMember, setActiveModalMember] = useState<TeamMember | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const device = useDevicePerformance();
@@ -487,8 +488,8 @@ function TeamPage() {
                 </div>
               </div>
 
-              {/* Right Vision & Leadership Content */}
-              <div className="lg:col-span-8 space-y-4">
+              {/* Right Vision & CTA */}
+              <div className="lg:col-span-8 space-y-5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-accent-gold/30 bg-accent-gold/10">
                   <ShieldCheck className="size-3.5 text-accent-gold" />
                   <span className="font-display text-[0.62rem] tracking-[0.25em] text-accent-gold uppercase font-bold">
@@ -496,46 +497,22 @@ function TeamPage() {
                   </span>
                 </div>
 
-                <h2 className="font-display text-xl md:text-3xl tracking-[0.08em] text-foreground uppercase font-bold leading-tight">
+                <h2 className="font-display text-2xl md:text-4xl tracking-[0.08em] text-foreground uppercase font-bold leading-tight">
                   ONE VISION. ONE STANDARD. ONE FAMILY.
                 </h2>
 
-                <blockquote className="border-l-2 border-accent-gold pl-4 space-y-2.5 italic text-foreground/90 font-body text-xs md:text-sm leading-relaxed">
-                  <p>
-                    &ldquo;I believe every great brand begins with a simple decision to build
-                    something that people can trust and remember.&rdquo;
-                  </p>
-                  <p>
-                    &ldquo;THE BILLIONAIRE&apos;S AQUA™ is our commitment to building a premium
-                    Indian water brand with a long-term vision. From Pune to the world, we are
-                    building a standard that reflects precision, ambition, and collective
-                    growth.&rdquo;
-                  </p>
-                </blockquote>
+                <p className="font-body text-xs md:text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                  Discover the entrepreneurial journey, early lessons, and long-term vision behind Gadget Dash and THE BILLIONAIRE’S AQUA™ — from where it all started to building a ₹5,000 Crore legacy.
+                </p>
 
-                <div className="grid sm:grid-cols-2 gap-3 pt-3 border-t border-hairline/80 font-body text-xs">
-                  <div className="flex items-start gap-2.5 p-2.5 bg-black/40 rounded-xl border border-hairline">
-                    <Target className="size-3.5 text-accent-gold shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-display text-[0.7rem] tracking-[0.15em] text-foreground uppercase font-bold">
-                        ₹5,000 Cr Milestone
-                      </p>
-                      <p className="text-muted-foreground text-[0.68rem] mt-0.5">
-                        Targeting national leadership and legacy scale by 2030.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5 p-2.5 bg-black/40 rounded-xl border border-hairline">
-                    <Users className="size-3.5 text-accent-gold shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-display text-[0.7rem] tracking-[0.15em] text-foreground uppercase font-bold">
-                        Unified Execution
-                      </p>
-                      <p className="text-muted-foreground text-[0.68rem] mt-0.5">
-                        Empowering specialized leaders across marketing, sales &amp; operations.
-                      </p>
-                    </div>
-                  </div>
+                <div className="pt-2">
+                  <button
+                    onClick={() => navigate({ to: "/founder" })}
+                    className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-accent-gold text-black font-body text-xs tracking-[0.18em] uppercase font-bold transition-all hover:bg-accent-gold-light hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] cursor-pointer"
+                  >
+                    See Full Story of Founder
+                    <ArrowRight className="size-4" />
+                  </button>
                 </div>
               </div>
             </div>

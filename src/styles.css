@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -22,6 +23,7 @@
   --font-display: "Antonio", "Arial Narrow", sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
   --font-editorial: "Playfair Display", Georgia, serif;
+  --font-brand: "Bebas Neue", "Antonio", "Arial Narrow", sans-serif;
   --color-accent-gold: var(--accent-gold);
   --color-accent-gold-light: var(--accent-gold-light);
   --color-brand-green: var(--brand-green);

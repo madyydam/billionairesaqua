@@ -96,6 +96,7 @@ export function Footer() {
             <ul className="space-y-4">
               {[
                 { label: "Our Story", id: "intro" },
+                { label: "Founder's Story", id: "founder", href: "/founder" },
                 { label: "Our Team", id: "team", href: "/team" },
                 { label: "Our Water", id: "reveal" },
                 { label: "Quality", id: "technology" },

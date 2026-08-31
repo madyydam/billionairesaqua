@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FounderRouteImport } from './routes/founder'
 import { Route as TeamRouteImport } from './routes/team'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FounderRoute = FounderRouteImport.update({
+  id: '/founder',
+  path: '/founder',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeamRoute = TeamRouteImport.update({
@@ -25,27 +31,31 @@ const TeamRoute = TeamRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/founder': typeof FounderRoute
   '/team': typeof TeamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/founder': typeof FounderRoute
   '/team': typeof TeamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/founder': typeof FounderRoute
   '/team': typeof TeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/team'
+  fullPaths: '/' | '/founder' | '/team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/team'
-  id: '__root__' | '/' | '/team'
+  to: '/' | '/founder' | '/team'
+  id: '__root__' | '/' | '/founder' | '/team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FounderRoute: typeof FounderRoute
   TeamRoute: typeof TeamRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/founder': {
+      id: '/founder'
+      path: '/founder'
+      fullPath: '/founder'
+      preLoaderRoute: typeof FounderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/team': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FounderRoute: FounderRoute,
   TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport

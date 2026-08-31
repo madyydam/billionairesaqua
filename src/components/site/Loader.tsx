@@ -52,13 +52,13 @@ export function Loader({ ready }: { ready: boolean }) {
       className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-background"
     >
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-6 text-center">
-        <span className="font-editorial font-bold text-base sm:text-2xl tracking-[0.22em] text-accent-gold uppercase">
+        <span className="font-brand font-bold text-2xl sm:text-4xl tracking-[0.18em] text-white uppercase">
           THE
         </span>
-        <span className="font-editorial font-bold text-xl sm:text-3xl tracking-[0.14em] text-white uppercase drop-shadow-[0_2px_12px_rgba(255,255,255,0.35)]">
+        <span className="font-brand font-bold text-2xl sm:text-4xl tracking-[0.18em] text-white uppercase">
           BILLIONAIRE&apos;S
         </span>
-        <span className="font-editorial font-bold text-base sm:text-2xl tracking-[0.22em] text-accent-gold uppercase">
+        <span className="font-brand font-bold text-2xl sm:text-4xl tracking-[0.18em] text-white uppercase">
           AQUA
         </span>
       </div>
