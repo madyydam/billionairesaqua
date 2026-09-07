@@ -217,8 +217,6 @@ function FounderStoryPage() {
                     WHERE IT ALL STARTED.
                   </h1>
 
-                  <div className="story-hero-item w-16 h-0.5 bg-accent-gold" />
-
                   <blockquote className="story-hero-item border-l-2 border-accent-gold pl-5 space-y-3 italic text-foreground/90 font-body text-sm md:text-base leading-relaxed">
                     <p>
                       &ldquo;My entrepreneurial journey did not begin with a successful company,
