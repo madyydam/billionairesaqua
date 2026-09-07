@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FounderRouteImport } from './routes/founder'
-import { Route as TeamRouteImport } from './routes/team'
+import { Route as OurteamRouteImport } from './routes/ourteam'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +23,40 @@ const FounderRoute = FounderRouteImport.update({
   path: '/founder',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TeamRoute = TeamRouteImport.update({
-  id: '/team',
-  path: '/team',
+const OurteamRoute = OurteamRouteImport.update({
+  id: '/ourteam',
+  path: '/ourteam',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/founder': typeof FounderRoute
-  '/team': typeof TeamRoute
+  '/ourteam': typeof OurteamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/founder': typeof FounderRoute
-  '/team': typeof TeamRoute
+  '/ourteam': typeof OurteamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/founder': typeof FounderRoute
-  '/team': typeof TeamRoute
+  '/ourteam': typeof OurteamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/founder' | '/team'
+  fullPaths: '/' | '/founder' | '/ourteam'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/founder' | '/team'
-  id: '__root__' | '/' | '/founder' | '/team'
+  to: '/' | '/founder' | '/ourteam'
+  id: '__root__' | '/' | '/founder' | '/ourteam'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FounderRoute: typeof FounderRoute
-  TeamRoute: typeof TeamRoute
+  OurteamRoute: typeof OurteamRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,11 +75,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FounderRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/team': {
-      id: '/team'
-      path: '/team'
-      fullPath: '/team'
-      preLoaderRoute: typeof TeamRouteImport
+    '/ourteam': {
+      id: '/ourteam'
+      path: '/ourteam'
+      fullPath: '/ourteam'
+      preLoaderRoute: typeof OurteamRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -88,7 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FounderRoute: FounderRoute,
-  TeamRoute: TeamRoute,
+  OurteamRoute: OurteamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

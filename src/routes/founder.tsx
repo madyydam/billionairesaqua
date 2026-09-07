@@ -27,9 +27,9 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TITLE = "Founder Story | Suraj Ishwar — The Billionaire's Aqua™";
+const TITLE = "Founder Story | Suraj Ishwar | The Billionaire's Aqua™";
 const DESCRIPTION =
-  "Discover the entrepreneurial journey of Suraj Ishwar — from early lessons and Gadget Dash to the vision behind THE BILLIONAIRE’S AQUA™ and building a ₹5,000 Crore legacy.";
+  "Discover the entrepreneurial journey of Suraj Ishwar, from early lessons and Gadget Dash to the vision behind THE BILLIONAIRE’S AQUA™ and building a ₹5,000 Crore legacy.";
 
 export const Route = createFileRoute("/founder")({
   component: FounderStoryPage,
@@ -188,15 +188,18 @@ function FounderStoryPage() {
                   </div>
 
                   {/* Founder Profile Details */}
-                  <div className="story-hero-item mt-6 text-center space-y-1.5">
+                  <div className="story-hero-item mt-6 w-full max-w-[320px] md:max-w-[360px] text-left space-y-1.5">
                     <h2 className="font-display text-2xl md:text-3xl tracking-[0.08em] text-white uppercase font-bold">
                       SURAJ ISHWAR
                     </h2>
-                    <p className="font-body text-[0.72rem] md:text-[0.78rem] tracking-[0.2em] text-accent-gold uppercase font-semibold">
-                      FOUNDER &amp; CEO — GADGET DASH
+                    <p className="font-body text-[0.68rem] md:text-[0.74rem] tracking-[0.18em] text-accent-gold uppercase font-semibold">
+                      CO-FOUNDER &amp; CEO - DUDE SALAD
                     </p>
-                    <p className="font-display text-[0.65rem] md:text-[0.7rem] text-white/80 tracking-[0.22em] uppercase font-semibold">
-                      FOUNDER — THE BILLIONAIRE&apos;S AQUA™
+                    <p className="font-body text-[0.68rem] md:text-[0.74rem] tracking-[0.18em] text-accent-gold uppercase font-semibold">
+                      FOUNDER &amp; CEO - GADGET DASH™
+                    </p>
+                    <p className="font-body text-[0.68rem] md:text-[0.74rem] tracking-[0.18em] text-accent-gold uppercase font-semibold">
+                      FOUNDER, CHAIRMAN &amp; MD - THE BILLIONAIRE&apos;S AQUA™
                     </p>
                   </div>
                 </div>
@@ -223,14 +226,14 @@ function FounderStoryPage() {
                       to take a risk, and the courage to start.&rdquo;
                     </p>
                     <p className="text-accent-gold font-medium not-italic text-xs md:text-sm font-body">
-                      — Suraj Ishwar
+                      - Suraj Ishwar
                     </p>
                   </blockquote>
 
                   <p className="story-hero-item font-body text-xs md:text-sm text-muted-foreground leading-relaxed">
                     From facing losses in early ventures and discovering the mechanics of business
                     to founding Gadget Dash, innovating Theft Shield, and carrying a 5-year vision
-                    to craft a ₹5,000 Crore luxury water brand — this is the unfiltered story of
+                    to craft a ₹5,000 Crore luxury water brand, this is the unfiltered story of
                     resilience, lessons, and relentless ambition.
                   </p>
 
@@ -306,7 +309,7 @@ function FounderStoryPage() {
               <div className="lg:col-span-8 space-y-4 font-body text-xs md:text-sm text-muted-foreground leading-relaxed">
                 <p>
                   After Dude Salad, I started exploring <span className="text-foreground font-semibold">Dropshipping</span>.
-                  Dropshipping taught me a different side of business — understanding products, customers,
+                  Dropshipping taught me a different side of business: understanding products, customers,
                   online selling, marketing and the importance of execution.
                 </p>
                 <p>
@@ -652,7 +655,7 @@ function FounderStoryPage() {
                   &ldquo;Today, I am building one step at a time. Tomorrow, I want those steps to become an ecosystem. A legacy built on vision, innovation, ambition and higher standards. This is not the destination. This is the foundation.&rdquo;
                 </p>
                 <p className="font-display text-xs tracking-[0.25em] text-foreground/80 uppercase font-semibold">
-                  — Many More Plans Hidden…
+                  Many More Plans Hidden…
                 </p>
               </div>
             </div>
@@ -674,7 +677,7 @@ function FounderStoryPage() {
 
               <div className="flex flex-wrap items-center gap-3">
                 <button
-                  onClick={() => navigate({ to: "/team" })}
+                  onClick={() => navigate({ to: "/ourteam" })}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-gold text-black font-body text-xs tracking-[0.16em] uppercase font-bold transition-all hover:bg-accent-gold-light hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] cursor-pointer"
                 >
                   Meet Our Team

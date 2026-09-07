@@ -67,3 +67,28 @@ export function useScrollProgress(steps = 100) {
 
   return value;
 }
+
+/**
+ * Highly optimized boolean hook that only re-renders when scroll passes
+ * or retreats across a threshold (e.g. 0.03 for sticky nav styling).
+ * Avoids dozens of wasted re-renders during continuous scrolling.
+ */
+export function useIsScrolled(threshold = 0.03) {
+  const [scrolled, setScrolled] = useState(() => scrollState.progress > threshold);
+
+  useEffect(() => {
+    let last = scrollState.progress > threshold;
+    const unsubscribe = subscribeScroll((p) => {
+      const isPast = p > threshold;
+      if (isPast !== last) {
+        last = isPast;
+        setScrolled(isPast);
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, [threshold]);
+
+  return scrolled;
+}

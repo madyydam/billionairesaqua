@@ -55,11 +55,41 @@ export const Route = createFileRoute("/")({
   }),
 });
 
+function HeroVideoBackground() {
+  const scrollProgress = useScrollProgress(100);
+  const opacity = Math.max(0, 1 - scrollProgress * 9);
+  const isHidden = opacity <= 0;
+
+  return (
+    <div
+      className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-700 ease-out"
+      style={{
+        opacity,
+        visibility: isHidden ? "hidden" : "visible",
+      }}
+      aria-hidden="true"
+    >
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        disablePictureInPicture
+        preload="auto"
+        className="h-full w-full object-cover"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+      {/* 60% dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/60" />
+    </div>
+  );
+}
+
 function Index() {
   const device = useDevicePerformance();
   const [ready, setReady] = useState(false);
   const onReady = useCallback(() => setReady(true), []);
-  const scrollProgress = useScrollProgress(100);
 
   return (
     <>
@@ -72,25 +102,7 @@ function Index() {
         ON TOP of the video, so the bottle is always in front of the video.
         The 40% black overlay keeps content readable. Fades out on scroll.
       */}
-      <div
-        className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-700 ease-out"
-        style={{ opacity: Math.max(0, 1 - scrollProgress * 9) }}
-        aria-hidden="true"
-      >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          disablePictureInPicture
-          preload="auto"
-          className="h-full w-full object-cover"
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
-        {/* 60% dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/60" />
-      </div>
+      <HeroVideoBackground />
 
       {/* persistent WebGL stage — fixed z-0, comes AFTER video so it renders on top */}
       <ProductSceneLazy device={device} onReady={onReady} />

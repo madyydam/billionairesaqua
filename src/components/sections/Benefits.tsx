@@ -225,7 +225,7 @@ export function Benefits() {
 
             <div className="pt-4 border-t border-hairline/60">
               <p className="font-display text-sm md:text-lg tracking-[0.25em] text-accent-gold uppercase font-semibold">
-                &ldquo;From a vision today to a ₹5,000 Crore legacy tomorrow — we will build it together.&rdquo;
+                &ldquo;From a vision today to a ₹5,000 Crore legacy tomorrow, we will build it together.&rdquo;
               </p>
             </div>
           </div>
@@ -297,7 +297,7 @@ export function Benefits() {
             <div>
               <Eyebrow>Strategic Growth</Eyebrow>
               <h4 className="font-display text-xl tracking-[0.2em] text-foreground uppercase mt-2">
-                Ambition Roadmap (2026 — 2030)
+                Ambition Roadmap (2026 to 2030)
               </h4>
             </div>
             <span className="font-display text-xs tracking-[0.2em] text-accent-gold uppercase hidden sm:block">

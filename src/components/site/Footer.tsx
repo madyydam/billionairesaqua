@@ -56,7 +56,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative z-10 border-t border-hairline bg-black/60 px-6 pt-14 pb-3 md:px-10 md:pt-16 md:pb-4">
+    <footer className="relative z-10 border-t border-hairline bg-black/60 px-6 pt-14 pb-8 sm:pb-10 md:px-10 md:pt-16 md:pb-10">
       <div className="mx-auto max-w-[1600px]">
         {/* Main Grid */}
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-6 mb-8 md:mb-10">
@@ -97,7 +97,7 @@ export function Footer() {
               {[
                 { label: "Our Story", id: "intro" },
                 { label: "Founder's Story", id: "founder", href: "/founder" },
-                { label: "Our Team", id: "team", href: "/team" },
+                { label: "Our Team", id: "team", href: "/ourteam" },
                 { label: "Our Water", id: "reveal" },
                 { label: "Quality", id: "technology" },
                 { label: "Products", id: "details" },
@@ -220,6 +220,21 @@ export function Footer() {
               })}
             </div>
           </div>
+        </div>
+
+        {/* Very Bottom Credit */}
+        <div className="pt-3 pb-2 text-center mt-3 border-t border-white/15">
+          <p className="font-body text-[0.66rem] md:text-[0.72rem] tracking-[0.14em] text-muted-foreground">
+            Designed and Developed by{" "}
+            <a
+              href="https://www.instagram.com/futoralift/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 font-bold underline underline-offset-4 decoration-blue-400/50 hover:decoration-blue-300 transition-colors duration-200"
+            >
+              FUTORALIFT
+            </a>
+          </p>
         </div>
       </div>
     </footer>

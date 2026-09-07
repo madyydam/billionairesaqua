@@ -1,12 +1,11 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * Custom water-drop cursor.
- * – Main drop follows the pointer instantly
- * – A soft ring trails behind with damping
- * – Ripple burst on click
- * – Scales up when hovering buttons / links
- * – Default cursor hidden via global style injected here
+ * – Main drop follows pointer / touch accurately
+ * – Hidden by default (never stuck at 0,0 on mobile or load)
+ * – On mobile: appears exactly where the user touches, tracks drag, and fades on release
+ * – On desktop: follows pointer, ripples on click, scales on hover
  */
 export function WaterCursor() {
   const dropRef = useRef<HTMLDivElement>(null);
@@ -15,33 +14,73 @@ export function WaterCursor() {
   const pos = useRef({ x: -200, y: -200 });
   const rafId = useRef<number | null>(null);
   const isDirty = useRef(false);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-    if (!isFinePointer) return;
 
-    // Inject global cursor:none
-    const style = document.createElement("style");
-    style.id = "water-cursor-hide";
-    style.textContent = `*, *::before, *::after { cursor: none !important; }`;
-    document.head.appendChild(style);
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+
+    // Only inject cursor: none for mouse / fine pointer devices
+    let style: HTMLStyleElement | null = null;
+    if (isFinePointer) {
+      style = document.createElement("style");
+      style.id = "water-cursor-hide";
+      style.textContent = `*, *::before, *::after { cursor: none !important; }`;
+      document.head.appendChild(style);
+    }
 
     const updatePosition = () => {
-      if (isDirty.current && dropRef.current) {
+      rafId.current = null;
+      if (dropRef.current) {
         dropRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) translate(-50%, -50%)`;
-        isDirty.current = false;
       }
-      rafId.current = requestAnimationFrame(updatePosition);
+      isDirty.current = false;
     };
 
-    const onMove = (e: PointerEvent) => {
-      pos.current.x = e.clientX;
-      pos.current.y = e.clientY;
+    const scheduleUpdate = () => {
+      if (rafId.current === null) {
+        rafId.current = requestAnimationFrame(updatePosition);
+      }
+    };
+
+    const showDrop = (x: number, y: number) => {
+      pos.current.x = x;
+      pos.current.y = y;
       isDirty.current = true;
+      scheduleUpdate();
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+        hideTimeoutRef.current = null;
+      }
+      dropRef.current?.classList.add("is-active");
     };
 
-    const onEnter = (e: MouseEvent) => {
+    const hideDrop = (delay = 0) => {
+      if (delay > 0) {
+        if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+        hideTimeoutRef.current = setTimeout(() => {
+          dropRef.current?.classList.remove("is-active");
+        }, delay);
+      } else {
+        dropRef.current?.classList.remove("is-active");
+      }
+    };
+
+    // ── Mouse / Fine Pointer Handlers ──
+    const onMouseMove = (e: MouseEvent) => {
+      showDrop(e.clientX, e.clientY);
+    };
+
+    const onMouseLeave = () => {
+      hideDrop(0);
+    };
+
+    const onMouseEnter = () => {
+      dropRef.current?.classList.add("is-active");
+    };
+
+    const onHoverCheck = (e: MouseEvent) => {
       const t = e.target as HTMLElement | null;
       if (!t) return;
       if (
@@ -54,33 +93,68 @@ export function WaterCursor() {
         t.closest("a")
       ) {
         dropRef.current?.classList.add("water-cursor--hover");
+      } else {
+        dropRef.current?.classList.remove("water-cursor--hover");
       }
-    };
-
-    const onLeave = () => {
-      dropRef.current?.classList.remove("water-cursor--hover");
     };
 
     const onClick = (e: MouseEvent) => {
       spawnRipple(e.clientX, e.clientY);
     };
 
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("mouseover", onEnter, { passive: true });
-    window.addEventListener("mouseout", onLeave, { passive: true });
-    window.addEventListener("click", onClick, { passive: true });
+    // ── Touch / Mobile Handlers ──
+    const onTouchStart = (e: TouchEvent) => {
+      const touch = e.touches?.[0];
+      if (!touch) return;
+      showDrop(touch.clientX, touch.clientY);
+      spawnRipple(touch.clientX, touch.clientY);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const touch = e.touches?.[0];
+      if (!touch) return;
+      showDrop(touch.clientX, touch.clientY);
+    };
+
+    const onTouchEnd = () => {
+      // Fade out smoothly once finger is lifted
+      hideDrop(350);
+    };
+
+    // Attach mouse listeners
+    if (isFinePointer) {
+      window.addEventListener("mousemove", onMouseMove, { passive: true });
+      document.addEventListener("mouseleave", onMouseLeave, { passive: true });
+      document.addEventListener("mouseenter", onMouseEnter, { passive: true });
+      window.addEventListener("mouseover", onHoverCheck, { passive: true });
+      window.addEventListener("click", onClick, { passive: true });
+    }
+
+    // Attach touch listeners for mobile
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
 
     rafId.current = requestAnimationFrame(updatePosition);
 
     return () => {
-      style.remove();
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("mouseover", onEnter);
-      window.removeEventListener("mouseout", onLeave);
-      window.removeEventListener("click", onClick);
-      if (rafId.current !== null) {
-        cancelAnimationFrame(rafId.current);
+      if (style) style.remove();
+      if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+
+      if (isFinePointer) {
+        window.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseleave", onMouseLeave);
+        document.removeEventListener("mouseenter", onMouseEnter);
+        window.removeEventListener("mouseover", onHoverCheck);
+        window.removeEventListener("click", onClick);
       }
+
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchcancel", onTouchEnd);
     };
   }, []);
 
@@ -103,8 +177,13 @@ export function WaterCursor() {
           top: 0; left: 0;
           z-index: 99999;
           pointer-events: none;
-          will-change: transform;
-          transition: width 0.25s ease, height 0.25s ease;
+          will-change: transform, opacity;
+          opacity: 0;
+          transform: translate3d(-200px, -200px, 0) translate(-50%, -50%);
+          transition: width 0.25s ease, height 0.25s ease, opacity 0.3s ease;
+        }
+        .water-cursor.is-active {
+          opacity: 1;
         }
         .water-cursor svg {
           width: 28px;
@@ -117,7 +196,7 @@ export function WaterCursor() {
           filter: drop-shadow(0 4px 16px rgba(0,168,185,0.95));
         }
 
-        /* ── Click ripple ── */
+        /* ── Click / Touch ripple ── */
         .water-ripple {
           position: fixed;
           top: 0; left: 0;

@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { scrollToSection } from "@/components/SmoothScrollProvider";
-import { useScrollProgress } from "@/hooks/useScrollProgress";
+import { useIsScrolled } from "@/hooks/useScrollProgress";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
   { label: "Home", id: "hero", to: "/" },
   { label: "Our Story", id: "intro", to: "/#intro" },
   { label: "Founder", id: "founder", to: "/founder" },
-  { label: "Our Team", id: "team", to: "/team" },
+  { label: "Our Team", id: "team", to: "/ourteam" },
   { label: "Our Water", id: "reveal", to: "/#reveal" },
   { label: "Products", id: "details", to: "/#details" },
   { label: "Quality", id: "technology", to: "/#technology" },
@@ -20,12 +20,12 @@ export function Nav() {
   const location = useLocation();
   const navigate = useNavigate();
   const pathname = location.pathname;
-  const isTeamPage = pathname === "/team";
+  const isTeamPage = pathname === "/ourteam";
   const isFounderPage = pathname === "/founder";
 
-  const progress = useScrollProgress(60);
+  const isPastThreshold = useIsScrolled(0.03);
   const [open, setOpen] = useState(false);
-  const solid = progress > 0.03 || isTeamPage || isFounderPage;
+  const solid = isPastThreshold || isTeamPage || isFounderPage;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -37,11 +37,11 @@ export function Nav() {
   const go = (link: (typeof LINKS)[number]) => {
     setOpen(false);
 
-    if (link.to === "/team") {
+    if (link.to === "/ourteam") {
       if (isTeamPage) {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        navigate({ to: "/team" });
+        navigate({ to: "/ourteam" });
       }
       return;
     }
@@ -103,16 +103,16 @@ export function Nav() {
         <button
           onClick={goHome}
           suppressHydrationWarning
-          className="flex items-center gap-1.5 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group cursor-pointer"
+          className="flex items-center gap-1 sm:gap-1.5 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group cursor-pointer whitespace-nowrap"
           aria-label="The Billionaire's Aqua home"
         >
-          <span className="font-brand font-bold text-sm md:text-[0.95rem] tracking-[0.18em] text-white uppercase">
+          <span className="font-brand font-bold text-[0.72rem] sm:text-[0.78rem] md:text-[0.84rem] tracking-[0.14em] sm:tracking-[0.16em] text-white uppercase">
             THE
           </span>
-          <span className="font-brand font-bold text-sm md:text-[0.95rem] tracking-[0.18em] text-white uppercase">
+          <span className="font-brand font-bold text-[0.72rem] sm:text-[0.78rem] md:text-[0.84rem] tracking-[0.14em] sm:tracking-[0.16em] text-white uppercase">
             BILLIONAIRE&apos;S
           </span>
-          <span className="font-brand font-bold text-sm md:text-[0.95rem] tracking-[0.18em] text-white uppercase">
+          <span className="font-brand font-bold text-[0.72rem] sm:text-[0.78rem] md:text-[0.84rem] tracking-[0.14em] sm:tracking-[0.16em] text-white uppercase">
             AQUA
           </span>
         </button>
@@ -120,7 +120,7 @@ export function Nav() {
         <nav aria-label="Primary" className="hidden items-center gap-6 lg:gap-7 md:flex">
           {LINKS.map((link) => {
             const isActive =
-              link.to === "/team"
+              link.to === "/ourteam"
                 ? isTeamPage
                 : link.to === "/founder"
                   ? isFounderPage
@@ -172,7 +172,7 @@ export function Nav() {
           <nav aria-label="Mobile" className="flex flex-col px-6 py-5">
             {LINKS.map((link) => {
               const isActive =
-                link.to === "/team"
+                link.to === "/ourteam"
                   ? isTeamPage
                   : link.to === "/founder"
                     ? isFounderPage
@@ -182,8 +182,8 @@ export function Nav() {
                   key={link.id}
                   onClick={() => go(link)}
                   className={cn(
-                    "border-b border-hairline py-3.5 text-left font-display text-base tracking-[0.08em] uppercase transition-colors",
-                    isActive ? "text-accent-gold font-semibold" : "text-foreground",
+                    "border-b border-hairline py-3.5 text-left font-body text-xs tracking-[0.2em] uppercase font-semibold transition-colors duration-200",
+                    isActive ? "text-accent-gold" : "text-foreground/90 hover:text-accent-gold",
                   )}
                 >
                   {link.label}

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -23,7 +23,7 @@
   --font-display: "Antonio", "Arial Narrow", sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
   --font-editorial: "Playfair Display", Georgia, serif;
-  --font-brand: "Bebas Neue", "Antonio", "Arial Narrow", sans-serif;
+  --font-brand: "Times New Roman", "Tinos", Times, "Playfair Display", Georgia, serif;
   --color-accent-gold: var(--accent-gold);
   --color-accent-gold-light: var(--accent-gold-light);
   --color-brand-green: var(--brand-green);

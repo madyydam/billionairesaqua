@@ -15,15 +15,21 @@ export interface DeviceProfile {
   ready: boolean;
 }
 
+let cachedWebGL: boolean | null = null;
 function detectWebGL(): boolean {
+  if (cachedWebGL !== null) return cachedWebGL;
   try {
     const canvas = document.createElement("canvas");
     const gl =
       canvas.getContext("webgl2") ||
       canvas.getContext("webgl") ||
       canvas.getContext("experimental-webgl");
-    return Boolean(gl);
+    cachedWebGL = Boolean(gl);
+    const ext = gl && "getExtension" in gl ? (gl as WebGLRenderingContext).getExtension("WEBGL_lose_context") : null;
+    ext?.loseContext?.();
+    return cachedWebGL;
   } catch {
+    cachedWebGL = false;
     return false;
   }
 }

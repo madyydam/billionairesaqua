@@ -68,17 +68,22 @@ export function SmoothScrollProvider({ reducedMotion }: { reducedMotion: boolean
     measure();
     compute(window.scrollY, 0);
 
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
     const onResize = () => {
-      measure();
-      compute(window.scrollY, 0);
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        measure();
+        compute(window.scrollY, 0);
+      }, 100);
     };
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
     ScrollTrigger.addEventListener("refresh", measure);
 
     if (reducedMotion) {
       const onScroll = () => compute(window.scrollY, 0);
       window.addEventListener("scroll", onScroll, { passive: true });
       return () => {
+        if (resizeTimer) clearTimeout(resizeTimer);
         window.removeEventListener("scroll", onScroll);
         window.removeEventListener("resize", onResize);
         ScrollTrigger.removeEventListener("refresh", measure);
@@ -103,6 +108,7 @@ export function SmoothScrollProvider({ reducedMotion }: { reducedMotion: boolean
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
       gsap.ticker.remove(raf);
       lenis.destroy();
       lenisInstance = null;

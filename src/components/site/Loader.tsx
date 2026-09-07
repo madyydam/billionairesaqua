@@ -51,14 +51,14 @@ export function Loader({ ready }: { ready: boolean }) {
       aria-live="polite"
       className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-background"
     >
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-6 text-center">
-        <span className="font-brand font-bold text-2xl sm:text-4xl tracking-[0.18em] text-white uppercase">
+      <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 px-4 text-center whitespace-nowrap">
+        <span className="font-brand font-bold text-base sm:text-2xl md:text-[1.75rem] tracking-[0.14em] sm:tracking-[0.18em] text-white uppercase whitespace-nowrap">
           THE
         </span>
-        <span className="font-brand font-bold text-2xl sm:text-4xl tracking-[0.18em] text-white uppercase">
+        <span className="font-brand font-bold text-base sm:text-2xl md:text-[1.75rem] tracking-[0.14em] sm:tracking-[0.18em] text-white uppercase whitespace-nowrap">
           BILLIONAIRE&apos;S
         </span>
-        <span className="font-brand font-bold text-2xl sm:text-4xl tracking-[0.18em] text-white uppercase">
+        <span className="font-brand font-bold text-base sm:text-2xl md:text-[1.75rem] tracking-[0.14em] sm:tracking-[0.18em] text-white uppercase whitespace-nowrap">
           AQUA
         </span>
       </div>
