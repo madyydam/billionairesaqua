@@ -221,21 +221,6 @@ export function Footer() {
             </div>
           </div>
         </div>
-
-        {/* Very Bottom Credit */}
-        <div className="pt-3 pb-2 text-center mt-3 border-t border-white/15">
-          <p className="font-body text-[0.66rem] md:text-[0.72rem] tracking-[0.14em] text-muted-foreground">
-            Designed and Developed by{" "}
-            <a
-              href="https://www.instagram.com/futoralift/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 font-bold underline underline-offset-4 decoration-blue-400/50 hover:decoration-blue-300 transition-colors duration-200"
-            >
-              FUTORALIFT
-            </a>
-          </p>
-        </div>
       </div>
     </footer>
   );
