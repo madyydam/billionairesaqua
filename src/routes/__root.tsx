@@ -7,13 +7,19 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { WaterCursor } from "@/components/site/WaterCursor";
 import { Sparkles, Home } from "lucide-react";
 import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
 import { reportError } from "../lib/error-reporting";
+import {
+  syncRuntimeGateway,
+  subscribeGateway,
+  type GatewayStatus,
+} from "../lib/runtime-config";
+import { MaintenanceView } from "@/components/site/MaintenanceView";
 
 function NotFoundComponent() {
   return (
@@ -154,13 +160,32 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [gatewayStatus, setGatewayStatus] = useState<GatewayStatus>({ state: "CHECKING" });
+
+  useEffect(() => {
+    syncRuntimeGateway().then(setGatewayStatus);
+    return subscribeGateway(setGatewayStatus);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <WaterCursor />
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-      <Analytics />
+      {gatewayStatus.state === "READY" ? (
+        <>
+          <WaterCursor />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+          <Analytics />
+        </>
+      ) : (
+        <MaintenanceView
+          notice={gatewayStatus.notice}
+          onRetry={async () => {
+            const res = await syncRuntimeGateway();
+            setGatewayStatus(res);
+          }}
+        />
+      )}
     </QueryClientProvider>
   );
 }
+
