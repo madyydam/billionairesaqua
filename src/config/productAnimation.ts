@@ -31,35 +31,108 @@ export interface SceneKeyframe {
   drama: number;
 }
 
-import { getDynamicTimeline } from "@/lib/runtime-config";
-
-/**
- * Dynamic timeline coordinates securely synchronized from infrastructure gateway.
- */
-export const TIMELINE: SceneKeyframe[] = new Proxy([] as SceneKeyframe[], {
-  get(target, prop, receiver) {
-    const dynamic = getDynamicTimeline();
-    const source = dynamic && dynamic.length > 0 ? dynamic : target;
-    const val = Reflect.get(source, prop, receiver);
-    return typeof val === "function" ? val.bind(source) : val;
+export const TIMELINE: SceneKeyframe[] = [
+  {
+    id: "hero",
+    at: 0.0,
+    position: [1.45, -0.05, 0],
+    rotation: [0.03, -0.35, 0.02],
+    scale: 1,
+    cameraPosition: [0, 0.05, 6.4],
+    cameraFov: 32,
+    packagingOpen: 1,
+    drama: 0.25,
   },
-  has(target, prop) {
-    const dynamic = getDynamicTimeline();
-    const source = dynamic && dynamic.length > 0 ? dynamic : target;
-    return Reflect.has(source, prop);
+  {
+    id: "intro",
+    at: 0.17,
+    position: [-1.6, -0.02, 0.2],
+    rotation: [0, 0.85, -0.03],
+    scale: 0.88,
+    cameraPosition: [0.3, 0.1, 6.1],
+    cameraFov: 34,
+    packagingOpen: 1,
+    drama: 0.35,
   },
-  getOwnPropertyDescriptor(target, prop) {
-    const dynamic = getDynamicTimeline();
-    const source = dynamic && dynamic.length > 0 ? dynamic : target;
-    return Reflect.getOwnPropertyDescriptor(source, prop);
+  {
+    id: "focus",
+    at: 0.32,
+    position: [0, 0, 0.4],
+    rotation: [0, 1.9, 0],
+    scale: 1.18,
+    cameraPosition: [0, 0, 5.2],
+    cameraFov: 30,
+    packagingOpen: 1,
+    drama: 0.45,
   },
-  ownKeys(target) {
-    const dynamic = getDynamicTimeline();
-    const source = dynamic && dynamic.length > 0 ? dynamic : target;
-    return Reflect.ownKeys(source);
+  {
+    id: "details",
+    at: 0.46,
+    position: [0, -10, -5],
+    rotation: [0.02, 2.75, 0.03],
+    scale: 0,
+    cameraPosition: [-0.25, 0.05, 5.6],
+    cameraFov: 32,
+    packagingOpen: 1,
+    drama: 0.55,
   },
-});
-
+  {
+    id: "reveal",
+    at: 0.6,
+    position: [0, -0.05, 0],
+    rotation: [0, 3.9, 0],
+    scale: 1.05,
+    cameraPosition: [0, 0.1, 5.4],
+    cameraFov: 31,
+    // packaging closes in, then opens across the reveal scene
+    packagingOpen: 0,
+    drama: 0.7,
+  },
+  {
+    id: "angles",
+    at: 0.72,
+    position: [0, 0, 0.2],
+    rotation: [0, 7.2, 0],
+    scale: 1.22,
+    cameraPosition: [0, 0.02, 4.8],
+    cameraFov: 30,
+    packagingOpen: 1,
+    drama: 0.6,
+  },
+  {
+    id: "technology",
+    at: 0.82,
+    position: [-1.15, 0, 0.1],
+    rotation: [0.04, 8.6, -0.04],
+    scale: 1.1,
+    cameraPosition: [0.2, 0.05, 5.1],
+    cameraFov: 31,
+    packagingOpen: 1,
+    drama: 0.8,
+  },
+  {
+    id: "moment",
+    at: 0.91,
+    position: [0, -0.02, 0.6],
+    rotation: [0, 9.6, 0],
+    scale: 1.45,
+    cameraPosition: [0, 0, 4.4],
+    cameraFov: 28,
+    packagingOpen: 1,
+    drama: 1,
+  },
+  {
+    id: "cta",
+    at: 1.0,
+    position: [0, -0.05, 0],
+    rotation: [0, 10.6, 0],
+    scale: 0.95,
+    cameraPosition: [0, 0.05, 5.9],
+    cameraFov: 33,
+    packagingOpen: 1,
+    drama: 0.75,
+  },
+];
 
 /** how quickly the rendered transform chases the scroll value (per second) */
 export const SCROLL_DAMPING = 5.2;
