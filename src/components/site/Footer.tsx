@@ -182,16 +182,16 @@ export function Footer() {
         </div>
 
         {/* Bottom Section: Copyright — Suraj Ishwar Group Logo — Social Links (No horizontal divider line, perfectly centered) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-center md:text-left pt-1">
-          {/* Left: Copyright */}
-          <div className="flex justify-center md:justify-start items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 md:gap-4 text-center md:text-left pt-2 md:pt-1">
+          {/* Left / Last on mobile: Copyright */}
+          <div className="order-3 md:order-1 flex justify-center md:justify-start items-center">
             <p className="font-body text-[0.62rem] md:text-[0.66rem] tracking-[0.2em] text-muted-foreground uppercase">
               © 2026 THE BILLIONAIRE&apos;S AQUA. ALL RIGHTS RESERVED.
             </p>
           </div>
 
-          {/* Center: Suraj Ishwar Group Emblem Logo (Prominent, Perfect Middle) */}
-          <div className="flex justify-center items-center justify-self-center">
+          {/* Center / First on mobile: Suraj Ishwar Group Emblem Logo (Prominent, Perfect Middle) */}
+          <div className="order-1 md:order-2 flex justify-center items-center justify-self-center">
             <img
               src="/logos/billionaires-aqua-emblem.webp"
               alt="Suraj Ishwar Group - The Billionaire's Aqua Emblem"
@@ -199,8 +199,8 @@ export function Footer() {
             />
           </div>
 
-          {/* Right: Social Media Links (Slightly Smaller Icons) */}
-          <div className="flex justify-center md:justify-end items-center">
+          {/* Right / Second on mobile: Social Media Links (Slightly Smaller Icons) */}
+          <div className="order-2 md:order-3 flex justify-center md:justify-end items-center">
             <div className="flex items-center justify-center md:justify-end gap-4 md:gap-5">
               {SOCIAL_LINKS.map((item) => {
                 const Icon = item.icon;

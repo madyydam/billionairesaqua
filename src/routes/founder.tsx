@@ -189,16 +189,16 @@ function FounderStoryPage() {
 
                   {/* Founder Profile Details */}
                   <div className="story-hero-item mt-6 w-full max-w-[320px] md:max-w-[360px] text-left space-y-1.5">
-                    <h2 className="font-display text-2xl md:text-3xl tracking-[0.08em] text-white uppercase font-bold">
+                    <h2 className="font-display text-2xl md:text-3xl tracking-[0.08em] text-accent-gold uppercase font-bold">
                       SURAJ ISHWAR
                     </h2>
-                    <p className="font-body text-[0.68rem] md:text-[0.74rem] tracking-[0.18em] text-accent-gold uppercase font-semibold">
+                    <p className="font-body text-[0.64rem] sm:text-[0.68rem] md:text-[0.72rem] tracking-[0.12em] md:tracking-[0.14em] text-white uppercase font-semibold whitespace-nowrap">
                       CO-FOUNDER &amp; CEO - DUDE SALAD
                     </p>
-                    <p className="font-body text-[0.68rem] md:text-[0.74rem] tracking-[0.18em] text-accent-gold uppercase font-semibold">
+                    <p className="font-body text-[0.64rem] sm:text-[0.68rem] md:text-[0.72rem] tracking-[0.12em] md:tracking-[0.14em] text-white uppercase font-semibold whitespace-nowrap">
                       FOUNDER &amp; CEO - GADGET DASH™
                     </p>
-                    <p className="font-body text-[0.68rem] md:text-[0.74rem] tracking-[0.18em] text-accent-gold uppercase font-semibold">
+                    <p className="font-body text-[0.64rem] sm:text-[0.68rem] md:text-[0.72rem] tracking-[0.12em] md:tracking-[0.14em] text-white uppercase font-semibold whitespace-nowrap">
                       FOUNDER, CHAIRMAN &amp; MD - THE BILLIONAIRE&apos;S AQUA™
                     </p>
                   </div>

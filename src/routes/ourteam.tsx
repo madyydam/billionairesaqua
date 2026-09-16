@@ -28,6 +28,7 @@ interface TeamMember {
   category: "leadership" | "brand" | "sales" | "research" | "community";
   image: string;
   bio: string;
+  shortBio?: string;
   highlights: string[];
 }
 
@@ -140,16 +141,17 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "vipul-yadav",
     name: "Vipul Sachin Yadav",
-    role: "Market Research & Business Analytics Lead",
-    department: "Market Research & Business Analytics",
-    category: "research",
+    role: "Head of Market Intelligence & Research",
+    department: "Market Intelligence & Research",
+    category: "leadership",
     image: "/team/Vipul Sachin Yadav.jpeg",
-    bio: "Vipul works across Market Research & Business Analytics, focusing on converting collected information into useful business insights. His responsibilities include customer and consumer research, competitor analysis, pricing research, retail market data, data collection, analysis and preparation of research findings and reports. He supports the team by identifying patterns, opportunities and important market information that can contribute to better business decisions. His analytical contribution will become increasingly valuable as THE BILLIONAIRE’S AQUA™ collects more market feedback, evaluates customer behaviour and prepares for expansion into new markets.",
+    shortBio: "Research. Intelligence. Insights. Strategic Growth.",
+    bio: "Vipul Sachin Yadav serves as the Head of Market Intelligence & Research at THE BILLIONAIRE’S AQUA™, leading the company’s market intelligence, research and business analytics function.\n\nWith experience in market research and business analytics, Vipul focuses on understanding market trends, customer behaviour, competitor activity and emerging business opportunities.\n\nHis responsibilities include market and consumer research, competitor and pricing analysis, data collection, business analytics, market intelligence and research-based strategic insights.\n\nIn his leadership role, Vipul is responsible for transforming research and data into meaningful insights and actionable recommendations that support the company’s strategic planning and growth.\n\nHis work contributes to building a research-driven and informed approach to the growth of THE BILLIONAIRE’S AQUA™.",
     highlights: [
-      "Quantitative Retail Market Analysis",
-      "Predictive Customer Behavior Modeling",
-      "Business Intelligence Dashboards",
-      "Expansion Feasibility Research",
+      "Market & Consumer Research",
+      "Competitor & Pricing Elasticity Analysis",
+      "Business Analytics & Data Intelligence",
+      "Research-Driven Strategic Insights",
     ],
   },
   {
@@ -184,17 +186,18 @@ const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     id: "atharva-shirke",
-    name: "Atharva Satish Shirke",
-    role: "Business Research Analyst Lead",
-    department: "Market Intelligence & Research",
-    category: "research",
+    name: "Atharva Shirke",
+    role: "Chief of Public Relations",
+    department: "Public Relations & Communications",
+    category: "leadership",
     image: "/team/Atharva Satish Shirke.jpeg",
-    bio: "Atharva contributes to the growth and strategic development of THE BILLIONAIRE’S AQUA™ through research, market analysis, and strategic business insights. As Business Research Analyst Lead, he focuses on understanding market trends, customer preferences, competitor landscapes, industry developments, and emerging opportunities within the premium packaged drinking water industry. His work involves transforming market research and business information into meaningful insights that support informed decision-making, uncover growth opportunities, and contribute to the brand’s long-term strategic direction. He brings a structured, analytical, and research-driven approach to the organization, helping the team evaluate opportunities and make decisions based on relevant insights rather than assumptions.",
+    shortBio: "Building Relationships. Shaping Perception. Representing the Vision.",
+    bio: "Atharva Shirke serves as the Chief of Public Relations at THE BILLIONAIRE’S AQUA™, leading the company’s Public Relations and Corporate Communications function.\n\nWith his involvement in business research and organizational activities, Atharva has developed an understanding of the brand, its vision and its business direction. In his current leadership role, he focuses on building professional relationships, strengthening the company’s public presence, coordinating corporate communications and supporting the brand’s reputation and external image.\n\nHis responsibilities include PR strategy, media relations, corporate communication, stakeholder relationships, event communication and public representation of the brand.\n\nAtharva’s role is centred on ensuring that every external interaction reflects the professionalism, vision and standards of THE BILLIONAIRE’S AQUA™.",
     highlights: [
-      "Market Trends & Competitor Landscapes",
-      "Strategic Business Intelligence & Insights",
-      "Evidence-Based Opportunity Analysis",
-      "Long-Term Strategic Positioning",
+      "PR Strategy & Media Relations",
+      "Corporate Communications & Brand Voice",
+      "Stakeholder & Professional Relationships",
+      "Public Representation & Event Communication",
     ],
   },
   {
@@ -526,9 +529,9 @@ function TeamPage() {
                       {member.role}
                     </p>
 
-                    {/* Bio excerpt */}
+                    {/* Bio excerpt / short tagline */}
                     <p className="font-body text-[0.66rem] sm:text-[0.72rem] text-muted-foreground leading-relaxed line-clamp-3 pt-0.5">
-                      {member.bio}
+                      {member.shortBio || member.bio}
                     </p>
                   </div>
                 </div>
@@ -695,9 +698,14 @@ function TeamPage() {
                 <h3 className="font-display text-2xl font-bold tracking-[0.06em] uppercase">
                   {activeModalMember.name}
                 </h3>
-                <p className="font-body text-xs tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="font-body text-xs tracking-[0.15em] text-muted-foreground uppercase font-semibold">
                   {activeModalMember.role}
                 </p>
+                {activeModalMember.shortBio && (
+                  <p className="font-body text-xs italic text-accent-gold/90 pt-1">
+                    &ldquo;{activeModalMember.shortBio}&rdquo;
+                  </p>
+                )}
               </div>
             </div>
 
@@ -706,7 +714,7 @@ function TeamPage() {
                 <h4 className="font-display text-xs tracking-[0.25em] text-accent-gold uppercase font-bold mb-2">
                   Complete Profile &amp; Role Mandate
                 </h4>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                <p className="font-body text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                   {activeModalMember.bio}
                 </p>
               </div>
