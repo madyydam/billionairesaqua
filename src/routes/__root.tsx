@@ -115,7 +115,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "googlebot", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "The Billionaire's Aqua" },
+      { property: "og:image", content: "/logos/the-b-aqua-tagline.webp" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/logos/the-b-aqua-tagline.webp" },
     ],
     links: [
       {
@@ -128,7 +130,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Antonio:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap",
       },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "icon", href: "/logos/the-b-aqua-tagline.webp", type: "image/webp" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
   }),
 

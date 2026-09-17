@@ -236,8 +236,10 @@ export const Route = createFileRoute("/ourteam")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: "/ourteam" },
+      { property: "og:image", content: "/logos/the-b-aqua-tagline.webp" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: "/logos/the-b-aqua-tagline.webp" },
     ],
     links: [{ rel: "canonical", href: "/ourteam" }],
     scripts: [

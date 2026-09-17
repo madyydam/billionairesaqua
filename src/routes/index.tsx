@@ -31,7 +31,10 @@ export const Route = createFileRoute("/")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
+      { property: "og:image", content: "/logos/the-b-aqua-tagline.webp" },
       { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/logos/the-b-aqua-tagline.webp" },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [
