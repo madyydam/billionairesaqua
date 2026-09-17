@@ -63,6 +63,7 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Regional & Statewide Network Scale",
     ],
   },
+  /*
   {
     id: "aditya-jaunjal",
     name: "Aditya Sandipan Jaunjal",
@@ -78,6 +79,7 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Product-Launch Campaign Aesthetics",
     ],
   },
+  */
   {
     id: "aditya-ekbote",
     name: "Aditya Sidram Ekbote",
@@ -108,6 +110,7 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Pre-Launch & Launch Orchestration",
     ],
   },
+  /*
   {
     id: "rudraksh-kankal",
     name: "Rudraksh Vijay Kankal",
@@ -123,6 +126,7 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Evidence-Based Strategy Support",
     ],
   },
+  */
   {
     id: "rushikesh-kadam",
     name: "Rushikesh Tukaram Kadam",
@@ -154,6 +158,7 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Research-Driven Strategic Insights",
     ],
   },
+  /*
   {
     id: "jagruti-babar",
     name: "Jagruti Abhijeet Babar",
@@ -169,6 +174,7 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Community & Corporate Outreach",
     ],
   },
+  */
   {
     id: "vaibhavi-saudagar",
     name: "Vaibhavi Saudagar",
@@ -496,7 +502,7 @@ function TeamPage() {
                 className={cn(
                   "team-card-animate group relative flex flex-col justify-between rounded-2xl border border-brand-green/30 bg-[#081719]/90 hover:border-accent-gold/60 backdrop-blur-md overflow-hidden p-3 transition-all duration-400 hover:shadow-[0_0_25px_rgba(0,168,185,0.25)] hover:-translate-y-1.5",
                   "lg:col-span-2",
-                  idx === 10 && "lg:col-start-4"
+                  idx === 5 && "lg:col-start-2"
                 )}
               >
                 {/* Top Section: Clean Photo + Info downside */}

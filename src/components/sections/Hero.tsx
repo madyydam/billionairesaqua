@@ -101,8 +101,8 @@ export function Hero({ ready }: { ready: boolean }) {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
-        <p className="font-body text-[0.55rem] tracking-[0.4em] text-[#00B3C6] uppercase drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+      <div className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10 w-full px-4 text-center">
+        <p className="font-body text-[0.48rem] sm:text-[0.55rem] tracking-[0.2em] sm:tracking-[0.32em] md:tracking-[0.4em] text-[#00B3C6] uppercase drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] whitespace-nowrap">
           PUNE • MAHARASHTRA • INDIA
         </p>
         <span className="flex flex-col items-center gap-1 font-body text-[0.5rem] tracking-[0.32em] text-white/60 uppercase">
