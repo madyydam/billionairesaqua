@@ -649,7 +649,9 @@ function TeamPage() {
             </p>
             <div className="pt-2 flex flex-wrap justify-center gap-4">
               <a
-                href="/#cta"
+                href="https://forms.gle/pJ2ibpTaGcZB7Rjp8"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-gold text-black font-body text-xs tracking-[0.2em] font-bold uppercase transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105"
               >
                 Partner With Us
